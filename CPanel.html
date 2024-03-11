@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Renta de salones y oficinas en la ciudad de México">
+    <meta name="keywords" content="nubox, renta, salones, oficinas, renta de salones, renta de oficinas">
+    <meta name="Abraham" content="Abraham">
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="assent/bootstrap/css/bootstrap.min.css">
+
+    <!--Favicon-->
+    <link rel="icon" href="favicon.ico">
+    
+    <!--Titulo-->
+    <title>Nubox</title>
+
+    <!--Css propio-->
+    <link rel="stylesheet" href="assent/css/style.css">
+
+    <!-- Importacion de iconos-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+  <!--Proloader-->
+  <div class="proloader"></div>
+
+  <!--Nav-->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html"><img src="assent/imagenes/logo.png" class="logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="CPanelRV.html">Reporte visitantes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="CPanelRA.html">Reporte de actividad</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Validacion de boletos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Salir</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section id="menú">
+    <div class="container my-3">
+      <div class="row">
+        <div class="col-sm-12 col-md-4 col-xl-4" style="width: 100%;">
+          <h1>Bienvenido al sistema de Validación de boletos</h1>
+          <h2>Nuestras reglas son: </h2>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <i class="fas fa-users"></i> Las reservas deben realizarse con anticipación. Se requiere un pago inicial para confirmar la reserva.
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-chart-line"></i> Respetar los horarios acordados para el evento. Se aplicará un cargo adicional por exceder el tiempo acordado.
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-ticket"></i> Cumplir con la capacidad máxima permitida. Se prohíbe exceder el límite de capacidad por razones de seguridad.
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-sign-out-alt"></i> Conocer las salidas de emergencia. Seguir las instrucciones en caso de evacuación.
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-sign-out-alt"></i> Consultar y obtener aprobación para la decoración. Evitar daños a las instalaciones durante la decoración y desmontaje.
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-sign-out-alt"></i> No se permite llevar alcohol o sustancias ilícitas. Se aplicará una política de tolerancia cero hacia el consumo excesivo de alcohol.
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-sign-out-alt"></i> Coordinar con el servicio de catering autorizado. No se permite llevar alimentos sin previa autorización.
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-sign-out-alt"></i> Mantener niveles de ruido aceptables. Respetar las regulaciones locales sobre horarios de música.
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-sign-out-alt"></i> Mantener la limpieza durante y después del evento. Se aplicarán cargos por limpieza adicional si es necesario.
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-sign-out-alt"></i> Reportar cualquier daño a las instalaciones. Los organizadores son responsables de los daños causados por los asistentes.
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-sign-out-alt"></i> Seguir las instrucciones del personal del salón. Cualquier solicitud adicional debe comunicarse con el personal designado.
+            </li>
+            <li class="list-group-item">
+              <i class="fas fa-sign-out-alt"></i> Supervisar a los niños para garantizar un entorno seguro. Cumplir con las políticas específicas para eventos infantiles.
+            </li>
+          </ul>
+          <p>Nuestra prioridad siempre será el nuestros clientes, caso de algún incumplimiento por favor generar el reporte de actividad.</p>
+        </div>
+      </div>
+    </div>      
+  </section>
+
+  <div class="container">
+    <section id="validar">
+      <div class="row">
+        <div class="col-12">
+          <h1>Validar código QR</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <video id="video" width="320" height="240"></video>
+          <button type="button" id="btn-escanear" class="btn btn-Cotizacion">Escanear</button>
+        </div>
+        <div class="col-6">
+          <input type="text" id="codigo-qr" class="form-control" placeholder="Ingrese el código QR">
+          <button type="button" id="btn-validar" class="btn btn-Cotizacion">Validar</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section>
+    <div class="container my-3">
+      <div class="row">
+        <div class="col-sm-12 col-md-4 col-xl-4" style="padding-top: 5%;">
+          <ul class="fa-ul">
+            <li>AVISO Y PRIVACIDAD</li>
+            <li>SERVICIOS</li>
+            <li>NOSOTROS</li>
+          </ul>
+        </div>
+        <div class="col-sm-12 col-md-4 col-xl-4">
+          <img src="assent/imagenes/logo.png" width="50%">
+            <ul class="list-inline text-light" style="padding-left: 14%;">
+              <li class="list-inline-item">
+              <a href="#">
+              <i class="fab fa-youtube"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+              <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+              <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+              <i class="fab fa-tiktok"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-12 col-md-4 col-xl-4" style="padding-top: 5%;">
+          <h4>Contactos</h4>
+          <p>PUENTE DE LA GLORIA 27, BARRIO LA
+             AUSIÓN, IZTACALCO, 08600            
+                +52 5543 1666 83
+                nubox@nubox.com </p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-4 col-xl-4" style="width: 100%;">
+          <p><center>DERECHOS RESERVADO NUBOX S.A.V.C<br>
+             © 2023 Reservados todos los derechos. Tec. Abraham Vera Martinez | Sitio web de México</p>
+        </div>
+      </div>
+    </div>                                
+  </section> 
+    <!--JS-->
+    <script src="assent/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assent/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assent/bootstrap/js/popper.min.js"></script>
+    <script src="assent/js/proloader.js"></script>
+    <script src="assent/js/filterable-image.js"></script>
+    <script src="assent/js/accordions.js"></script>
+    <script src="https://webrtc.github.io/samples/src/js/pc.js"></script>
+    <script src="js/app.js"></script>
+    <script src="https://cdn.webrtc.org/adapter/adapter-latest.js"></script>
+</body>
+</html>

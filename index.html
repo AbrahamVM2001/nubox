@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Renta de salones y oficinas en la ciudad de México">
+    <meta name="keywords" content="nubox, renta, salones, oficinas, renta de salones, renta de oficinas">
+    <meta name="Abraham" content="Abraham">
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="assent/bootstrap/css/bootstrap.min.css">
+
+    <!--Favicon-->
+    <link rel="icon" href="favicon.ico">
+    
+    <!--Titulo-->
+    <title>Nubox</title>
+
+    <!--Css propio-->
+    <link rel="stylesheet" href="assent/css/style.css">
+
+    <!-- Importacion de iconos-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+
+    <!--Proloader-->
+    <div class="proloader"></div>
+
+    <!--Nav-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><img src="assent/imagenes/logo.png" class="logo"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#inicio">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">Nosotros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#card-eventhall-offices">Oficinas y Salones</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login.html"><img src="assent/imagenes/acceso.png" class="acceso"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!--Header-->
+      <section id="inicio">
+        <div class="container my-3">
+          <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4" style="width: 60%;">
+              <h1 class="h1-header"><span class="title-header">NUBOX</span> RENTA TU OFICINA O TU SALÓN DE EVENTOS EN LA CDMX</h1>
+              <div class="Buttons-info-OS">
+                <div class="Button-info"><a href="#">Información</a></div>
+                <div class="Button-OS"><a href="#">Oficinas y Salones</a></div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+              <img src="assent/imagenes/oficina.jpg" class="imagen-into">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!--About-->
+      <section id="about">
+        <div class="container my-3" style="padding-top: 90px;">
+          <div class="row">
+            <div class="col-sm-12 col-md-4 col-xl-4">
+              <h2 class="title-about">¿QUIENES SOMOS?</h2>
+              <p class="paragraph-about">Nubox: tu espacio, nuestras soluciones. Somos una empresa Mexicana en la cdmx, especializada 
+                en ofrecer oficinas y salones para eventos. Creando entornos inspiradores, flexibles y completamente
+                equipados, estamos aquí para hacer tus reuniones y eventos inolvidables. ¡Con Nubox, tus ideas se 
+                vuelven realidad!
+              </p>
+            </div>
+            <div class="col-sm-12 col-md-4 col-xl-4">
+              <img src="assent/imagenes/salon intro.jpg" class="imagen-salon-intro">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="card-eventhall-offices">
+        <div class="container my-3" style="padding-top: 100px;">
+          <div class="row">
+            <div class="col-sm-12 col-lg-4 col-xl-4" style="width: 100%;">
+              <h2>NUESTROS SALONES Y OFICINAS</h2>
+              <div id="myBtnContainer">
+                <button class="btn active" onclick="filterSelection('all')"> TODO</button>
+                <button class="btn" onclick="filterSelection('nature')"> OFICINAS</button>
+                <button class="btn" onclick="filterSelection('cars')"> SALONES</button>
+              </div>
+
+              <!-- Portfolio Gallery Grid -->
+              <div class="row">
+                <div class="column nature">
+                  <div class="content">
+                    <img src="assent/imagenes/OFICINAS/1.jpg" alt="Mountains" style="width:100%">
+                    <h4><center>Oficina comporativa</center></h4>
+                    <p>Oficina privada comporativa, lista para usar</p>
+                    <p>Carateristicas</p>
+                    <div class="accordion">
+                      <div class="accordion-item">
+                          <div class="accordion-title"><p>Características ></p></div>
+                          <div class="accordion-content">
+                              <!-- Agrega la clase "fa-ul" a la lista desordenada para utilizar íconos de lista -->
+                              <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Mobilario de alta calidad</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Cerca de metro polanco</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Amigable equipo de asistencia en sitio</li>
+                              </ul>
+                          </div>
+                      </div>
+                      <div class="accordion-item">
+                          <div class="accordion-title">Dirección</div>
+                          <div class="accordion-content">
+                              <p>Temístocle 219B, Polanco IV Secc, Miguel Hidalgo, 11550 Ciudad de México, CDMX</p>
+                          </div>
+                      </div>
+                      <center><a href="oficina1.html" class="btn-Cotizacion">Obtener cotización</a></center>
+                    </div>                  
+                  </div>
+                </div>
+
+                <div class="column nature">
+                  <div class="content">
+                    <img src="assent/imagenes/OFICINAS/3.jpg" alt="Mountains" style="width:100%">
+                    <h4><center>Oficina comporativa</center></h4>
+                    <p>Oficina privada comporativa, lista para usar</p>
+                    <p>Carateristicas</p>
+                    <div class="accordion">
+                      <div class="accordion-item">
+                          <div class="accordion-title">Características</div>
+                          <div class="accordion-content">
+                              <!-- Agrega la clase "fa-ul" a la lista desordenada para utilizar íconos de lista -->
+                              <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Mobilario de alta calidad</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Cerca de metro viaducto</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Amigable equipo de asistencia en sitio</li>
+                              </ul>
+                          </div>
+                      </div>
+                      <div class="accordion-item">
+                          <div class="accordion-title">Dirección</div>
+                          <div class="accordion-content">
+                              <p>Cerca de cádiz 184, Álamos, Benito Juarez, 03400 Ciudad de México, CDMX.</p>
+                          </div>
+                      </div>
+                      <center><a href="oficina2.html" class="btn-Cotizacion">Obtener cotización</a></center>
+                    </div>                  
+                  </div>
+                </div>
+
+                <div class="column nature">
+                  <div class="content">
+                    <img src="assent/imagenes/OFICINAS/4.jpg" alt="Mountains" style="width:100%">
+                    <h4><center>Oficina comporativa</center></h4>
+                    <p>Oficina privada comporativa, lista para usar</p>
+                    <p>Carateristicas</p>
+                    <div class="accordion">
+                      <div class="accordion-item">
+                          <div class="accordion-title">Características</div>
+                          <div class="accordion-content">
+                              <!-- Agrega la clase "fa-ul" a la lista desordenada para utilizar íconos de lista -->
+                              <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Mobilario de alta calidad</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Cerca de metro polanco</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Amigable equipo de asistencia en sitio</li>
+                              </ul>
+                          </div>
+                      </div>
+                      <div class="accordion-item">
+                          <div class="accordion-title">Dirección</div>
+                          <div class="accordion-content">
+                              <p>Temístocle 219B, Polanco IV Secc, Miguel Hidalgo, 11550 Ciudad de México, CDMX</p>
+                          </div>
+                      </div>
+                      <center><a href="oficina3.html" class="btn-Cotizacion">Obtener cotización</a></center>
+                    </div>                  
+                  </div>
+                </div>
+
+                <div class="column cars">
+                  <div class="content">
+                    <img src="assent/imagenes/SALONES/1.jpg" alt="Mountains" style="width:100%">
+                    <h4><center>SALÓN PARA EVENTOS</center></h4>
+                    <p>Salón para eventos, lista para usar</p>
+                    <p>Carateristicas</p>
+                    <div class="accordion">
+                      <div class="accordion-item">
+                          <div class="accordion-title">Características</div>
+                          <div class="accordion-content">
+                              <!-- Agrega la clase "fa-ul" a la lista desordenada para utilizar íconos de lista -->
+                              <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Salón para fiestas y cualquier evento</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Comida incluida</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Capacidad para 50 personas</li>
+                              </ul>
+                          </div>
+                      </div>
+                      <div class="accordion-item">
+                          <div class="accordion-title">Dirección</div>
+                          <div class="accordion-content">
+                              <p>Mercelino Dávalos 83, Algarín, Cuauhtémoc, 06880 Ciudad de México, CDMX</p>
+                          </div>
+                      </div>
+                      <center><a href="salon1.html" class="btn-Cotizacion">Obtener cotización</a></center>
+                    </div>                  
+                  </div>
+                </div>
+
+                <div class="column cars">
+                  <div class="content">
+                    <img src="assent/imagenes/SALONES/3.jpg" alt="Mountains" style="width:100%">
+                    <h4><center>SALÓN PARA EVENTOS</center></h4>
+                    <p>Salón para eventos, lista para usar</p>
+                    <p>Carateristicas</p>
+                    <div class="accordion">
+                      <div class="accordion-item">
+                          <div class="accordion-title">Características</div>
+                          <div class="accordion-content">
+                              <!-- Agrega la clase "fa-ul" a la lista desordenada para utilizar íconos de lista -->
+                              <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Salón para fiestas y cualquier evento</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Comida incluida</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Capacidad para 25 personas</li>
+                              </ul>
+                          </div>
+                      </div>
+                      <div class="accordion-item">
+                          <div class="accordion-title">Dirección</div>
+                          <div class="accordion-content">
+                              <p>Francisco Olaguibel 79, Obrera; Cuauhtémoc, 06800 Ciudad de México, CDMX</p>
+                          </div>
+                      </div>
+                      <center><a href="salon2.html" class="btn-Cotizacion">Obtener cotización</a></center>
+                    </div>                  
+                  </div>
+                </div>
+
+                <div class="column cars">
+                  <div class="content">
+                    <img src="assent/imagenes/SALONES/4.jpg" alt="Mountains" style="width:100%">
+                    <h4><center>SALÓN PARA EVENTOS</center></h4>
+                    <p>Salón para eventos, lista para usar</p>
+                    <p>Carateristicas</p>
+                    <div class="accordion">
+                      <div class="accordion-item">
+                          <div class="accordion-title">Características</div>
+                          <div class="accordion-content">
+                              <!-- Agrega la clase "fa-ul" a la lista desordenada para utilizar íconos de lista -->
+                              <ul class="fa-ul">
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Salón para fiestas y cualquier evento</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Comida incluida</li>
+                                <li><span class="fa-li"><i class="fas fa-check"></i></span>Capacidad para 39 personas</li>
+                              </ul>
+                          </div>
+                      </div>
+                      <div class="accordion-item">
+                          <div class="accordion-title">Dirección</div>
+                          <div class="accordion-content">
+                              <p>Mercelino Dávalos 83, Algarín, Cuauhtémoc, 06880 Ciudad de México, CDMX</p>
+                          </div>
+                      </div>
+                      <center><a href="salon3.html" class="btn-Cotizacion">Obtener cotización</a></center>
+                    </div>                  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="container my-3">
+          <div class="row">
+            <div class="col-sm-12 col-md-4 col-xl-4" style="padding-top: 5%;">
+              <ul class="fa-ul">
+                <li>AVISO Y PRIVACIDAD</li>
+                <li>SERVICIOS</li>
+                <li>NOSOTROS</li>
+              </ul>
+            </div>
+            <div class="col-sm-12 col-md-4 col-xl-4">
+              <img src="assent/imagenes/logo.png" width="50%">
+              <ul class="list-inline text-light" style="padding-left: 14%;">
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fab fa-youtube"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item">
+                  <a href="#">
+                    <i class="fab fa-tiktok"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-sm-12 col-md-4 col-xl-4" style="padding-top: 5%;">
+              <h4>Contactos</h4>
+              <p>PUENTE DE LA GLORIA 27, BARRIO LA
+                AUSIÓN, IZTACALCO, 08600
+                
+                +52 5543 1666 83
+                
+                nubox@nubox.com </p>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-md-4 col-xl-4" style="width: 100%;">
+              <p><center>DERECHOS RESERVADO NUBOX S.A.V.C<br>
+              © 2023 Reservados todos los derechos. Tec. Abraham Vera Martinez | Sitio web de México</p>
+            </div>
+          </div>
+        </div>                                
+      </section> 
+    <!--JS-->
+    <script src="assent/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assent/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assent/bootstrap/js/popper.min.js"></script>
+    <script src="assent/js/proloader.js"></script>
+    <script src="assent/js/filterable-image.js"></script>
+    <script src="assent/js/accordions.js"></script>
+</body>
+</html>

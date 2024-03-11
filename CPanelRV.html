@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Renta de salones y oficinas en la ciudad de México">
+    <meta name="keywords" content="nubox, renta, salones, oficinas, renta de salones, renta de oficinas">
+    <meta name="Abraham" content="Abraham">
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="assent/bootstrap/css/bootstrap.min.css">
+
+    <!--Favicon-->
+    <link rel="icon" href="favicon.ico">
+    
+    <!--Titulo-->
+    <title>Nubox</title>
+
+    <!--Css propio-->
+    <link rel="stylesheet" href="assent/css/style.css">
+
+    <!-- Importacion de iconos-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+  <!--Proloader-->
+  <div class="proloader"></div>
+
+  <!--Nav-->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.html"><img src="assent/imagenes/logo.png" class="logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="CPanelRV.html">Reporte visitantes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="CPanelRA.html">Reporte de actividad</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="CPanel.html">Validacion de boletos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Salir</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section id="Reporte">
+    <div class="container my-3">
+        <div class="col-sm-12 col-md-4 col-xl-4" style="width: 100%;">
+            <center><h1>Reporte de visitantes</h1></center>
+            <p>Aquí podras ver la Información de cuantos visitantes vendrán dependiedo de cada salón alquilado,
+                recuerda que solo necesitas el código de reservación y listo.
+            </p>
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Ingresa el código de reservación</label>
+                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" style="background-color: #dddddd;">
+                    <button type="submit" class="btn btn-Cotizacion">Buscar</button>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th style="background-color: #424242; color: #fff;">Encargado</th>
+                        <th style="background-color: #424242; color: #fff;">Salón</th>
+                        <th style="background-color: #424242; color: #fff;">Correo del encargado</th>
+                        <th style="background-color: #424242; color: #fff;">Capacidad</th>
+                        <th style="background-color: #424242; color: #fff;">Fecha alquiler</th>
+                        <th style="background-color: #424242; color: #fff;">Estado de pago</th>
+                      </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+                <button type="submit" class="btn btn-Cotizacion">Limpiar</button>                  
+            </form>  
+        </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container my-3">
+      <div class="row">
+        <div class="col-sm-12 col-md-4 col-xl-4" style="padding-top: 5%;">
+          <ul class="fa-ul">
+            <li>AVISO Y PRIVACIDAD</li>
+            <li>SERVICIOS</li>
+            <li>NOSOTROS</li>
+          </ul>
+        </div>
+        <div class="col-sm-12 col-md-4 col-xl-4">
+          <img src="assent/imagenes/logo.png" width="50%">
+            <ul class="list-inline text-light" style="padding-left: 14%;">
+              <li class="list-inline-item">
+              <a href="#">
+              <i class="fab fa-youtube"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+              <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+              <i class="fab fa-instagram"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+              <i class="fab fa-tiktok"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-12 col-md-4 col-xl-4" style="padding-top: 5%;">
+          <h4>Contactos</h4>
+          <p>PUENTE DE LA GLORIA 27, BARRIO LA
+             AUSIÓN, IZTACALCO, 08600            
+                +52 5543 1666 83
+                nubox@nubox.com </p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-4 col-xl-4" style="width: 100%;">
+          <p><center>DERECHOS RESERVADO NUBOX S.A.V.C<br>
+             © 2023 Reservados todos los derechos. Tec. Abraham Vera Martinez | Sitio web de México</p>
+        </div>
+      </div>
+    </div>                                
+  </section> 
+    <!--JS-->
+    <script src="assent/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assent/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assent/bootstrap/js/popper.min.js"></script>
+    <script src="assent/js/proloader.js"></script>
+    <script src="assent/js/filterable-image.js"></script>
+    <script src="assent/js/accordions.js"></script>
+</body>
+</html>
