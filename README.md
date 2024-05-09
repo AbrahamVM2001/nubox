@@ -8,7 +8,6 @@
  </th>
  <th>
   <tr>
-   <td>jis</td>
+   <td>Jojo</td>
   </tr>
- </th>
 </table>
