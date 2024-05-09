@@ -1,7 +1,15 @@
 :root {
-    --amarillo1: #ffeba7;
-    --amarillo2: #ffeba7;
-    --amarillo3: #ffeba7;
-    --blanco1: #ececee;
-    --negro1: #353746;
+    --primario: #fff;
+    --secundario: #000;
+    --secundatio2: #646464;
+    --WhatsApp: #25D366;
+}
+
+.ui-switch {
+    --switch-bg: rgb(135, 150, 165);
+    --switch-width: 48px;
+    --switch-height: 20px;
+    --circle-diameter: 32px;
+    --circle-bg: rgb(232, 89, 15);
+    --circle-inset: calc((var(--circle-diameter) - var(--switch-height)) / 2);
 }

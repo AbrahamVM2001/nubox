@@ -40,7 +40,7 @@ class App extends ControllerBase
                 require_once $archivoController;
                 $controller = new Login();
                 $controller->loadModel("login");
-                $controller->render();
+                $controller->iniciar();
                 return false;
             }
             $this->general($this->url);

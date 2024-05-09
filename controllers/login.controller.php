@@ -9,7 +9,11 @@ class Login extends ControllerBase
   }
   function render()
   {
-    $this->view->render('login/index');
+    $this->view->render('general/login/index');
+  }
+  function iniciar()
+  {
+    $this->view->render('general/index');
   }
   function acceso()
   {
