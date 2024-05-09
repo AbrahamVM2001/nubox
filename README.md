@@ -4,7 +4,7 @@
 
 <table>
  <th>
-  <tr>Hola</tr>
+  <td>Hola</td>
  </th>
  <th>
   <tr>
