@@ -23,6 +23,16 @@ class Admin extends ControllerBase
         }
     }
 
+    // Generador de token
+    function generarToken()
+    {
+        $caracteres = "ABCDEFGHIJKLNMOPQRSTUVWXYZ123456789";
+        $token = "";
+        for ($i = 0; $i < 10; $i++) {
+            $token .= $caracteres[rand(0, strlen($caracteres) - 1)];
+        }
+        return $token;
+    }
     // empleados
 
     function empleados()
@@ -114,6 +124,86 @@ class Admin extends ControllerBase
         } catch (\Throwable $th) {
             echo "Error recopilado controlador buscarUsuario: " . $th->getMessage();
             return;
+        }
+    }
+
+    // salon
+    function salon()
+    {
+        if ($this->verificarAdmin()) {
+            $this->view->render("admin/salon");
+        } else {
+            $this->recargar();
+        }
+    }
+    function viewSalon()
+    {
+        try {
+            $salon = AdminModel::salon();
+            echo json_encode($salon);
+        } catch (\Throwable $th) {
+            echo "Error recopilado controlador salon: " . $th->getMessage();
+            return;
+        }
+    }
+    function buscarTokenSalon($token)
+    {
+        try {
+            $tokensEncontrados = AdminModel::buscarTokenSalon($token);
+            return count($tokensEncontrados) > 0;
+        } catch (\Throwable $th) {
+            echo "Error en el controlador token: " . $th->getMessage();
+            return false;
+        }
+    }
+    function guardarSalon()
+    {
+        try {
+            $token = $this->generarToken();
+            while ($this->buscarTokenSalon($token)) {
+                $token = $this->generarToken();
+            }
+            if ($_POST['tipo'] == 'nuevo') {
+                $foto = $_FILES['imagen'];
+                $nombreArchivo = $token . $_POST['titulo'] . '.' . pathinfo($foto['name'], PATHINFO_EXTENSION);
+                $rutaImagen = $this->subirImagenSalon($nombreArchivo, $foto);
+                $resp = AdminModel::guardarSalon($_POST, $rutaImagen, $token);
+            } else {
+                $resp = AdminModel::actualizarSalon($_POST);
+            }
+            if ($resp != false) {
+                $data = [
+                    'estatus' => 'success',
+                    'titulo' => ($_POST['tipo'] == 'nuevo') ? 'Salón publicado' : 'Salon actualizado',
+                    'respuesta' => ($_POST['tipo'] == 'nuevo') ? 'Salón publicado en la página central' : 'Se actualizó correctamente el salon'
+                ];
+            } else {
+                $data = [
+                    'estatus' => 'warning',
+                    'titulo' => ($_POST['tipo'] == 'nuevo') ? 'Salón no publicado' : 'Salón no actualizada',
+                    'respuesta' => ($_POST['tipo'] == 'nuevo') ? 'No se pudo publicar correctamente el salón' : 'No se pudo actualizar correctamente el salon'
+                ];
+            }
+        } catch (\Throwable $th) {
+            $data = [
+                'estatus' => 'error',
+                'titulo' => 'Error servidor',
+                'respuesta' => 'Contacte al área de sistemas. Error:' . $th->getMessage()
+            ];
+        }
+        echo json_encode($data);
+    }
+
+    function subirImagenSalon($nombreArchivo, $foto)
+    {
+        $directorio = 'public/img/SALONES';
+        $rutaCompleta = $directorio . '/' . $nombreArchivo;
+
+        if (isset($foto) && $foto['error'] == UPLOAD_ERR_OK) {
+            move_uploaded_file($foto['tmp_name'], $rutaCompleta);   
+            return $rutaCompleta;
+        } else {
+            return false;
         }
     }
 }

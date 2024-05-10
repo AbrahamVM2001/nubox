@@ -10,7 +10,7 @@ class AdminModel extends ModelBase
     {
         parent::__construct();
     }
-    /* conferencia */
+    /* Empleado */
     public static function empleado()
     {
         try {
@@ -50,8 +50,7 @@ class AdminModel extends ModelBase
             return false;
         }
     }
-
-    public static function actualizarEmpleado($datos,$contra_encriptada)
+    public static function actualizarEmpleado($datos, $contra_encriptada)
     {
         try {
             $con = new Database;
@@ -121,6 +120,81 @@ class AdminModel extends ModelBase
         } catch (PDOException $e) {
             echo "Error recopilado model buscarEmpleado: " . $e->getMessage();
             return;
+        }
+    }
+    // salon
+    public static function salon()
+    {
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("SELECT * FROM cat_salon;");
+            $query->execute();
+            return $query->fetchAll();
+        } catch (\Throwable $e) {
+            echo "Error recopilado model salon: " . $e->getMessage();
+            return;
+        }
+    }
+    public static function buscarTokenSalon($token){
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("SELECT * FROM cat_salon WHERE token = :token");
+            $query->execute([
+                ':token' => $token
+            ]);
+            return $query->fetchAll();
+        } catch (PDOException $e) {
+            echo "Error en el modelo eventos: " . $e->getMessage();
+            return [];
+        }
+    }
+    public static function guardarSalon($datos,$rutaImagen, $token)
+    {
+        try {
+            $con = new Database;
+            $con->pdo->beginTransaction();
+            $query = $con->pdo->prepare("INSERT INTO cat_salon
+            (Nombre,Descripcion,Caracteristicas,Ubicacion,Aforo,Precio,titulo,Imagen,token,estatus)
+        VALUES 
+            (:nom,:decs,:caract,:ubi,:afo,:pre,:titu,:ima,:token,:esta)");
+            $query->execute([
+                ':nom' => $datos['nombre'],
+                ':decs' => $datos['decripcion'],
+                ':caract' => $datos['caracteristicas'],
+                ':ubi' => $datos['ubicacion'],
+                ':afo' => $datos['aforo'],
+                ':pre' => $datos['precio'],
+                ':titu' => $datos['titulo'],
+                ':ima' => $rutaImagen,
+                ':token' => $token,
+                ':esta' => $datos['estatus']
+            ]);
+            $con->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            $con->pdo->rollBack();
+            echo "Error recopilado model guardarSalon: " . $e->getMessage();
+            return false;
+        }
+    }
+    public static function actualizarSalon($datos)
+    {
+        try {
+            $con = new Database;
+            $con->pdo->beginTransaction();
+            $query = $con->pdo->prepare("UPDATE cat_empleado SET 
+                Nombre = :nom
+                    WHERE 
+                id_empleado = :idEmpleado;");
+            $query->execute([
+                ':nom' => $datos['nombre']
+            ]);
+            $con->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            $con->pdo->rollBack();
+            echo "Error recopilado model actualizarSalon: " . $e->getMessage();
+            return false;
         }
     }
 }

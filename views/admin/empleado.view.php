@@ -23,7 +23,7 @@
             <div class="modal-body">
                 <form id="form-new-empleado" action="javascript:;" class="needs-validation" novalidate method="post">
                     <input type="hidden" name="tipo" id="tipo" value="nuevo">
-                    <input type="hidden " name="empleado" id="empleado">
+                    <input type="hidden" name="empleado" id="empleado">
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                             <label for="Nombre">Nombre del empleado.</label>
