@@ -28,7 +28,7 @@ $(function () {
                         timer: 2000,
                     });
                     setTimeout(() => {
-                        location.reload();
+                        window.location.href = servidor;
                     }, 2000);
                 },
                 error: function (data) {
@@ -44,8 +44,3 @@ $(function () {
         form.addClass("was-validated");
     });
 });
-
-// // Initialization for ES Users
-// import { Dropdown, Collapse, initMDB } from "mdb-ui-kit";
-
-// initMDB({ Dropdown, Collapse });

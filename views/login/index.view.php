@@ -2,13 +2,28 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= constant('SOCIEDAD') ?></title>
-    <?php require('views/estilos.view.php'); ?>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../../../assets/img/favicon.png">
+    <title>
+        <?= constant('SOCIEDAD') ?>
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="<?= constant('URL') ?>public/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="<?= constant('URL') ?>public/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="<?= constant('URL') ?>public/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="<?= constant('URL') ?>public/css/soft-ui-dashboard.css?v=1.0.5" rel="stylesheet" />
+    <link href="<?= constant('URL') ?>public/css/style.css" rel="stylesheet">
+    <link href="<?= constant('URL') ?>public/css/variables.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="bg-gray-100">
     <nav>
         <div class="wrapper">
             <div class="logo"><a href="#"><img src="<?= constant('URL') ?>public/img/logo.png" alt="logo"></a></div>
@@ -53,8 +68,7 @@
         </div>
     </nav>
 
-    <!-- modal -->
-
+    <!-- model iniciar sesion -->
     <div class="modal fade" id="modalIniciar" aria-hidden="true" aria-labelledby="modalIniciarLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -67,7 +81,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                 <label for="">Correo</label>
-                                <input type="email" class="form-control" name="mail" id="mail" placeholder="Corre..." required>
+                                <input type="email" class="form-control" name="mail" id="mail" placeholder="Corre0..." required>
                                 <div class="invalid-feedback">
                                     Ingrese tu correo, por favor.
                                 </div>
@@ -84,25 +98,56 @@
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                    <button data-formulario="form-new-conferencia" type="button" class="btn btn-primary btn-iniciar">Guardar</button>
+                    <button data-formulario="form-new-iniciar" type="button" class="btn btn-primary btn-iniciar">Guardar</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- header -->
+    <!-- contenido home -->
 
     <div class="body-text">
         <div class="title">Necesitas una oficina o salon.</div>
         <div class="sub-title">solo escoge tu gusto pagas y listo.</div>
     </div>
-
-    <div class="container">
-        <div class="row"></div>
-    </div>
-    <?php require('views/footer.view.php'); ?>
-    <script src="<?= constant('URL') ?>public/js/paginas/main.js"></script>
+    <!--   Core JS Files   -->
+    <script>
+        let servidor = '<?= constant('URL') ?>';
+    </script>
+    <!-- loader -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="<?= constant("URL") ?>public/js/paginas/loader.js"></script>
+    <!-- fin del loader -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/es.min.js"></script>
+    <script src="<?= constant("URL") ?>public/js/plugins/jquery/jquery.min.js"></script>
+    <script src="<?= constant('URL') ?>public/js/core/popper.min.js"></script>
+    <script src="<?= constant('URL') ?>public/js/core/bootstrap.min.js"></script>
+    <script src="<?= constant('URL') ?>public/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="<?= constant('URL') ?>public/js/plugins/smooth-scrollbar.min.js"></script>
+    <!-- Kanban scripts -->
+    <script src="<?= constant('URL') ?>public/js/plugins/dragula/dragula.min.js"></script>
+    <script src="<?= constant('URL') ?>public/js/plugins/jkanban/jkanban.js"></script>
+    <!-- Select2 -->
+    <script src="<?php echo constant("URL"); ?>public/plugins/select2/js/select2.full.min.js"></script>
+    <!-- Github buttons -->
+    <script async defer src="<?= constant('URL') ?>public/js/github.buttons.js"></script>
+    <script src="<?= constant('URL') ?>public/js/fontawesome-4f9827e774.js"></script>
     <script src="<?= constant('URL') ?>public/js/sweetalert.min.js"></script>
+    <script src="<?= constant('URL') ?>public/js/paginas/loginUser.js"></script>
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="<?= constant('URL') ?>public/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
 </body>
 
 </html>

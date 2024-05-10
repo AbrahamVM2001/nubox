@@ -57,6 +57,13 @@ class ControllerBase{
         return false;
     }
   }
+  function verificarDev() {
+    if (isset($_SESSION['tipo_usuario-' . constant('Sistema')]) && $_SESSION['tipo_usuario-' . constant('Sistema')] == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   function recargar(){
     header('Location:'.constant('URL'));
   }
