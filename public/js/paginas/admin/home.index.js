@@ -183,4 +183,10 @@ $(function () {
             if (error.name == 'AbortError') { } else { throw error; }
         }
     }
+    let a = 1;
+    if (a == 1) {
+        console.log("Hola cambios");
+    } else {
+        console.log("puta madre git");
+    }
 });
