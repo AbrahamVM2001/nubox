@@ -1,13 +1,13 @@
 $(function () {
-    async function cardsSalon() {
+    async function cardsOficina() {
         try {
-            let peticion = await fetch(servidor + `admin/viewsalon`);
+            let peticion = await fetch(servidor + `admin/viewOficina`);
             let response = await peticion.json();
             if (response.length == 0) {
-                jQuery(`<h3 class="mt-4 text-center text-uppercase">Sin salon publicados</h3>`).appendTo("#container-salon").addClass('text-danger');
+                jQuery(`<h3 class="mt-4 text-center text-uppercase">Sin oficinas publicados</h3>`).appendTo("#container-oficina").addClass('text-danger');
                 return false;
             }
-            $("#container-salon").empty();
+            $("#container-oficina").empty();
             jQuery(`<table class="table align-items-center mb-0 table table-striped table-bordered" style="width:100%" id="info-table-result">
                 <thead><tr>
                 <th class="text-uppercase">Nombre</th>
@@ -23,7 +23,7 @@ $(function () {
                 </tr></thead>
                 </table>
                 `)
-                .appendTo("#container-salon")
+                .appendTo("#container-oficina")
                 .removeClass("text-danger");
             $('#info-table-result').DataTable({
                 "drawCallback": function (settings) {
@@ -54,7 +54,7 @@ $(function () {
                     {
                         data: null,
                         render: function (data) {
-                            return `<img src="${servidor}${data.Imagen}" style="max-width: 100px; max-height: 100px;">`;
+                            return `<img src="${servidor}${data.imagen}" style="max-width: 100px; max-height: 100px;">`;
                         },
                         className: 'text-vertical text-center'
                     },
@@ -65,7 +65,7 @@ $(function () {
                             let color = (data.estatus == 1) ? 'success' : 'danger';
                             let botones = `
                                 <div class="col-sm-12 col-md-12 col-lg-12 col-<xl-12 d-flex justify-content-between align-items-center">
-                                    <button data-id="${btoa(data.id_salon)}" data-estatus="${btoa(data.estatus)}" data-bs-toggle="tooltip" title="Activa o desactiva la sesión" type="button" class="btn btn-${color} btn-suspender"><i class="fa-solid fa-power-off"></i></button>
+                                    <button data-id="${btoa(data.id_oficina)}" data-estatus="${btoa(data.estatus)}" data-bs-toggle="tooltip" title="Activa o desactiva la sesión" type="button" class="btn btn-${color} btn-suspender"><i class="fa-solid fa-power-off"></i></button>
                                 </div>`;
                             return botones;
                         },
@@ -80,8 +80,8 @@ $(function () {
             if (error.name == 'AbortError') { } else { throw error; }
         }
     }
-    cardsSalon();
-    $(".btn-salon").on("click", function () {
+    cardsOficina();
+    $(".btn-oficina").on("click", function () {
         let form = $("#" + $(this).data("formulario"));
         if (form[0].checkValidity() === false) {
             event.preventDefault();
@@ -89,7 +89,7 @@ $(function () {
         } else {
             $.ajax({
                 type: "POST",
-                url: servidor + "admin/guardarSalon",
+                url: servidor + "admin/guardarOficina",
                 dataType: "json",
                 data: new FormData(form.get(0)),
                 contentType: false,
@@ -126,17 +126,17 @@ $(function () {
         form.addClass("was-validated");
     });
     $(document).on('click', '.btn-suspender', function () {
-        var idSalon = $(this).data('id');
+        var idOficina = $(this).data('id');
         var estatus = $(this).data('estatus');
-        suspender(idSalon, estatus);
+        suspender(idOficina, estatus);
     });
-    function suspender(idSalon, estatus) {
+    function suspender(idOficina, estatus) {
         $.ajax({
             type: "POST",
-            url: servidor + "admin/ActDec_salon",
+            url: servidor + "admin/ActDec_oficina",
             dataType: "json",
             data: {
-                idsalon: idSalon,
+                idoficina: idOficina,
                 estatus: estatus
             },
             beforeSend: function () {
@@ -168,21 +168,21 @@ $(function () {
     }
     $('body').on('dblclick', '#info-table-result tbody tr', function () {
         var data = $('#info-table-result').DataTable().row(this).data();
-        if (data['id_salon'] == 0) {
+        if (data['id_oficina'] == 0) {
             registroNoEditar();
         } else {
-            $("#form-new-salon")[0].reset();
-            $('#modalSalonLabel').text('Editar salon');
-            $('#modalSalon').modal('show');
-            buscarSalon(data['id_salon']);
+            $("#form-new-oficina")[0].reset();
+            $('#modalOficinaLabel').text('Editar oficina');
+            $('#modalOficina').modal('show');
+            buscarOficina(data['id_oficina']);
         }
     });
-    async function buscarSalon(id_salon) {
+    async function buscarOficina(id_oficina) {
         try {
-            let peticion = await fetch(servidor + `admin/buscarSalon/${id_salon}`);
+            let peticion = await fetch(servidor + `admin/buscarOficina/${id_oficina}`);
             let response = await peticion.json();
             $('#tipo').val('');
-            $('#salon').val(response['id_salon']);
+            $('#oficina').val(response['id_oficina']);
             $('#nombre').val(response['Nombre']);
             $('#decripcion').val(response['Descripcion']);
             $('#caracteristicas').val(response['Caracteristicas']);

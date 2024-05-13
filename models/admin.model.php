@@ -177,17 +177,37 @@ class AdminModel extends ModelBase
             return false;
         }
     }
-    public static function actualizarSalon($datos)
+    public static function actualizarSalon($datos, $rutaImagen, $token)
     {
         try {
             $con = new Database;
             $con->pdo->beginTransaction();
-            $query = $con->pdo->prepare("UPDATE cat_empleado SET 
-                Nombre = :nom
+            $query = $con->pdo->prepare("UPDATE cat_salon SET 
+                Nombre = :nom,
+                Descripcion = :desc,
+                Caracteristicas = :caract,
+                Ubicacion = :ubi,
+                Aforo = :afo,
+                Precio = :preci,
+                titulo = :title,
+                Imagen = :img,
+                token = :token,
+                estatus = :estatus
                     WHERE 
-                id_empleado = :idEmpleado;");
+                id_salon = :idSalon;");
             $query->execute([
-                ':nom' => $datos['nombre']
+                ':nom' => $datos['nombre'],
+                ':desc' => $datos['decripcion'],
+                ':caract' => $datos['caracteristicas'],
+                ':ubi' => $datos['ubicacion'],
+                ':afo' => $datos['aforo'],
+                ':preci' => $datos['precio'],
+                ':title' => $datos['titulo'],
+                ':img' => $rutaImagen,
+                ':token' => $token,
+                ':estatus' => $datos['estatus'],
+                ':idSalon' => $datos['salon']
+
             ]);
             $con->pdo->commit();
             return true;
@@ -195,6 +215,191 @@ class AdminModel extends ModelBase
             $con->pdo->rollBack();
             echo "Error recopilado model actualizarSalon: " . $e->getMessage();
             return false;
+        }
+    }
+    public static function ActDesc_salon($id_salon, $nuevoEstatus)
+    {
+        try {
+            $con = new Database;
+            $con->pdo->beginTransaction();
+
+            $query = $con->pdo->prepare("UPDATE cat_salon SET  
+            estatus = :estatus
+                WHERE 
+            id_salon = :idSalon;");
+            $query->execute([
+                ':idSalon' => base64_decode($id_salon),
+                ':estatus' => base64_decode($nuevoEstatus)
+            ]);
+            $con->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            $con->pdo->rollBack();
+            echo "No podemos eliminar usuario: " . $e->getMessage();
+            return false;
+        }
+    }
+    public static function buscarSalon($id_salon)
+    {
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("SELECT * FROM cat_salon WHERE id_salon = :idSalon;");
+            $query->execute([
+                ':idSalon' => $id_salon
+            ]);
+            return $query->fetch();
+        } catch (PDOException $e) {
+            echo "Error recopilado model buscarSalon: " . $e->getMessage();
+            return;
+        }
+    }
+    // oficina
+    public static function oficina()
+    {
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("SELECT * FROM cat_oficina;");
+            $query->execute();
+            return $query->fetchAll();
+        } catch (\Throwable $e) {
+            echo "Error recopilado model oficina: " . $e->getMessage();
+            return;
+        }
+    }
+    public static function buscarTokenOficina($token){
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("SELECT * FROM cat_oficina WHERE token = :token");
+            $query->execute([
+                ':token' => $token
+            ]);
+            return $query->fetchAll();
+        } catch (PDOException $e) {
+            echo "Error en el modelo eventos: " . $e->getMessage();
+            return [];
+        }
+    }
+    public static function guardarOficina($datos,$rutaImagen, $token)
+    {
+        try {
+            $con = new Database;
+            $con->pdo->beginTransaction();
+            $query = $con->pdo->prepare("INSERT INTO cat_oficina
+            (Nombre,Descripcion,Caracteristicas,Ubicacion,Aforo,Precio,titulo,Imagen,token,estatus)
+        VALUES 
+            (:nom,:decs,:caract,:ubi,:afo,:pre,:titu,:ima,:token,:esta)");
+            $query->execute([
+                ':nom' => $datos['nombre'],
+                ':decs' => $datos['decripcion'],
+                ':caract' => $datos['caracteristicas'],
+                ':ubi' => $datos['ubicacion'],
+                ':afo' => $datos['aforo'],
+                ':pre' => $datos['precio'],
+                ':titu' => $datos['titulo'],
+                ':ima' => $rutaImagen,
+                ':token' => $token,
+                ':esta' => $datos['estatus']
+            ]);
+            $con->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            $con->pdo->rollBack();
+            echo "Error recopilado model guardarSalon: " . $e->getMessage();
+            return false;
+        }
+    }
+    public static function ActDesc_oficina($id_oficina, $nuevoEstatus)
+    {
+        try {
+            $con = new Database;
+            $con->pdo->beginTransaction();
+
+            $query = $con->pdo->prepare("UPDATE cat_oficina SET  
+            estatus = :estatus
+                WHERE 
+            id_oficina = :idOficina;");
+            $query->execute([
+                ':idOficina' => base64_decode($id_oficina),
+                ':estatus' => base64_decode($nuevoEstatus)
+            ]);
+            $con->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            $con->pdo->rollBack();
+            echo "No podemos eliminar oficina: " . $e->getMessage();
+            return false;
+        }
+    }
+    public static function buscarOficina($id_oficina)
+    {
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("SELECT * FROM cat_oficina WHERE id_oficina = :idOficina;");
+            $query->execute([
+                ':idOficina' => $id_oficina
+            ]);
+            return $query->fetch();
+        } catch (PDOException $e) {
+            echo "Error recopilado model buscarOficina: " . $e->getMessage();
+            return;
+        }
+    }
+    public static function actualizarOficina($datos, $rutaImagen, $token)
+    {
+        try {
+            $con = new Database;
+            $con->pdo->beginTransaction();
+            $query = $con->pdo->prepare("UPDATE cat_oficina SET 
+                Nombre = :nom,
+                Descripcion = :desc,
+                Caracteristicas = :caract,
+                Ubicacion = :ubi,
+                Aforo = :afo,
+                Precio = :preci,
+                titulo = :title,
+                imagen = :img,
+                token = :token,
+                estatus = :estatus
+                    WHERE 
+                id_oficina = :idOficina;");
+            $query->execute([
+                ':nom' => $datos['nombre'],
+                ':desc' => $datos['decripcion'],
+                ':caract' => $datos['caracteristicas'],
+                ':ubi' => $datos['ubicacion'],
+                ':afo' => $datos['aforo'],
+                ':preci' => $datos['precio'],
+                ':title' => $datos['titulo'],
+                ':img' => $rutaImagen,
+                ':token' => $token,
+                ':estatus' => $datos['estatus'],
+                ':idOficina' => $datos['oficina']
+            ]);
+            $con->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            $con->pdo->rollBack();
+            echo "Error recopilado model actualizarOficina: " . $e->getMessage();
+            return false;
+        }
+    }
+    // asignacion
+    public static function asginacion()
+    {
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("SELECT CONCAT(e.Nombre, ' ', e.Apellidos) AS Nombre_completo,
+                s.Nombre AS Nombre_salon,
+                ao.fecha_inicio,
+                ao.fecha_final
+            FROM asignacion_salon ao
+            JOIN cat_salon s ON ao.fk_salon = s.id_salon
+            JOIN cat_empleado e ON ao.fk_empleado = e.id_empleado;");
+            $query->execute();
+            return $query->fetchAll();
+        } catch (\Throwable $e) {
+            echo "Error recopilado model oficina: " . $e->getMessage();
+            return;
         }
     }
 }

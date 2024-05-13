@@ -519,3 +519,59 @@ nav input {
     font-size: 45px;
     font-weight: 600;
 }
+
+.boton {
+    line-height: 1;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: .75rem;
+    background-color: var(--clr);
+    color: var(--primario);
+    border-radius: 10rem;
+    font-weight: 600;
+    padding: .75rem 1.5rem;
+    padding-left: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color .3s;
+    font-size: 12px;
+}
+
+.boton__icon-wrapper {
+    flex-shrink: 0;
+    width: 25px;
+    height: 25px;
+    position: relative;
+    color: var(--clr);
+    background-color: var(--primario);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+.boton:hover {
+    background-color: var(--secundario);
+}
+
+.boton:hover .boton__icon-wrapper {
+    color: val(--secundario);
+}
+
+.boton__icon-svg--copy {
+    position: absolute;
+    transform: translate(-150%, 150%);
+}
+
+.boton:hover .boton__icon-svg:first-child {
+    transition: transform .3s ease-in-out;
+    transform: translate(150%, -150%);
+}
+
+.boton:hover .boton__icon-svg--copy {
+    transition: transform .3s ease-in-out .1s;
+    transform: translate(0);
+    color: var(--primario);
+}

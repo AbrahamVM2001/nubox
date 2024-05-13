@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-05-2024 a las 01:52:19
+-- Tiempo de generación: 14-05-2024 a las 01:46:19
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -115,7 +115,7 @@ CREATE TABLE `cat_empleado` (
   `Edad` int(3) DEFAULT NULL,
   `Telefono` varchar(11) DEFAULT NULL,
   `Curp` varchar(20) DEFAULT NULL,
-  `tipo_usuario` int(3) DEFAULT NULL,
+  `tipo_usuario` int(3) DEFAULT NULL COMMENT '0: dev; 1: admin; 2: empleado',
   `correo` varchar(100) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
   `estatus` int(2) DEFAULT NULL
@@ -126,7 +126,8 @@ CREATE TABLE `cat_empleado` (
 --
 
 INSERT INTO `cat_empleado` (`id_empleado`, `Nombre`, `Apellidos`, `Fecha_nacimiento`, `Edad`, `Telefono`, `Curp`, `tipo_usuario`, `correo`, `password`, `estatus`) VALUES
-(1, 'Abraham', 'Vera Martinesz', '2001-12-15', 22, '5547599600', 'VEMA011215HDFRRBA0', 0, 'abrahamveram2001@devabraham.com', 'TE0xL3B4Ymh5RkhTRFd3UVBjVEpqdz09', 1);
+(1, 'Abraham', 'Vera Martinesz', '2001-12-15', 22, '5547599600', 'VEMA011215HDFRRBA0', 1, 'abrahamveram2001@devabraham.com', 'TE0xL3B4Ymh5RkhTRFd3UVBjVEpqdz09', 1),
+(2, 'Aquetzalli', 'Garcia Urbina', '2002-07-18', 21, '5612099010', 'GAUA020718MDFRBQA1', 2, 'a_garcia_urbina@devabraham.com', 'c20xNHF4SWdYUGQyazNkb2w3SFRFUT09', 1);
 
 -- --------------------------------------------------------
 
@@ -3599,7 +3600,7 @@ CREATE TABLE `cat_menu` (
   `referencia_menu` varchar(100) DEFAULT NULL,
   `posicion_menu` int(11) NOT NULL,
   `icono_menu` varchar(150) DEFAULT NULL,
-  `tipo_usuario` tinyint(1) NOT NULL COMMENT '1=Admin;2=Usuario;3=General',
+  `tipo_usuario` tinyint(1) NOT NULL COMMENT '0: Dev; 1: admin; 2: empleado; 3: general',
   `estatus_menu` tinyint(1) NOT NULL DEFAULT 1 COMMENT '0=Inactivo;1=Activo'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -3610,9 +3611,11 @@ CREATE TABLE `cat_menu` (
 INSERT INTO `cat_menu` (`id_menu`, `nombre_menu`, `descripcion_menu`, `referencia_menu`, `posicion_menu`, `icono_menu`, `tipo_usuario`, `estatus_menu`) VALUES
 (1, 'Inicio', 'Página de inicio', NULL, 1, '<i class=\"fa-solid fa-house\"></i>', 3, 1),
 (2, 'Salir', 'Salir del sistema', 'login/salir', 100, '<i class=\"fa-solid fa-right-from-bracket\"></i>', 3, 1),
-(3, 'Logeos', 'Ver los logeos de los usuarios', 'admin/logeo', 3, '<i class=\"fa fa-square-poll-vertical\"></i>', 1, 1),
-(4, 'Estadisticas', 'Genera el filtro de las estadisticas', 'admin/estadisticas', 6, '<i class=\"fa fa-chart-simple\"></i>', 1, 1),
-(5, 'Preguntas', 'Ver las preguntas', 'admin/preguntas', 4, '<i class=\"fas fa-building\"></i>\n', 1, 1);
+(3, 'Empleados', 'Altas y bajas de empleados', 'admin/empleados', 2, '<i class=\"fa-solid fa-briefcase\"></i>', 1, 1),
+(4, 'Salones', 'Altas y bajas', 'admin/salon', 3, '<i class=\"fa-solid fa-champagne-glasses\"></i>', 1, 1),
+(5, 'Oficinas', 'Altas y bajas', 'admin/oficina', 4, '<i class=\"fa-regular fa-building\"></i>', 1, 1),
+(6, 'Asignacion', 'Tabla de asignacion de eventos', 'admin/asignacion', 5, '<i class=\"fa-solid fa-calendar-days\"></i>', 1, 1),
+(7, 'Reportes', 'Generador de reportes', 'admin/reportes', 6, '<i class=\"fa-solid fa-file\"></i>', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -3625,9 +3628,25 @@ CREATE TABLE `cat_oficina` (
   `Nombre` varchar(100) DEFAULT NULL,
   `Descripcion` varchar(300) DEFAULT NULL,
   `Caracteristicas` varchar(500) DEFAULT NULL,
+  `Ubicacion` varchar(500) DEFAULT NULL,
   `Aforo` int(11) DEFAULT NULL,
-  `Precio` float DEFAULT NULL
+  `Precio` float DEFAULT NULL,
+  `titulo` varchar(100) DEFAULT NULL,
+  `imagen` varchar(100) DEFAULT NULL,
+  `token` varchar(50) DEFAULT NULL,
+  `estatus` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cat_oficina`
+--
+
+INSERT INTO `cat_oficina` (`id_oficina`, `Nombre`, `Descripcion`, `Caracteristicas`, `Ubicacion`, `Aforo`, `Precio`, `titulo`, `imagen`, `token`, `estatus`) VALUES
+(1, 'Innova Experience', 'Innovación Central\" es un espacio dinámico y estimulante diseñado para inspirar la creatividad y fomentar la colaboración. En el corazón de nuestra empresa, Innovación Central es más que una simple oficina; es un ecosistema donde las ideas cobran vida y la innovación florece. Con un diseño moderno y', 'Diseño moderno y funcional: Nuestras instalaciones están diseñadas para inspirar y facilitar la colaboración, con espacios abiertos y flexibles que se adaptan a una variedad de actividades y necesidades de trabajo.\r\n\r\nTecnología de vanguardia: Equipamos nuestras oficinas con la última tecnología para potenciar la productividad y la creatividad, incluyendo equipos de videoconferencia, sistemas de colaboración en línea y herramientas de desarrollo de software.\r\n\r\nÁreas de trabajo flexibles: Desde ', 'nnovación Central\r\nAv. Tecnología 123\r\nColonia Creatividad, Ciudad Futura, CP 12345\r\nCiudad Innovaci', 51, 100000, 'Innova experiences', 'public/img/OFICINAS/MGNH1G2QBUINNOVAEXPERIENCES.jpg', 'MGNH1G2QBU', 1),
+(2, 'Centro de Innovación Empresarial', 'Centro de Innovación Empresarial: Un espacio dinámico que impulsa la creatividad y el progreso en el mundo empresarial, ofreciendo colaboración y recursos de vanguardia.', 'El Centro de Innovación Empresarial es un lugar diseñado para fomentar la creatividad y el progreso en el mundo empresarial. Ofrece espacios colaborativos que estimulan la generación de nuevas ideas y el intercambio de conocimientos entre profesionales. Cuenta con tecnología de vanguardia y recursos innovadores para apoyar el desarrollo de proyectos empresariales. Además, organiza eventos, talleres y programas de capacitación para impulsar la innovación y el crecimiento empresarial. Con un ambie', 'Centro de Innovación Empresarial\r\nAvenida del Progreso 123,\r\nColonia Emprendedores, Ciudad de México,\r\nMéxico', 20, 25000, 'Centro de innovacion Empresarial', 'public/img/OFICINAS/FRNJHVHMWQCENTRODEINNOVACIONEMPRESARIAL.jpg', 'FRNJHVHMWQ', 1),
+(3, 'Nexus Corporativo', 'Nexus Corporativo: Centro de negocios de vanguardia, donde la innovación y la eficiencia se fusionan para impulsar el éxito empresarial.', 'El Nexus Corporativo es un centro de negocios de vanguardia diseñado para satisfacer las necesidades de empresas y emprendedores en un entorno empresarial dinámico y eficiente. Sus características incluyen:\r\n\r\n1. **Infraestructura moderna:** El edificio cuenta con instalaciones de última generación y un diseño arquitectónico innovador que crea un entorno profesional y atractivo.\r\n\r\n2. **Espacios flexibles:** Ofrece una variedad de opciones de espacio, desde oficinas privadas hasta áreas de cowor', 'Nexus Corporativo\r\nAvenida del Progreso 123,\r\nColonia Empresarial, Ciudad de México,\r\nMéxico', 50, 120000, 'Nexus', 'public/img/OFICINAS/F6R1ICE5GVNEXUS.jpg', 'F6R1ICE5GV', 1),
+(4, 'Espacio Creativo Profesional', 'Espacio Creativo Profesional: Un entorno inspirador que potencia la innovación y el trabajo colaborativo para profesionales creativos.', 'El Espacio Creativo Profesional es un lugar diseñado para fomentar la creatividad, la innovación y el trabajo colaborativo entre profesionales de diversas disciplinas. Sus características incluyen:\r\n\r\n1. **Ambiente Inspirador:** El espacio está diseñado con una estética moderna y acogedora que estimula la creatividad y el pensamiento innovador.\r\n\r\n2. **Áreas de Trabajo Flexibles:** Ofrece una variedad de opciones de espacio, desde escritorios compartidos hasta estudios privados, que pueden adapt', 'Espacio Creativo Profesional\r\nCalle de la Inspiración 123,\r\nColonia Creatividad, Ciudad de México,\r\nMéxico', 100, 60, 'Espacio creativo Profesional', 'public/img/OFICINAS/VXLI66G2VBESPACIOCREATIVOPROFESIONAL.jpg', 'VXLI66G2VB', 1),
+(5, 'Zona de Emprendimiento', 'Zona de Emprendimiento: Un espacio vibrante donde las ideas cobran vida y los emprendedores encuentran el impulso necesario para crecer', 'La Zona de Emprendimiento es un ecosistema diseñado para fomentar la innovación y el crecimiento empresarial. Sus características incluyen:\r\n\r\n1. **Espacios Flexibles:** Ofrece una variedad de opciones de espacio, desde escritorios compartidos hasta oficinas privadas, para adaptarse a las necesidades de diferentes emprendedores y equipos.\r\n\r\n2. **Ambiente Inspirador:** Está diseñado con una estética moderna y creativa que estimula la generación de ideas y la colaboración entre emprendedores.\r\n\r\n', 'Zona de Emprendimiento\r\nAvenida del Progreso 123,\r\nColonia Emprendedores, Ciudad de México,\r\nMéxico', 39, 134098, 'Zona de emprendimiento', 'public/img/OFICINAS/ET6V718TXIZONADEEMPRENDIMIENTO.jpg', 'ET6V718TXI', 1);
 
 -- --------------------------------------------------------
 
@@ -3881,9 +3900,25 @@ CREATE TABLE `cat_salon` (
   `Nombre` varchar(100) DEFAULT NULL,
   `Descripcion` varchar(200) DEFAULT NULL,
   `Caracteristicas` varchar(500) DEFAULT NULL,
+  `Ubicacion` varchar(500) DEFAULT NULL,
   `Aforo` varchar(100) DEFAULT NULL,
-  `Precio` float DEFAULT NULL
+  `Precio` float DEFAULT NULL,
+  `titulo` varchar(100) DEFAULT NULL,
+  `Imagen` varchar(100) DEFAULT NULL,
+  `token` varchar(50) DEFAULT NULL,
+  `estatus` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cat_salon`
+--
+
+INSERT INTO `cat_salon` (`id_salon`, `Nombre`, `Descripcion`, `Caracteristicas`, `Ubicacion`, `Aforo`, `Precio`, `titulo`, `Imagen`, `token`, `estatus`) VALUES
+(1, 'Salón CDMX Beauty', 'Salón CDMX Beauty\" es un oasis de belleza y estilo ubicado en el corazón de la vibrante Ciudad de México. Con una fusión única de elegancia moderna y encanto mexicano, nuestro salón ofrece una experie', 'Profesionales altamente capacitados: Nuestro equipo de estilistas y esteticistas cuenta con una amplia experiencia y formación en las últimas tendencias y técnicas de belleza.\r\n\r\nServicios personalizados: Nos esforzamos por entender las necesidades únicas de cada cliente y ofrecer soluciones personalizadas que realcen su belleza natural y reflejen su estilo personal.\r\n\r\nProductos de alta calidad: Utilizamos productos de belleza de primera calidad que cuidan tu cabello y piel, garantizando result', 'Salón CDMX Beauty\r\nAvenida Insurgentes Sur #1234\r\nColonia Condesa, Ciudad de México, CDMX\r\nMéxico', '50', 10000, 'SalonCDMXBeauty', 'public/img/SALONES/ZPXUQYN4PFSALONCDMXBEAUTY.jpg', 'ZPXUQYN4PF', 1),
+(2, 'Palacio de Eventos Esplendor', 'Palacio de Eventos Esplendor: Un lugar magnífico para celebrar tus momentos especiales. Elegancia y distinción en cada detalle', 'El \"Palacio de Eventos Esplendor\" es un lugar excepcional para celebrar todo tipo de eventos. Con una arquitectura impresionante y un diseño elegante, ofrece una atmósfera de lujo y distinción que cautiva a los invitados desde el momento en que entran. Sus amplios espacios son versátiles y pueden adaptarse a una variedad de eventos, desde bodas y banquetes hasta conferencias y presentaciones corporativas. El salón principal cuenta con una magnífica decoración y una acústica impecable, creando el', 'Palacio de Eventos Esplendor\r\nAvenida de los Sueños 123,\r\nColonia Elegancia, Ciudad Real,\r\nCiudad de México, México', '100', 15000, 'Palacio Eventos Esplendor', 'public/img/SALONES/IJX9J7TEDLPALACIOEVENTOSESPLENDOR.jpg', 'IJX9J7TEDL', 1),
+(3, 'Salón Encanto Mexicano', 'Salón Encanto Mexicano: Celebra en un espacio vibrante y auténtico, donde la cultura mexicana cobra vida en cada detalle.\"', 'El \"Salón Encanto Mexicano\" ofrece una experiencia única, con una decoración auténtica que refleja la riqueza cultural de México. Su ambiente vibrante y festivo es perfecto para una variedad de eventos, desde fiestas familiares hasta celebraciones corporativas. Con capacidad adaptable, servicios de catering especializados en cocina mexicana y un equipo profesional dedicado, garantiza una experiencia inolvidable para todos los asistentes. Su ubicación céntrica y accesible en la Ciudad de México l', 'Salón Encanto Mexicano\r\nCalle del Sol 123,\r\nColonia Fiesta, Ciudad de México,\r\nMéxico', '100', 25000, 'Salon', 'public/img/SALONES/5D5NAZJO6VSALON.jpg', '5D5NAZJO6V', 1),
+(4, 'Gran Salón Azteca', 'Gran Salón Azteca: Majestuosidad y elegancia se unen en nuestro espacio emblemático, ideal para eventos que buscan un toque de historia y esplendor.', '\r\nEl Gran Salón Azteca es un lugar emblemático que ofrece una experiencia única para eventos especiales. Con una arquitectura imponente y una decoración inspirada en la grandeza de la cultura azteca, proporciona un ambiente majestuoso y elegante para bodas, recepciones, conferencias y más. Su amplio espacio puede adaptarse a una variedad de configuraciones y capacidades, desde eventos íntimos hasta grandes celebraciones. Ofrece servicios de catering de alta calidad con opciones de menú que desta', 'Gran Salón Azteca\r\nAvenida de los Dioses 123,\r\nColonia Imperio, Ciudad de México,\r\nMéxico', '100', 100000, 'Gran Salon Azteca', 'public/img/SALONES/MMZJIYMM3QGRANSALONAZTECA.jpg', 'MMZJIYMM3Q', 1),
+(5, 'Salón Majestuoso del Centro', 'Salón Majestuoso del Centro: Un espacio elegante y distinguido en el corazón de la ciudad, ideal para eventos exclusivos y memorables.', '\r\nEl Salón Majestuoso del Centro es un lugar emblemático que ofrece una experiencia única para una amplia gama de eventos. Ubicado en el corazón de la ciudad, se distingue por su elegancia y distinción. Su arquitectura imponente y su interior exquisitamente decorado proporcionan un ambiente de lujo y sofisticación para bodas, recepciones, conferencias y otros eventos especiales. Con capacidad adaptable, puede albergar desde eventos íntimos hasta grandes celebraciones con facilidad. Ofrece servic', 'Salón Majestuoso del Centro\r\nCalle de la Gloria 123,\r\nColonia Elegancia, Ciudad de México,\r\nMéxico', '20', 6000, 'Salon Mahestuoso del centro', 'public/img/SALONES/5A2BLCLPJNSALONMAHESTUOSODELCENTRO.jpg', '5A2BLCLPJN', 1);
 
 -- --------------------------------------------------------
 
@@ -4113,7 +4148,7 @@ ALTER TABLE `cat_cliente`
 -- AUTO_INCREMENT de la tabla `cat_empleado`
 --
 ALTER TABLE `cat_empleado`
-  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `cat_estados`
@@ -4125,13 +4160,13 @@ ALTER TABLE `cat_estados`
 -- AUTO_INCREMENT de la tabla `cat_menu`
 --
 ALTER TABLE `cat_menu`
-  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `cat_oficina`
 --
 ALTER TABLE `cat_oficina`
-  MODIFY `id_oficina` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_oficina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `cat_paises`
@@ -4149,7 +4184,7 @@ ALTER TABLE `cat_prefijos`
 -- AUTO_INCREMENT de la tabla `cat_salon`
 --
 ALTER TABLE `cat_salon`
-  MODIFY `id_salon` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_salon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `cat_submenu`
@@ -4161,7 +4196,7 @@ ALTER TABLE `cat_submenu`
 -- AUTO_INCREMENT de la tabla `configuracion`
 --
 ALTER TABLE `configuracion`
-  MODIFY `id_sociedad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_sociedad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `reservacion_oficina`
@@ -4212,6 +4247,12 @@ ALTER TABLE `asignacion_salon`
 --
 ALTER TABLE `cat_estados`
   ADD CONSTRAINT `cat_estados_ibfk_1` FOREIGN KEY (`id_fk_pais`) REFERENCES `cat_paises` (`id_pais`);
+
+--
+-- Filtros para la tabla `cat_submenu`
+--
+ALTER TABLE `cat_submenu`
+  ADD CONSTRAINT `fk_cat_submenu_menu` FOREIGN KEY (`fk_id_menu`) REFERENCES `cat_menu` (`id_menu`);
 
 --
 -- Filtros para la tabla `reservacion_oficina`

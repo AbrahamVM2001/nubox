@@ -81,7 +81,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                                 <label for="">Correo</label>
-                                <input type="email" class="form-control" name="mail" id="mail" placeholder="Corre0..." required>
+                                <input type="email" class="form-control" name="mail" id="mail" placeholder="Correo..." required>
                                 <div class="invalid-feedback">
                                     Ingrese tu correo, por favor.
                                 </div>
@@ -108,7 +108,31 @@
 
     <div class="body-text">
         <div class="title">Necesitas una oficina o salon.</div>
-        <div class="sub-title">solo escoge tu gusto pagas y listo.</div>
+        <div class="sub-title">solo escoge tu gusto pagas y listo.<br>
+            <a style="--clr: #7808d0" class="boton" href="#">
+                <span class="boton__icon-wrapper">
+                    <svg width="10" class="boton__icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 15">
+                        <path fill="currentColor" d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"></path>
+                    </svg>
+
+                    <svg class="boton__icon-svg  boton__icon-svg--copy" xmlns="http://www.w3.org/2000/svg" width="10" fill="none" viewBox="0 0 14 15">
+                        <path fill="currentColor" d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"></path>
+                    </svg>
+                </span>
+                Escoger Salón o Oficina
+            </a>
+
+        </div>
+    </div>
+
+    <!-- slider -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div class="container-slider-salon"></div>
+            </div>
+        </div>
     </div>
     <!--   Core JS Files   -->
     <script>
