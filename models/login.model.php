@@ -9,18 +9,4 @@ class LoginModel extends ModelBase
     {
         parent::__construct();
     }
-    public static function user($datos)
-    {
-        try {
-            $con = new Database;
-            $query = $con->pdo->prepare("SELECT * FROM cat_empleado WHERE correo = :mail");
-            $query->execute([
-                ':mail' => $datos['mail']
-            ]);
-            return $query->fetch();
-        } catch (PDOException $e) {
-            echo "Error recopilado model user: " . $e->getMessage();
-            return;
-        }
-    }
 }

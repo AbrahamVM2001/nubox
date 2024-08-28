@@ -43,7 +43,8 @@ class ControllerBase{
       return false;
     }
   }
-  function verificarUser(){
+  function verificarUser()
+  {
     if (isset($_SESSION['tipo_usuario-' . constant('Sistema')]) && $_SESSION['tipo_usuario-' . constant('Sistema')] == 2) {
       return true;
     } else {
@@ -55,13 +56,6 @@ class ControllerBase{
         return true;
     } else {
         return false;
-    }
-  }
-  function verificarDev() {
-    if (isset($_SESSION['tipo_usuario-' . constant('Sistema')]) && $_SESSION['tipo_usuario-' . constant('Sistema')] == 0) {
-      return true;
-    } else {
-      return false;
     }
   }
   function recargar(){

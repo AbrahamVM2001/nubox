@@ -1,8 +1,8 @@
 <?php
-define("HOST", "217.21.76.167");//Servidor donde se aloja la base de datos
-define("DB", "u547745900_nubox");//Nombre de la base de datos
-define("USER", "u547745900_nubox");//Usuario de la base de datos
-define("PASSWORD", "r83:.CV?90M[");//Contraseña de usuario de la base de datos
+define("HOST", "localhost");//Servidor donde se aloja la base de datos
+define("DB", "bibloteca");//Nombre de la base de datos
+define("USER", "root");//Usuario de la base de datos
+define("PASSWORD", "");//Contraseña de usuario de la base de datos
 define("CHARSET", "utf8");//Codificación de caracteres.
 
     $db = new Database();
@@ -15,7 +15,7 @@ define("CHARSET", "utf8");//Codificación de caracteres.
         return [];
     }
 define("URL",$resp[0]['dominio_sociedad']);//Dominio del sistema
-define("Sistema", "conferencias");//Nombre del sistema
+define("Sistema", "programa-academico");//Nombre del sistema
 
 define("LOGOTIPO", $resp[0]['ruta_logotipo']);
 define("ICONO",$resp[0]['ruta_icono']);

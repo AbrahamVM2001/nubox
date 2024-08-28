@@ -11,8 +11,7 @@ class ViewBase
   public $nombresistema;
   public $descripcionsistema;
   public $correosoporte;
-  public $conferencia;
-  public $pregunta;
+  public $evento;
   public $fechas;
   public $idfecha;
   public $idprograma;

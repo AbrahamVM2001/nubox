@@ -1,4 +1,4 @@
-<?php if (isset($_SESSION['id_empleado-'.constant('Sistema')]) && !empty($_SESSION['id_empleado-'.constant('Sistema')])):?>
+<?php if (isset($_SESSION['id_usuario-'.constant('Sistema')]) && !empty($_SESSION['id_usuario-'.constant('Sistema')])):?>
 
 <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 px-0 mx-4 shadow-none border-radius-xl z-index-sticky border" id="navbarBlur" data-scroll="true">
       <div class="container-fluid py-1 px-3">

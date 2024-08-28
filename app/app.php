@@ -13,7 +13,7 @@ class App extends ControllerBase
         $this->url = trim($this->url ?? '', "/");
         $this->url = explode("/", $this->url);
         // Cuando se ingresa sin definir el controlador
-        if (isset($_SESSION['id_empleado-' . constant('Sistema')]) && !empty($_SESSION['id_empleado-' . constant('Sistema')]) && $this->verificarAdmin()) {
+        if (isset($_SESSION['id_usuario-' . constant('Sistema')]) && !empty($_SESSION['id_usuario-' . constant('Sistema')]) && $this->verificarAdmin()) {
             if (empty($this->url[0])) {
                 $archivoController = "controllers/admin.controller.php";
                 require_once $archivoController;
@@ -23,27 +23,16 @@ class App extends ControllerBase
                 return false;
             }
             $this->general($this->url);
-        } else if (isset($_SESSION['id_empleado-' . constant('Sistema')]) && !empty($_SESSION['id_empleado-' . constant('Sistema')])  && $this->verificarUser()) {
+        } else if (isset($_SESSION['id_usuario-' . constant('Sistema')]) && !empty($_SESSION['id_usuario-' . constant('Sistema')])  && $this->verificarUser()) {
             if (empty($this->url[0])) {
-                $archivoController = "controllers/user.controller.php";
+                $archivoController = "controllers/usuario.controller.php";
                 require_once $archivoController;
-                $controller = new user();
+                $controller = new Usuario();
                 $controller->loadModel("usuario");
                 $controller->render();
                 return false;
             }
             $this->general($this->url);
-        } else if(isset($_SESSION['id_empleado-' . constant('Sistema')]) && !empty($_SESSION['id_empleado-' . constant('Sistema')])  && $this->verificarDev()) {
-            if (empty($this->url[0])) {
-                $archivoController = "controllers/user.controller.php";
-                require_once $archivoController;
-                $controller = new user();
-                $controller->loadModel("usuario");
-                $controller->render();
-                return false;
-            }
-            $this->general($this->url);
-        
         } else {
             // echo "No esta logueado, redireccionar a Login";
             if (empty($this->url[0])) {
