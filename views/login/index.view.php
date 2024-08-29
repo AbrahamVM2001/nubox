@@ -48,7 +48,7 @@
     <!-- menu -->
     <nav>
         <div class="wrapper">
-            <div class="logo"><a href="#"><img src="img/logo/dark-prueba.png" alt="logo"></a></div>
+            <div class="logo"><a href="#"><img src="<?= constant('URL') ?>public/img/logo.png" width="10px" alt="logo"></a></div>
             <input type="radio" name="slider" id="menu-btn">
             <input type="radio" name="slider" id="close-btn">
             <ul class="nav-links">
@@ -88,7 +88,7 @@
                 <li>
                     <div class="group">
                         <span>Sesión</span>
-                        <a href="#">
+                        <a data-bs-toggle="modal" data-bs-target="#iniciarModal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                                 <path fill="#000000" d="m15 13l-4 4v-3H2v-2h9V9zM5 20v-4h2v2h10v-7.81l-5-4.5L7.21 10H4.22L12 3l10 9h-3v8z" />
                             </svg>
@@ -104,7 +104,10 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <h1 class="text">Renta de oficinas y salones</h1>
-                    <p>"Espacios Modernos, Negocios Exitosos"</p>
+                    <p style="color: #fff; font-weight: 900px;">Necesitas organizar un evento o quieres crecer tu negocio, bienvenido a nuestra empresa nosotros de ayudamos a poder
+                        rentar de la forma sencilla un salon o una oficina, gracias por visitar Nubox tus Espacios Modernos, Negocios Exitosos.
+                    </p>
+                    <a href="#about" class="btn btn-light">Conocer más</a>
                 </div>
             </div>
         </div>
@@ -295,7 +298,7 @@
                 <div class="col-sm-12 col-md-12 col-lg-6 d-flex align-items-end justify-content-end">
                     <ul class="list-unstyled d-flex">
                         <li class="ms-3">
-                            <a href="">
+                            <a href="https://www.linkedin.com/in/abraham-vera-713789181/">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                                     <circle cx="4" cy="4" r="2" fill="#000000" fill-opacity="0">
                                         <animate fill="freeze" attributeName="fill-opacity" dur="0.15s" values="0;1" />
@@ -315,7 +318,7 @@
                             </a>
                         </li>
                         <li class="ms-3">
-                            <a href="">
+                            <a href="https://github.com/AbrahamVM2001">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                                     <g fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                                         <path stroke-dasharray="32" stroke-dashoffset="32" d="M12 4c1.67 0 2.61 0.4 3 0.5c0.53 -0.43 1.94 -1.5 3.5 -1.5c0.34 1 0.29 2.22 0 3c0.75 1 1 2 1 3.5c0 2.19 -0.48 3.58 -1.5 4.5c-1.02 0.92 -2.11 1.37 -3.5 1.5c0.65 0.54 0.5 1.87 0.5 2.5c0 0.73 0 3 0 3M12 4c-1.67 0 -2.61 0.4 -3 0.5c-0.53 -0.43 -1.94 -1.5 -3.5 -1.5c-0.34 1 -0.29 2.22 0 3c-0.75 1 -1 2 -1 3.5c0 2.19 0.48 3.58 1.5 4.5c1.02 0.92 2.11 1.37 3.5 1.5c-0.65 0.54 -0.5 1.87 -0.5 2.5c0 0.73 0 3 0 3">
@@ -333,6 +336,48 @@
             </div>
         </div>
     </footer>
+    <!-- model de inciar sesión -->
+    <div class="modal fade" id="iniciarModal" tabindex="-1" aria-labelledby="iniciarModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content modal-sesion-estilo">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalLibrosLabel">Iniciar sesión</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <form id="form-new-iniciar" action="javascript:;" class="needs-validation" novalidate method="post">
+                            <input type="hidden" name="fechaActual" id="fechaActual">
+                            <input type="hidden" name="ubicacion" id="ubicacion">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
+                                    <label for="inicar">Correo Electronico <span>*</span></label>
+                                    <input type="email" name="correo" id="correo" class="form-control mt-2" placeholder="example@nubox.com" required>
+                                    <div class="invalid-feedback">
+                                        Ingresa un correo electronico valido, por favor,
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-3">
+                                    <label for="contraseña">Contraseña</label>
+                                    <input type="password" name="pass" id="pass" class="form-control mt-2" placeholder="Contraseña..." required>
+                                    <button class="btn btn-light btn-ver-password mt-3">Ver contraseña</button><br>
+                                    <button class="btn btn-light btn-recuperar mt-2">Olvide mi contraseña</button>
+                                    <div class="invalid-feedback">
+                                        Ingresa una contraseña valida, por favor.
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button data-formulario="form-new-iniciar" type="button" class="btn btn-primary btn-iniciar">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- scripts -->
     <script>
         let servidor = '<?= constant('URL') ?>';
     </script>
@@ -381,6 +426,53 @@
         setInterval(actualizarFecha, 1000);
 
         document.addEventListener('DOMContentLoaded', actualizarFecha);
+    </script>
+    <!-- password -->
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Selecciona el botón y el campo de entrada
+            const togglePasswordButton = document.querySelector('.btn-ver-password');
+            const passwordField = document.querySelector('#pass');
+
+            // Agrega un manejador de eventos al botón
+            togglePasswordButton.addEventListener('click', () => {
+                // Alterna el tipo de input entre 'password' y 'text'
+                const type = passwordField.type === 'password' ? 'text' : 'password';
+                passwordField.type = type;
+
+                // Cambia el texto del botón según el estado
+                togglePasswordButton.textContent = type === 'password' ? 'Ver contraseña' : 'Ocultar contraseña';
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Obtener la fecha actual
+            const fechaActual = new Date().toISOString(); // Formato ISO 8601
+            document.querySelector('#fechaActual').value = fechaActual;
+
+            // Obtener información del navegador y dispositivo
+            const navegador = navigator.userAgent;
+            const dispositivo = /Mobi|Android/i.test(navegador) ? 'Móvil' : 'Escritorio';
+
+            // Obtener la ubicación (coordenadas) del usuario
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const latitud = position.coords.latitude;
+                    const longitud = position.coords.longitude;
+
+                    // Componer la cadena con la ubicación y la información del dispositivo/navegador
+                    const ubicacion = `Latitud: ${latitud}, Longitud: ${longitud}, Dispositivo: ${dispositivo}, Navegador: ${navegador}`;
+                    document.querySelector('#ubicacion').value = ubicacion;
+                }, (error) => {
+                    console.error("Error al obtener la ubicación:", error.message);
+                    document.querySelector('#ubicacion').value = `Error al obtener la ubicación, Dispositivo: ${dispositivo}, Navegador: ${navegador}`;
+                });
+            } else {
+                console.error("Geolocalización no soportada por el navegador.");
+                document.querySelector('#ubicacion').value = `Geolocalización no soportada, Dispositivo: ${dispositivo}, Navegador: ${navegador}`;
+            }
+        });
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

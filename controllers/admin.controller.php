@@ -13,10 +13,18 @@ class Admin extends ControllerBase
     function __construct(){
         parent::__construct();
     }
-    /* Vistas */
+    /* inicio */
     function render(){
         if ($this->verificarAdmin()) {
             $this->view->render("admin/index");
+        } else {
+            $this->recargar();
+        }
+    }
+    // usuario
+    function usuario(){
+        if ($this->verificarAdmin()) {
+            $this->view->render("admin/usuario");
         } else {
             $this->recargar();
         }

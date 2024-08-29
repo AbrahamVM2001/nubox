@@ -11,17 +11,6 @@ class ViewBase
   public $nombresistema;
   public $descripcionsistema;
   public $correosoporte;
-  public $evento;
-  public $fechas;
-  public $idfecha;
-  public $idprograma;
-  public $idsalon;
-  public $idcapitulo;
-  public $idactividad;
-  public $exportable;
-  public $programa;
-  public $datos;
-  public $fechasPrograma;
   function __construct()
   {
     // echo "<p>Vista base</p>";
