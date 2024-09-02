@@ -23,4 +23,15 @@ class LoginModel extends ModelBase
             return;
         }
     }
+    public static function viewSalon(){
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("SELECT * FROM cat_espacios WHERE tipo_espacio = 1;");
+            $query->execute();
+            return $query->fetchAll();
+        } catch (PDOException $e) {
+            echo "Error recopilado model salon: " . $e->getMessage();
+            return;
+        }
+    }
 }

@@ -56,9 +56,9 @@ $(function () {
     });
     pais('#id_pais');
     // mostrar salones
-    async function cardsSalon() {
+    async function cardsEspacios() {
         try {
-            let peticion = await fetch(servidor + `admin/viewSalon`);
+            let peticion = await fetch(servidor + `admin/viewEspacios`);
             let response = await peticion.json();
             if (response.length == 0) {
                 jQuery(`<h3 class="mt-4 text-center text-uppercase">Sin salones registrados</h3>`).appendTo("#container-salon").addClass('text-danger');
@@ -86,10 +86,10 @@ $(function () {
                     $('#info-table-result_filter').addClass('pull-right');
                     $('input').addClass("form-control");
                     $('select').addClass('form-control');
-                    $('.previous.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2 mt-3");
-                    $('.next.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2 mt-3");
-                    $('.previous').addClass("btn-outline-info btn-rounded mx-2 mt-3");
-                    $('.next').addClass("btn-outline-info btn-rounded mx-2 mt-3");
+                    $('.previous.disabled').addClass("btn-light btn-rounded mx-2 mt-3");
+                    $('.next.disabled').addClass("btn-light btn-rounded mx-2 mt-3");
+                    $('.previous').addClass("btn-light btn-rounded mx-2 mt-3");
+                    $('.next').addClass("btn-light btn-rounded mx-2 mt-3");
                 },
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
@@ -116,9 +116,15 @@ $(function () {
                         render: function (data) {
                             let color = (data.estatus == 1) ? 'success' : 'danger';
                             let botones = `
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-<xl-12 d-flex justify-content-between align-items-center">
-                                    <button data-id="${btoa(data.id_espacio)}" data-estatus="${btoa(data.estatus)}" data-bs-toggle="tooltip" title="Activa o desactiva la sesión" type="button" class="btn btn-${color} btn-suspender"><i class="fa-solid fa-power-off"></i></button>
-                                </div>`;
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-6">
+                                        <button data-id="${btoa(data.id_espacio)}" data-estatus="${btoa(data.estatus)}" data-bs-toggle="tooltip" title="Activa o desactiva la sesión" type="button" class="btn btn-${color} btn-suspender"><i class="fa-solid fa-power-off"></i></button>
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-6">
+                                        <a href="${servidor}admin/contenido/${btoa(btoa(data.id_espacio))}/${btoa(btoa(data.tipo_espacio))}" class="btn btn-info btn-direccion"><i class="fa-solid fa-up-right-from-square"></i></a>
+                                    </div>
+                                </div>
+                            `;
                             return botones;
                         },
                         className: 'text-vertical text-center'
@@ -132,9 +138,9 @@ $(function () {
             if (error.name == 'AbortError') { } else { throw error; }
         }
     }
-    cardsSalon();
+    cardsEspacios();
     // guardar salones o modificar
-    $(".btn-salon").on("click", function () {
+    $(".btn-espacios").on("click", function () {
         let form = $("#" + $(this).data("formulario"));
         if (form[0].checkValidity() === false) {
             event.preventDefault();
@@ -146,7 +152,7 @@ $(function () {
             } else {
                 $.ajax({
                     type: "POST",
-                    url: servidor + "admin/guardarSalon",
+                    url: servidor + "admin/guardarEspacios",
                     dataType: "json",
                     data: new FormData(form.get(0)),
                     contentType: false,
@@ -194,17 +200,45 @@ $(function () {
         try {
             let peticion = await fetch(servidor + `admin/buscarEspacio/${id_espacio}`);
             let response = await peticion.json();
-            console.log(peticion);
-            $('#tipo').val('');
             $('#id_espacio').val(response['id_espacio']);
+            $('#tipo').val('')
             $('#nombre').val(response['nombre']);
             $('#tipo_espacio').val(response['tipo_espacio']);
             $('#id_pais').val(response['fk_pais']);
-            $('#id_estado').val(response['fk_estado']);
             $('#cordenadas').val(response['cordenadas']);
-            $('#precio').val(response['precio']);
+            $('#precio').val(response['precio_hora']);
+            await estado('#id_estado', response['fk_pais'], response['fk_estado']);
         } catch (error) {
-            if (error.name == 'AbortError') { } else { throw error; }
+            if (error.name === 'AbortError') { 
+            } else { 
+                throw error; 
+            }
         }
+    }
+    // activar o desactivar espacios
+    $(document).on('click', '.btn-suspender', function () {
+        suspender($(this).data('id'), $(this).data('estatus'));
+    });
+    function suspender(idEspacio, estatus) {
+        $.ajax({
+            type: "POST",
+            url: servidor + "admin/activar_desactivar_espacio",
+            dataType: "json",
+            data: { id_espacio: idEspacio, estatus: estatus },
+            beforeSend: () => $("#loading").addClass("loading"),
+            success: (data) => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: data.estatus,
+                    title: data.titulo,
+                    text: data.respuesta,
+                    showConfirmButton: false,
+                    timer: 2000,
+                });
+                setTimeout(() => location.reload(), 2000);
+            },
+            error: (data) => console.log("Error ajax", data),
+            complete: () => $("#loading").removeClass("loading"),
+        });
     }
 });

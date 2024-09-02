@@ -25,59 +25,59 @@
                     <input type="hidden" name="id_usuario" id="id_usuario">
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <label for="usuario">Nombre usuario <span>*</span></label>
-                            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="nombre..." required>
+                            <label for="usuario" style="color: #000;">Nombre usuario <span>*</span></label>
+                            <input style="color: #000;" type="text" name="nombre" id="nombre" class="form-control" placeholder="nombre..." required>
                             <div class="invalid-feedback">
                                 Ingresa un nombre o nombres validos, por favor.
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <label for="APaterno">Apellido paterno <span>*</span></label>
-                            <input type="text" name="apaterno" id="apaterno" class="form-control" placeholder="Apellido paterno..." required>
+                            <label for="APaterno" style="color: #000;">Apellido paterno <span>*</span></label>
+                            <input style="color: #000;" type="text" name="apaterno" id="apaterno" class="form-control" placeholder="Apellido paterno..." required>
                             <div class="invalid-feedback">
                                 Ingresa un Apellido paterno valido, por favor.
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <label for="AMaterno">Apellido materno <span>*</span></label>
-                            <input type="text" name="amaterno" id="amaterno" class="form-control" placeholder="Apellido materno...">
+                            <label for="AMaterno" style="color: #000;">Apellido materno <span>*</span></label>
+                            <input style="color: #000;" type="text" name="amaterno" id="amaterno" class="form-control" placeholder="Apellido materno...">
                             <div class="invalid-feedback">
                                 Ingresa un Apellido Materno, por favor.
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <label for="tipo_usuario">Tipo de usuario <span>*</span></label>
-                            <select class="form-control" name="tipo_usuario" id="tipo_usuario" required>
+                            <label for="tipo_usuario" style="color: #000;">Tipo de usuario <span>*</span></label>
+                            <select class="form-control" name="tipo_usuario" id="tipo_usuario" required style="color: #000;">
                                 <option value="">Seleccione un tipo de usuario..</option>
                                 <option value="1">Administrador</option>
                                 <option value="2">Usuario</option>
                             </select>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <label for="correo">Correo <span>*</span></label>
-                            <input type="email" name="correo" id="correo" class="form-control" placeholder="example@nubox.com" required>
+                            <label for="correo" style="color: #000;">Correo <span>*</span></label>
+                            <input style="color: #000;" type="email" name="correo" id="correo" class="form-control" placeholder="example@nubox.com" required>
                             <div class="invalid-feedback">
                                 Ingresa un correo valido, por favor.
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <label for="Caracteristicas">Ingresa una contraseña mayor a 8 pero menos a 32 con letras, caracteres y números.</label>
-                            <label for="Contraseña">Contraseña <span>*</span></label>
-                            <input type="password" name="pass" id="pass" class="form-control" placeholder="Contraseña..." required>
-                            <p style="font-size: 10px;"><span class="verificar-mayusculas"></span> Mayúsculas <span>ABCDFG</span></p>
-                            <p style="font-size: 10px;"><span class="verificar-minusculas"></span> Minúscula <span>abcdfg</span></p>
-                            <p style="font-size: 10px;"><span class="verificar-numeros"></span> Números <span>12345</span></p>
-                            <p style="font-size: 10px;"><span class="verificar-caracteres"></span> Caracteres <span>@?¡!&%</span></p>
-                            <p style="font-size: 10px;"><span class="verificar-meno"></span> Es mayor a 8 caracteres</p>
-                            <p style="font-size: 10px;"><span class="verificar-mayor"></span> Es menos a 32 caracteres</p>
+                            <label for="Caracteristicas" style="color: #000;">Ingresa una contraseña mayor a 8 pero menos a 32 con letras, caracteres y números.</label><br>
+                            <label for="Contraseña" style="color: #000;">Contraseña <span>*</span></label>
+                            <input style="color: #000;" type="password" name="pass" id="pass" class="form-control" placeholder="Contraseña..." required>
+                            <p style="font-size: 10px; color: #000;"><span class="verificar-mayusculas"></span> Mayúsculas <span>ABCDFG</span></p>
+                            <p style="font-size: 10px; color: #000;"><span class="verificar-minusculas"></span> Minúscula <span>abcdfg</span></p>
+                            <p style="font-size: 10px; color: #000;"><span class="verificar-numeros"></span> Números <span>12345</span></p>
+                            <p style="font-size: 10px; color: #000;"><span class="verificar-caracteres"></span> Caracteres <span>@?¡!&%</span></p>
+                            <p style="font-size: 10px; color: #000;"><span class="verificar-meno"></span> Es mayor a 8 caracteres</p>
+                            <p style="font-size: 10px; color: #000;"><span class="verificar-mayor"></span> Es menos a 32 caracteres</p>
                             <div class="invalid-feedback">
                                 Ingresa una contraseña válida, por favor.
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <label for="Confirmacion">Confirmación Contraseña</label>
-                            <input type="password" class="form-control" name="pass_confir" id="pass_confir" placeholder="Contraseña..." required>
-                            <p style="font-size: 10px;"><span class="verificar-similar"></span> Similar</p>
+                            <label for="Confirmacion" style="color: #000;">Confirmación Contraseña</label>
+                            <input style="color: #000;" type="password" class="form-control" name="pass_confir" id="pass_confir" placeholder="Contraseña..." required>
+                            <p style="font-size: 10px; color: #000;"><span class="verificar-similar"></span> Similar</p>
                             <div class="invalid-feedback">
                                 Ingresa una contraseña válida, por favor.
                             </div>

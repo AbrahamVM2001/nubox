@@ -61,6 +61,15 @@ class Login extends ControllerBase
         }
         echo json_encode($data);
     }
+    function viewSalon(){
+        try {
+            $salon = LoginModel::viewSalon();
+            echo json_encode($salon);
+        } catch (\Throwable $th) {
+            echo "Error en controllador salon: " . $th->getMessage();
+            return;
+        }
+    }
     function salir(){
         unset($_SESSION['id_usuario-' . constant('Sistema')]);
         unset($_SESSION['nombre_usuario-' . constant('Sistema')]);

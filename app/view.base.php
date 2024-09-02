@@ -11,6 +11,8 @@ class ViewBase
   public $nombresistema;
   public $descripcionsistema;
   public $correosoporte;
+  public $asignacion_contenido;
+  public $tipo;
   function __construct()
   {
     // echo "<p>Vista base</p>";

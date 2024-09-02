@@ -37,4 +37,20 @@ $(function () {
         }
         form.addClass('was-validated');
     });
+    // muestrar en carrusel salones
+    async function cardsSalones() {
+        try {
+            let peticion = await fetch(servidor + `login/viewSalon`);
+            let response = await peticion.json();
+            console.log(response);
+            if (response.length == 0) {
+                jQuery(`<h3 class="mt-4 text-center text-uppercase"></h3>`).appendTo("#card-salon").addClass('text-danger');
+                return false;
+            }
+            $("#card-salon").empty();
+        } catch (error) {
+            if (error.name == 'AbortError') { } else { throw error; }
+        }
+    }
+    cardsSalones();
 });

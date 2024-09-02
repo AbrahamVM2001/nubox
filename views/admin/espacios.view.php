@@ -2,7 +2,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header d-flex justify-content-between flex-wrap">
-            <h3>Salones</h3>
+            <h3>Espacios</h3>
             <button class="btn btn-success btn-agregar-inspeccion" data-bs-target="#modalSalon" data-bs-toggle="modal">Agregar <i class="fa-solid fa-circle-plus"></i></button>
         </div>
         <div class="card-body">
@@ -11,7 +11,7 @@
     </div>
 </div>
 <?php require('views/footer.view.php'); ?>
-<script src="<?= constant('URL') ?>public/js/paginas/admin/home.salon.js"></script>
+<script src="<?= constant('URL') ?>public/js/paginas/admin/home.espacios.js"></script>
 <div class="modal fade" id="modalSalon" aria-hidden="true" aria-labelledby="modalSalonLabel" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -22,18 +22,18 @@
             <div class="modal-body" id="registro">
                 <form id="form-new-salon" action="javascript:;" class="needs-validation" novalidate method="post">
                     <input type="hidden" name="tipo" id="tipo" value="nuevo">
-                    <input type="hidden" name="id_salon" id="id_salon">
+                    <input type="hidden" name="id_espacio" id="id_espacio">
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <label for="nombre">Nombre <span>*</span></label>
-                            <input type="text" class="form-control" name="nombre" id="nombre" placeholder="example..." required>
+                            <label for="nombre" style="color: #000;">Nombre <span>*</span></label>
+                            <input style="color: #000;" type="text" class="form-control" name="nombre" id="nombre" placeholder="example..." required>
                             <div class="invalid-feedback">
                                 Ingrese un nombre valido, por favor.
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <label for="tipo_espacio">Tipo de espacio <span>*</span></label>
-                            <select name="tipo_espacio" id="tipo_espacio" class="form-control" required>
+                            <label for="tipo_espacio" style="color: #000;">Tipo de espacio <span>*</span></label>
+                            <select name="tipo_espacio" id="tipo_espacio" class="form-control" required style="color: #000;">
                                 <option value="1">Salón</option>
                                 <option value="2">Oficina</option>
                             </select>
@@ -42,8 +42,8 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <label for="pais">País <span>*</span></label>
-                            <select name="id_pais" id="id_pais" class="form-control" required>
+                            <label for="pais" style="color: #000;">País <span>*</span></label>
+                            <select name="id_pais" id="id_pais" class="form-control" required style="color: #000;">
                                 <option></option>
                             </select>
                             <div class="invalid-feedback">
@@ -51,8 +51,8 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <label for="estado">Estado <span>*</span></label>
-                            <select name="id_estado" id="id_estado" class="form-control" required>
+                            <label for="estado" style="color: #000;">Estado <span>*</span></label>
+                            <select name="id_estado" id="id_estado" class="form-control" required style="color: #000;">
                                 <option></option>
                             </select>
                             <div class="invalid-feedback">
@@ -60,15 +60,15 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <label for="cordenadas">Cordenadas <span>*</span></label>
-                            <input type="text" name="cordenadas" id="cordenadas" class="form-control" required>
+                            <label for="cordenadas" style="color: #000;">Cordenadas <span>*</span></label>
+                            <input style="color: #000;" type="text" name="cordenadas" id="cordenadas" class="form-control" required>
                             <div class="invalid-feedback">
                                 Ingrese las cordenadas valido, por favor.
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <label for="precio">Precio por hora <span>*</span></label>
-                            <input type="number" name="precio" id="precio" class="form-control" placeholder="1000.00" required>
+                            <label for="precio" style="color: #000;">Precio por hora <span>*</span></label>
+                            <input style="color: #000;" type="number" name="precio" id="precio" class="form-control" placeholder="1000.00" required>
                             <div class="invalid-feedback">
                                 Ingrese un precio valido, por favor.
                             </div>
@@ -79,7 +79,7 @@
             <div class="modal-body" id="actualizar"></div>
             <div class="modal-footer d-flex justify-content-between">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <button data-formulario="form-new-salon" type="button" class="btn btn-primary btn-salon">Guardar</button>
+                <button data-formulario="form-new-salon" type="button" class="btn btn-primary btn-espacios">Guardar</button>
             </div>
         </div>
     </div>

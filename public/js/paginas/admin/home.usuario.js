@@ -29,10 +29,10 @@ $(function () {
                     $('#info-table-result_filter').addClass('pull-right');
                     $('input').addClass("form-control");
                     $('select').addClass('form-control');
-                    $('.previous.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2 mt-3");
-                    $('.next.disabled').addClass("btn-outline-info opacity-5 btn-rounded mx-2 mt-3");
-                    $('.previous').addClass("btn-outline-info btn-rounded mx-2 mt-3");
-                    $('.next').addClass("btn-outline-info btn-rounded mx-2 mt-3");
+                    $('.previous.disabled').addClass("btn-light btn-rounded mx-2 mt-3");
+                    $('.next.disabled').addClass("btn-light btn-rounded mx-2 mt-3");
+                    $('.previous').addClass("btn-light btn-rounded mx-2 mt-3");
+                    $('.next').addClass("btn-light btn-rounded mx-2 mt-3");
                 },
                 "language": {
                     "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"

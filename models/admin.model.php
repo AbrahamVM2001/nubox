@@ -132,8 +132,8 @@ class AdminModel extends ModelBase
             return false;
         }
     }
-    // salones
-    public static function salon()
+    // espacios
+    public static function espacios()
     {
         try {
             $con = new Database;
@@ -156,7 +156,7 @@ class AdminModel extends ModelBase
             return;
         }
     }
-    public static function guardarSalon($datos)
+    public static function guardarEspacios($datos)
     {
         try {
             $con = new Database;
@@ -181,20 +181,21 @@ class AdminModel extends ModelBase
             return false;
         }
     }
-    public static function actualizarSalon($datos)
+    public static function actualizarEspacios($datos)
     {
         try {
             $con = new Database;
             $con->pdo->beginTransaction();
-            $query = $con->pdo->prepare("UPDATE cat_salon SET
+            $query = $con->pdo->prepare("UPDATE cat_espacios SET
                 nombre = :nombre,
                 tipo_espacio = :tipoEspacio,
                 fk_pais = :idPais,
                 fk_estado = :idEstado,
                 cordenadas = :cordenadas
                     WHERE 
-                id_salon = :idSalon;");
+                id_espacio = :idEspacio;");
             $query->execute([
+                ':idEspacio' => $datos['id_espacio'],
                 ':nombre' => $datos['nombre'],
                 ':tipoEspacio' => $datos['tipo_espacio'],
                 ':idPais' => $datos['id_pais'],
@@ -246,6 +247,164 @@ class AdminModel extends ModelBase
         } catch (PDOException $e) {
             echo "Error recopilado model buscarEspacio: " . $e->getMessage();
             return;
+        }
+    }
+    public static function actualizarEstatusEspacio($id_espacio, $nuevoEstatus)
+    {
+        try {
+            $con = new Database;
+            $con->pdo->beginTransaction();
+            $query = $con->pdo->prepare("UPDATE cat_espacios SET  
+            estatus = :txtEstatus 
+                WHERE 
+            id_espacio = :idEspacio;");
+            $query->execute([
+                ':idEspacio' => base64_decode($id_espacio),
+                ':txtEstatus' => base64_decode($nuevoEstatus)
+            ]);
+            $con->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            $con->pdo->rollBack();
+            if ($e->getCode() == '23000') {
+                throw new Exception('Espacio en uso');
+            }
+            echo "No podemos eliminar espacio: " . $e->getMessage();
+            return false;
+        }
+    }
+    // asignacion contenido
+    public static function contenido($id_espacio)
+    {
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("
+            SELECT
+                ac.*,
+                ce.nombre AS nombre_espacio
+            FROM
+                asignacion_contenido ac
+            JOIN
+                cat_espacios ce ON ac.fk_espacio = ce.id_espacio
+            WHERE
+                fk_espacio = :idEspacio
+            ");
+            $query->execute([
+                ':idEspacio' => base64_decode(base64_decode($id_espacio))
+            ]);
+            return $query->fetchAll();
+        } catch (PDOException $e) {
+            echo "Error recopilado model usuario: " . $e->getMessage();
+            return;
+        }
+    }
+    public static function buscarToken($token)
+    {
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("SELECT token FROM asignacion_contenido WHERE token = :token");
+            $query->execute([
+                ':token' => $token
+            ]);
+            return $query->fetchAll();
+        } catch (PDOException $e) {
+            echo "Error en el modelo eventos: " . $e->getMessage();
+            return [];
+        }
+    }
+    public static function guardarContenido($datos)
+    {
+        try {
+            $fecha = date("Y-m-d h:m:s");
+            $usuario = $_SESSION['id_usuario-' . constant('Sistema')];
+            $con = new Database;
+            $con->pdo->beginTransaction();
+            $query = $con->pdo->prepare("INSERT INTO asignacion_contenido
+                (fk_usuario, fk_espacio, fecha, token, ubicacion, estatus)
+                    VALUES
+                (:fkUsuario, :fkEspacio, :fecha, :token, :ubicacion, 1)");
+            $query->execute([
+                ':fkUsuario' => $usuario,
+                ':fkEspacio' => base64_decode(base64_decode($datos['id_espacio'])),
+                ':fecha' => $fecha,
+                ':token' => $datos['token'],
+                ':ubicacion' => $datos['ubicacion']
+            ]);
+            $con->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            $con->pdo->rollBack();
+            echo "Error recopilado model guardarContenido: " . $e->getMessage();
+            return false;
+        }
+    }
+    public static function actualizarContenido($datos)
+    {
+        try {
+            $usuario = $_SESSION['id_usuario-' . constant('Sistema')];
+            $fecha = date("Y-m-d h:m:s");
+            $con = new Database;
+            $con->pdo->beginTransaction();
+            $query = $con->pdo->prepare("UPDATE asignacion_contenido SET
+                fk_usuario = :fkUsuario,
+                fk_espacio = :fkEspacio,
+                fecha = :fecha,
+                token = :token,
+                ubicacion = :ubicacion
+                    WHERE 
+                id_asignacion_contenido = :idContenido;");
+            $query->execute([
+                ':idContenido' => $datos['id_contenido'],
+                ':fkEspacio' => base64_decode(base64_decode($datos['id_espacio'])),
+                ':fkUsuario' => $usuario,
+                ':fecha' => $fecha,
+                ':token' => $datos['token'],
+                ':ubicacion' => $datos['ubicacion']
+            ]);
+            $con->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            $con->pdo->rollBack();
+            echo "Error recopilado model actualizarContenido: " . $e->getMessage();
+            return false;
+        }
+    }
+    public static function buscarContenido($id_asignacion_contenido)
+    {
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("SELECT * FROM asignacion_contenido WHERE id_asignacion_contenido = :idContenido;");
+            $query->execute([
+                ':idContenido' => $id_asignacion_contenido
+            ]);
+            return $query->fetch();
+        } catch (PDOException $e) {
+            echo "Error recopilado model buscarEspacio: " . $e->getMessage();
+            return;
+        }
+    }
+    public static function actualizarEstatusContenido($id_asignacion_contenido, $nuevoEstatus)
+    {
+        try {
+            $con = new Database;
+            $con->pdo->beginTransaction();
+            $query = $con->pdo->prepare("UPDATE asignacion_contenido SET  
+            estatus = :txtEstatus 
+                WHERE 
+            id_asignacion_contenido = :idContenido;");
+            $query->execute([
+                ':idContenido' => base64_decode($id_asignacion_contenido),
+                ':txtEstatus' => base64_decode($nuevoEstatus)
+            ]);
+            $con->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            $con->pdo->rollBack();
+            if ($e->getCode() == '23000') {
+                throw new Exception('Espacio en uso');
+            }
+            echo "No podemos eliminar contenido: " . $e->getMessage();
+            return false;
         }
     }
 }

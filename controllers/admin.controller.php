@@ -141,32 +141,32 @@ class Admin extends ControllerBase
 
         echo json_encode($data);
     }
-    // salones
-    function salon()
+    // espacios
+    function espacios()
     {
         if ($this->verificarAdmin()) {
-            $this->view->render("admin/salon");
+            $this->view->render("admin/espacios");
         } else {
             $this->render();
         }
     }
-    function viewSalon()
+    function viewEspacios()
     {
         try {
-            $salon = AdminModel::salon();
-            echo json_encode($salon);
+            $espacios = AdminModel::espacios();
+            echo json_encode($espacios);
         } catch (\Throwable $th) {
-            echo "Error recopilado controlador salon: " . $th->getMessage();
+            echo "Error recopilado controlador espacios: " . $th->getMessage();
             return;
         }
     }
-    function guardarSalon()
+    function guardarEspacios()
     {
         try {
             if ($_POST['tipo'] == 'nuevo') {
-                $resp = AdminModel::guardarSalon($_POST);
+                $resp = AdminModel::guardarEspacios($_POST);
             } else {
-                $resp = AdminModel::actualizarSalon($_POST);
+                $resp = AdminModel::actualizarEspacios($_POST);
             }
             if ($resp !== false) {
                 $data = [
@@ -220,5 +220,178 @@ class Admin extends ControllerBase
             echo "Error recopilado controlador buscarEspacio: " . $th->getMessage();
             return;
         }
+    }
+    function activar_desactivar_espacio()
+    {
+        try {
+            $id_espacio = $_POST['id_espacio'];
+            $nuevoEstatus = $_POST['estatus'];
+            $nuevoEstatus = ($nuevoEstatus == "MQ==") ? "MA==" : "MQ==";
+            $resp = adminModel::actualizarEstatusEspacio($id_espacio, $nuevoEstatus);
+            if ($resp != false) {
+                $data = [
+                    'estatus' => 'success',
+                    'titulo' => 'Operación exitosa',
+                    'respuesta' => 'Se actualizó correctamente el estatus del espacio.'
+                ];
+            } else {
+                $data = [
+                    'estatus' => 'warning',
+                    'titulo' => 'Error al actualizar',
+                    'respuesta' => 'No se pudo actualizar el estatus del espacio.'
+                ];
+            }
+        } catch (\Throwable $th) {
+            $data = [
+                'estatus' => 'error',
+                'titulo' => 'Error de servidor',
+                'respuesta' => 'Contacte al área de sistemas. Error: ' . $th->getMessage()
+            ];
+        }
+
+        echo json_encode($data);
+    }
+    // asignacion_contenido
+    function contenido($param = null){
+        if ($this->verificarAdmin()) {
+            $this->view->asignacion_contenido = $param[0];
+            $this->view->tipo = $param[1];
+            $this->view->render("admin/contenido");
+        } else {
+            $this->render();
+        }
+        
+    }
+    function viewContenido($param = null)
+    {
+        try {
+            $contenido = AdminModel::contenido($param[0]);
+            echo json_encode($contenido);
+        } catch (\Throwable $th) {
+            echo "Error recopilado controlador contenido: " . $th->getMessage();
+            return;
+        }
+    }
+    function generarToken()
+    {
+        $caracteres = "ABCDEFGHIJKLNMOPQRSTUVWXYZ123456789";
+        $token = "";
+        for ($i = 0; $i < 18; $i++) {
+            $token .= $caracteres[rand(0, strlen($caracteres) - 1)];
+        }
+        return $token;
+    }
+    function buscarToken($token)
+    {
+        try {
+            $tokensEncontrados = AdminModel::buscarToken($token);
+            return count($tokensEncontrados) > 0;
+        } catch (\Throwable $th) {
+            echo "Error en el controlador token: " . $th->getMessage();
+            return false;
+        }
+    }
+    function subirImagen($token, $foto, $tipo)
+    {
+        $directorio = 'public/contenido/';
+        if ($tipo === "1") {
+            $directorio .= "salones/";
+        } else {
+            $directorio .= "oficinas/";
+        }
+        if (isset($foto) && $foto['error'] == UPLOAD_ERR_OK) {
+            $nombreArchivo = $token . '.' . pathinfo($foto['name'], PATHINFO_EXTENSION);
+            $rutaCompleta = $directorio . $nombreArchivo;
+            move_uploaded_file($foto['tmp_name'], $rutaCompleta);
+            return $rutaCompleta;
+        } else {
+            return false;
+        }
+    }
+    function guardarContenido()
+    {
+        try {
+            if ($_POST['tipo'] == 'nuevo') {
+                $tipo = base64_decode(base64_decode($_POST['tipo_contenido']));
+                $token = $this->generarToken();
+                while ($this->buscarToken($token)) {
+                    $token = $this->generarToken();
+                }
+                $rutaImagen = $this->subirImagen($token, $_FILES['ubicacion'], $tipo);
+                $_POST['ubicacion'] = $rutaImagen;
+                $_POST['token'] = $token;
+                $resp = AdminModel::guardarContenido($_POST);
+            } else {
+                $tipo = base64_decode(base64_decode($_POST['tipo_contenido']));
+                $token = $this->generarToken();
+                while($this->buscarToken($token)) {
+                    $token = $this->generarToken();
+                }
+                $rutaImagen = $this->subirImagen($token, $_FILES['ubicacion'], $tipo);
+                $_POST['ubicacion'] = $rutaImagen;
+                $_POST['token'] = $token;
+                $resp = AdminModel::actualizarContenido($_POST);
+            }
+            if ($resp !== false) {
+                $data = [
+                    'estatus' => 'success',
+                    'titulo' => ($_POST['tipo'] == 'nuevo') ? 'Salon registrado' : 'Salon actualizado',
+                    'respuesta' => ($_POST['tipo'] == 'nuevo') ? 'Salon creado correctamente' : 'Se actualizó correctamente el salon'
+                ];
+            } else {
+                $data = [
+                    'estatus' => 'warning',
+                    'titulo' => ($_POST['tipo'] == 'nuevo') ? 'Error en el registro' : 'Salon no actualizado',
+                    'respuesta' => ($_POST['tipo'] == 'nuevo') ? 'No se pudo crear el salon' : 'No se pudo actualizar correctamente el salon'
+                ];
+            }
+        } catch (\Throwable $th) {
+            $data = [
+                'estatus' => 'error',
+                'titulo' => 'Error del servidor',
+                'respuesta' => 'Contacte al área de sistemas. Error: ' . $th->getMessage()
+            ];
+        }
+        echo json_encode($data);
+    }
+    function buscarContenido($param = null)
+    {
+        try {
+            $espacio = adminModel::buscarContenido($param[0]);
+            echo json_encode($espacio);
+        } catch (\Throwable $th) {
+            echo "Error recopilado controlador buscarEspacio: " . $th->getMessage();
+            return;
+        }
+    }
+    function activar_desactivar_contenido()
+    {
+        try {
+            $id_asignacion_contenido = $_POST['id_asignacion_contenido'];
+            $nuevoEstatus = $_POST['estatus'];
+            $nuevoEstatus = ($nuevoEstatus == "MQ==") ? "MA==" : "MQ==";
+            $resp = adminModel::actualizarEstatusContenido($id_asignacion_contenido, $nuevoEstatus);
+            if ($resp != false) {
+                $data = [
+                    'estatus' => 'success',
+                    'titulo' => 'Operación exitosa',
+                    'respuesta' => 'Se actualizó correctamente el estatus del espacio.'
+                ];
+            } else {
+                $data = [
+                    'estatus' => 'warning',
+                    'titulo' => 'Error al actualizar',
+                    'respuesta' => 'No se pudo actualizar el estatus del espacio.'
+                ];
+            }
+        } catch (\Throwable $th) {
+            $data = [
+                'estatus' => 'error',
+                'titulo' => 'Error de servidor',
+                'respuesta' => 'Contacte al área de sistemas. Error: ' . $th->getMessage()
+            ];
+        }
+
+        echo json_encode($data);
     }
 }
