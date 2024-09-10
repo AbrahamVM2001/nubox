@@ -60,6 +60,7 @@ $(function () {
         try {
             let peticion = await fetch(servidor + `admin/viewEspacios`);
             let response = await peticion.json();
+            console.log(response);
             if (response.length == 0) {
                 jQuery(`<h3 class="mt-4 text-center text-uppercase">Sin salones registrados</h3>`).appendTo("#container-salon").addClass('text-danger');
                 return false;
@@ -71,7 +72,7 @@ $(function () {
                 <th class="text-uppercase">Tipo de espacio</th>
                 <th class="text-uppercase">País</th>
                 <th class="text-uppercase">Estado</th>
-                <th class="text-uppercase">Cordenadas</th>
+                <th class="text-uppercase">Direccion</th>
                 <th class="text-uppercase">Precio</th>
                 <th class="text-uppercase">Acciones</th>
                 </tr></thead>
@@ -109,7 +110,7 @@ $(function () {
                     },
                     { "data": "pais", className: 'text-vertical text-center' },
                     { "data": "estado", className: 'text-vertical text-center' },
-                    { "data": "cordenadas", className: 'text-vertical text-center'},
+                    { "data": "direccion", className: 'text-vertical text-center'},
                     { "data": "precio_hora", className: 'text-vertical text-center'},
                     {
                         data: null,

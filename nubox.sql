@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-09-2024 a las 00:26:43
+-- Tiempo de generación: 11-09-2024 a las 01:47:19
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -177,7 +177,7 @@ CREATE TABLE `cat_espacios` (
   `fk_estado` int(11) DEFAULT NULL,
   `longitud` varchar(500) DEFAULT NULL,
   `latitud` varchar(500) DEFAULT NULL,
-  `Direccion` varchar(500) DEFAULT NULL,
+  `direccion` varchar(500) DEFAULT NULL,
   `precio_hora` float DEFAULT NULL,
   `token` varchar(33) DEFAULT NULL,
   `ubicacion` varchar(500) DEFAULT NULL,
@@ -189,7 +189,7 @@ CREATE TABLE `cat_espacios` (
 -- Volcado de datos para la tabla `cat_espacios`
 --
 
-INSERT INTO `cat_espacios` (`id_espacio`, `nombre`, `tipo_espacio`, `fk_pais`, `fk_estado`, `longitud`, `latitud`, `Direccion`, `precio_hora`, `token`, `ubicacion`, `descripcion`, `estatus`) VALUES
+INSERT INTO `cat_espacios` (`id_espacio`, `nombre`, `tipo_espacio`, `fk_pais`, `fk_estado`, `longitud`, `latitud`, `direccion`, `precio_hora`, `token`, `ubicacion`, `descripcion`, `estatus`) VALUES
 (1, 'Salón Majestuoso del Centro', 1, 119, 2055, '19.445155', '-99.157716', '19.445155, -99.157716', 1200, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
 (2, 'Salón Encanto Mexicano', 1, 119, 2055, '19.438396', '-99.167887', '19.438396, -99.167887', 10950, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
 (3, 'Salón Santa Marta Maria Tellez', 1, 119, 2055, '19.448473', '-99.147245', '19.448473, -99.147245', 50234, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
