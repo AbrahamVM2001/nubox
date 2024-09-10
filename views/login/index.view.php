@@ -132,6 +132,10 @@
     <section id="carrusel-salones">
         <div class="container">
             <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                    <h3>Nuestros salones</h3>
+                    <div class="line mx-auto my-3"></div>
+                </div>
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="slide-container swiper">
                         <div class="swiper-button-next swiper-navBtn"></div>
@@ -150,6 +154,10 @@
     <section id="carrusel-oficinas" class="mt-5">
         <div class="container">
             <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                    <h3>Nuestras oficinas</h3>
+                    <div class="line mx-auto my-3"></div>
+                </div>
                 <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                     <div class="slide-container swiper">
                         <div class="swiper-button-next swiper-navBtn"></div>
