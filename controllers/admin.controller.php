@@ -164,8 +164,24 @@ class Admin extends ControllerBase
     {
         try {
             if ($_POST['tipo'] == 'nuevo') {
+                $tipo = $_POST['tipo_espacio'];
+                $token = $this->generarToken();
+                while ($this->buscarToken($token)) {
+                    $token = $this->generarToken();
+                }
+                $rutaImagen = $this->subirImagen($token, $_FILES['ubicacion'], $tipo);
+                $_POST['ubicacion'] = $rutaImagen;
+                $_POST['token'] = $token;
                 $resp = AdminModel::guardarEspacios($_POST);
             } else {
+                $tipo = $_POST['tipo_espacio'];
+                $token = $this->generarToken();
+                while ($this->buscarToken($token)) {
+                    $token = $this->generarToken();
+                }
+                $rutaImagen = $this->subirImagen($token, $_FILES['ubicacion'], $tipo);
+                $_POST['ubicacion'] = $rutaImagen;
+                $_POST['token'] = $token;
                 $resp = AdminModel::actualizarEspacios($_POST);
             }
             if ($resp !== false) {

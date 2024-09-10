@@ -13,6 +13,8 @@ class ViewBase
   public $correosoporte;
   public $asignacion_contenido;
   public $tipo;
+  public $salon;
+  public $oficina;
   function __construct()
   {
     // echo "<p>Vista base</p>";

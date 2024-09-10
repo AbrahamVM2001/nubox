@@ -61,12 +61,36 @@ class Login extends ControllerBase
         }
         echo json_encode($data);
     }
+    // carruseles
     function viewSalon(){
         try {
             $salon = LoginModel::viewSalon();
             echo json_encode($salon);
         } catch (\Throwable $th) {
             echo "Error en controllador salon: " . $th->getMessage();
+            return;
+        }
+    }
+    function viewOficina(){
+        try {
+            $oficina = LoginModel::viewOficina();
+            echo json_encode($oficina);
+        } catch (\Throwable $th) {
+            echo "Error en controllador oficina: " . $th->getMessage();
+            return;
+        }
+    }
+    // mostrar el salon
+    function salon($param){
+        $this->view->salon = $param[0];
+        $this->view->render('login/salon');
+    }
+    function espacio($param){
+        try {
+            $contenido = LoginModel::espacio($param[0]);
+            echo json_encode($contenido);
+        } catch (\Throwable $th) {
+            echo "Error en el espacio controllador: " . $th->getMessage();
             return;
         }
     }
@@ -77,6 +101,32 @@ class Login extends ControllerBase
         unset($_SESSION['tipo_usuario-' . constant('Sistema')]);
         /* session_destroy(); */
         header("location:" . constant('URL'));
+    }
+    // pantalla para mostrar todos los salones
+    function salones(){
+        $this->view->render('login/salones');
+    }
+    function mostrarSalones(){
+        try {
+            $salones = LoginModel::mostrarSalones();
+            echo json_encode($salones);
+        } catch (\Throwable $th) {
+            echo "Error controlador mostrarSalones: " . $th->getMessage();
+            return;
+        }
+    }
+    // pantalla para mostrar todos las oficinas
+    function oficinas(){
+        $this->view->render('login/oficinas');
+    }
+    function mostrarOficinas(){
+        try {
+            $oficinas = LoginModel::mostrarOficinas();
+            echo json_encode($oficinas);
+        } catch (\Throwable $th) {
+            echo "Error controlador mostrarOficinas: " . $th->getMessage();
+            return;
+        }
     }
 }
 ?>

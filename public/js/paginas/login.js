@@ -42,15 +42,52 @@ $(function () {
         try {
             let peticion = await fetch(servidor + `login/viewSalon`);
             let response = await peticion.json();
-            console.log(response);
             if (response.length == 0) {
-                jQuery(`<h3 class="mt-4 text-center text-uppercase"></h3>`).appendTo("#card-salon").addClass('text-danger');
+                jQuery(`<h3 class="mt-4 text-center text-uppercase">No hay salones disponibles</h3>`).appendTo("#container-carrusel-salon").addClass('text-danger');
                 return false;
             }
-            $("#card-salon").empty();
+            $("#container-carrusel-salon").empty();
+            response.forEach(item => {
+                let cardHtml = `
+                <div class="card swiper-slide" data-bs-toggle="modal" data-bs-target="#BrandingModal"
+                    data-image="${item.ubicacion}" data-name="${item.nombre}">
+                    <div class="image-content">
+                        <div class="card-image">
+                            <a href="login/salon/${btoa(btoa(item.id_espacio))}"><img src="${servidor}${item.ubicacion}" class="card-img" alt="${item.nombre}"></a>
+                        </div>
+                    </div>
+                </div>`;
+                $("#container-carrusel-salon").append(cardHtml);
+            });
         } catch (error) {
             if (error.name == 'AbortError') { } else { throw error; }
         }
     }
     cardsSalones();
+    async function cardsOficina() {
+        try {
+            let peticion = await fetch(servidor + `login/viewOficina`);
+            let response = await peticion.json();
+            if (response.length == 0) {
+                jQuery(`<h3 class="mt-4 text-center text-uppercase">No hay oficina disponibles</h3>`).appendTo("#container-carrusel-oficina").addClass('text-danger');
+                return false;
+            }
+            $("#container-carrusel-oficina").empty();
+            response.forEach(item => {
+                let cardHtml = `
+                <div class="card swiper-slide" data-bs-toggle="modal" data-bs-target="#BrandingModal"
+                    data-image="${item.ubicacion}" data-name="${item.nombre}">
+                    <div class="image-content">
+                        <div class="card-image">
+                            <a href="login/salon/${btoa(btoa(item.id_espacio))}"><img src="${servidor}${item.ubicacion}" class="card-img" alt="${item.nombre}"></a>
+                        </div>
+                    </div>
+                </div>`;
+                $("#container-carrusel-oficina").append(cardHtml);
+            });
+        } catch (error) {
+            if (error.name == 'AbortError') { } else { throw error; }
+        }
+    }
+    cardsOficina();
 });

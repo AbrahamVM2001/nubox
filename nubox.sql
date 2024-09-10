@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-09-2024 a las 01:58:50
+-- Tiempo de generación: 11-09-2024 a las 00:26:43
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -67,11 +67,11 @@ INSERT INTO `asignacion_contenido` (`id_asignacion_contenido`, `fk_usuario`, `fk
 (23, 1, 2, '2024-09-02 05:09:12', 'EDRGR5V69N4YQPHSP8', 'public/contenido/salones/EDRGR5V69N4YQPHSP8.png', 1),
 (24, 1, 2, '2024-09-02 05:09:19', '38OI66D528TQA6J1MR', 'public/contenido/salones/38OI66D528TQA6J1MR.png', 1),
 (25, 1, 2, '2024-09-02 05:09:26', 'CVYVJOFR8MIGB9Y2NX', 'public/contenido/salones/CVYVJOFR8MIGB9Y2NX.png', 1),
-(26, 1, 1, '2024-09-02 05:09:41', 'PHPWHXKUBGA82D4GWE', 'public/contenido/salones/PHPWHXKUBGA82D4GWE.png', 1),
-(27, 1, 1, '2024-09-02 05:09:49', 'TSSH434WILW98W67X7', 'public/contenido/salones/TSSH434WILW98W67X7.png', 1),
-(28, 1, 1, '2024-09-02 05:09:22', 'POOMH4DZV6QR2UOK36', 'public/contenido/salones/POOMH4DZV6QR2UOK36.png', 1),
-(29, 1, 1, '2024-09-02 05:09:29', 'M5YC7SIT313NU3TPM6', 'public/contenido/salones/M5YC7SIT313NU3TPM6.png', 1),
-(30, 1, 1, '2024-09-02 05:09:37', 'NS2IKUNTJZQ695KK6T', 'public/contenido/salones/NS2IKUNTJZQ695KK6T.png', 1),
+(26, 1, 1, '2024-09-02 05:09:41', 'PHPWHXKUBGA82D4GWE', 'public/contenido/salones/FVYSLPZNNX8A7XAE48.png', 1),
+(27, 1, 1, '2024-09-02 05:09:49', 'TSSH434WILW98W67X7', 'public/contenido/salones/FVYSLPZNNX8A7XAE48.png', 1),
+(28, 1, 1, '2024-09-02 05:09:22', 'POOMH4DZV6QR2UOK36', 'public/contenido/salones/FVYSLPZNNX8A7XAE48.png', 1),
+(29, 1, 1, '2024-09-02 05:09:29', 'M5YC7SIT313NU3TPM6', 'public/contenido/salones/FVYSLPZNNX8A7XAE48.png', 1),
+(30, 1, 1, '2024-09-02 05:09:37', 'NS2IKUNTJZQ695KK6T', 'public/contenido/salones/FVYSLPZNNX8A7XAE48.png', 1),
 (31, 1, 6, '2024-09-02 05:09:03', 'JYYZ9N7DKTMJPSKXFW', 'public/contenido/salones/JYYZ9N7DKTMJPSKXFW.png', 1),
 (32, 1, 6, '2024-09-02 05:09:10', '8ERXRW4LVEGSLQA1EE', 'public/contenido/salones/8ERXRW4LVEGSLQA1EE.png', 1),
 (33, 1, 6, '2024-09-02 05:09:16', '11V4L5ON1TU9WZTAUF', 'public/contenido/salones/11V4L5ON1TU9WZTAUF.png', 1),
@@ -152,16 +152,15 @@ CREATE TABLE `asignacion_pago` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `asignacion_reserva`
+-- Estructura de tabla para la tabla `asignacion_reservacion`
 --
 
-CREATE TABLE `asignacion_reserva` (
-  `id_reserva` int(11) NOT NULL,
+CREATE TABLE `asignacion_reservacion` (
+  `id_asignacion_reservacion` int(11) NOT NULL,
   `fk_usuario` int(11) DEFAULT NULL,
   `fk_espacio` int(11) DEFAULT NULL,
-  `fecha_inicio` datetime DEFAULT NULL,
-  `fecha_finalizacion` datetime DEFAULT NULL,
-  `estatus` int(2) DEFAULT NULL
+  `fecha_incio` datetime DEFAULT NULL,
+  `fecha_finalizacion` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -176,8 +175,13 @@ CREATE TABLE `cat_espacios` (
   `tipo_espacio` int(2) DEFAULT NULL,
   `fk_pais` int(11) DEFAULT NULL,
   `fk_estado` int(11) DEFAULT NULL,
-  `cordenadas` varchar(500) DEFAULT NULL,
+  `longitud` varchar(500) DEFAULT NULL,
+  `latitud` varchar(500) DEFAULT NULL,
+  `Direccion` varchar(500) DEFAULT NULL,
   `precio_hora` float DEFAULT NULL,
+  `token` varchar(33) DEFAULT NULL,
+  `ubicacion` varchar(500) DEFAULT NULL,
+  `descripcion` varchar(500) DEFAULT NULL,
   `estatus` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -185,26 +189,27 @@ CREATE TABLE `cat_espacios` (
 -- Volcado de datos para la tabla `cat_espacios`
 --
 
-INSERT INTO `cat_espacios` (`id_espacio`, `nombre`, `tipo_espacio`, `fk_pais`, `fk_estado`, `cordenadas`, `precio_hora`, `estatus`) VALUES
-(1, 'Salón Majestuoso del Centro', 1, 119, 2055, '19.445155, -99.157716', 1200, 1),
-(2, 'Salón Encanto Mexicano', 1, 119, 2055, '19.438396, -99.167887', 10950, 1),
-(3, 'Salón Santa Marta Maria Tellez', 1, 119, 2055, '19.448473, -99.147245', 50234, 1),
-(4, 'Salón Cultural', 1, 119, 2055, '19.451670, -99.147931', 2131, 1),
-(5, 'Salón Azteca', 1, 119, 2055, '19.433054, -99.140550', 34567, 1),
-(6, 'Salón Pabellón', 1, 119, 2055, '19.436697, -99.152438', 10987, 1),
-(7, 'Salón Source', 1, 119, 2055, '19.432297, -99.197530', 7569, 1),
-(8, 'Salón Perez Ortiz', 1, 119, 2055, '19.428817, -99.204332', 8765, 1),
-(9, 'Salón Chinga tu madre', 1, 119, 2055, '19.432601, -99.199804', 321312, 1),
-(10, 'Salón Calli', 1, 119, 2055, '19.432965, -99.190920', 12000, 1),
-(11, 'Oficina Emperial', 2, 119, 2055, '19.390403, -99.126635', 25000, 1),
-(12, 'Oficina Washitom', 2, 119, 2055, '19.392943, -99.133459', 32456, 1),
-(13, 'Oficina Hercules', 2, 119, 2055, '19.389916, -99.135949', 12345, 1),
-(14, 'Oficina Sex', 2, 119, 2055, '19.440177, -99.208141', 45000, 1),
-(15, 'Oficina Kolin', 2, 119, 2055, '19.451838, -99.153486', 24670, 1),
-(16, 'Oficina Julie', 2, 119, 2055, '19.447649, -99.150214', 12980, 1),
-(17, 'Oficina Emperial', 2, 119, 2055, '19.454913, -99.158990', 32150, 1),
-(18, 'Oficina Clover', 2, 119, 2055, '19.448600, -99.161329', 23456, 1),
-(19, 'Oficina Jouler', 2, 119, 2055, '19.430912, -99.201623', 45670, 1);
+INSERT INTO `cat_espacios` (`id_espacio`, `nombre`, `tipo_espacio`, `fk_pais`, `fk_estado`, `longitud`, `latitud`, `Direccion`, `precio_hora`, `token`, `ubicacion`, `descripcion`, `estatus`) VALUES
+(1, 'Salón Majestuoso del Centro', 1, 119, 2055, '19.445155', '-99.157716', '19.445155, -99.157716', 1200, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(2, 'Salón Encanto Mexicano', 1, 119, 2055, '19.438396', '-99.167887', '19.438396, -99.167887', 10950, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(3, 'Salón Santa Marta Maria Tellez', 1, 119, 2055, '19.448473', '-99.147245', '19.448473, -99.147245', 50234, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(4, 'Salón Cultural', 1, 119, 2055, '19.451670', '-99.147931', '19.451670, -99.147931', 2131, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(5, 'Salón Azteca', 1, 119, 2055, '19.433054', '-99.140550', '19.433054, -99.140550', 34567, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(6, 'Salón Pabellón', 1, 119, 2055, '19.436697', '-99.152438', '19.436697, -99.152438', 10987, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(7, 'Salón Source', 1, 119, 2055, '19.432297', '-99.197530', '19.432297, -99.197530', 7569, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(8, 'Salón Perez Ortiz', 1, 119, 2055, '19.428817', '-99.204332', '19.428817, -99.204332', 8765, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(9, 'Salón Chinga tu madre', 1, 119, 2055, '19.432601', '-99.199804', '19.432601, -99.199804', 321312, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(10, 'Salón Calli', 1, 119, 2055, '19.432965', '-99.190920', '19.432965, -99.190920', 12000, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(11, 'Oficina Emperial', 2, 119, 2055, '19.390403', '-99.126635', '19.390403, -99.126635', 25000, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/Q3KQRGUHIEFBFDW12F.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(12, 'Oficina Washitom', 2, 119, 2055, '19.392943', '-99.133459', '19.392943, -99.133459', 32456, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(13, 'Oficina Hercules', 2, 119, 2055, '19.392943', '-99.133459', '19.389916, -99.135949', 12345, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(14, 'Oficina Sex', 2, 119, 2055, '19.440177', '-99.208141', '19.440177, -99.208141', 45000, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(15, 'Oficina Kolin', 2, 119, 2055, '19.451838', '-99.153486', '19.451838, -99.153486', 24670, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(16, 'Oficina Julie', 2, 119, 2055, '19.447649', '-99.150214', '19.447649, -99.150214', 12980, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(17, 'Oficina Emperial', 2, 119, 2055, '19.454913', '-99.158990', '19.454913, -99.158990', 32150, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(18, 'Oficina Clover', 2, 119, 2055, '19.448600', '-99.161329', '19.448600, -99.161329', 23456, 'DNQJNQS2YFUQD48DVC', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(19, 'Oficina Jouler', 2, 119, 2055, '19.430912', '-99.201623', '19.430912, -99.201623', 45670, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
+(20, 'example', 1, 1, 14, '50.4949629', '10.5469211,17', '50.4949629,10.5469211,17', 12560, 'P7JQLIY3VV1HNS9V83', 'public/contenido/salones/P7JQLIY3VV1HNS9V83.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1);
 
 -- --------------------------------------------------------
 
@@ -3996,10 +4001,12 @@ ALTER TABLE `asignacion_pago`
   ADD KEY `fk_usuario` (`fk_usuario`);
 
 --
--- Indices de la tabla `asignacion_reserva`
+-- Indices de la tabla `asignacion_reservacion`
 --
-ALTER TABLE `asignacion_reserva`
-  ADD PRIMARY KEY (`id_reserva`);
+ALTER TABLE `asignacion_reservacion`
+  ADD PRIMARY KEY (`id_asignacion_reservacion`),
+  ADD KEY `fk_usuario` (`fk_usuario`),
+  ADD KEY `fk_espacio` (`fk_espacio`);
 
 --
 -- Indices de la tabla `cat_espacios`
@@ -4064,16 +4071,16 @@ ALTER TABLE `asignacion_pago`
   MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `asignacion_reserva`
+-- AUTO_INCREMENT de la tabla `asignacion_reservacion`
 --
-ALTER TABLE `asignacion_reserva`
-  MODIFY `id_reserva` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `asignacion_reservacion`
+  MODIFY `id_asignacion_reservacion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `cat_espacios`
 --
 ALTER TABLE `cat_espacios`
-  MODIFY `id_espacio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_espacio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `cat_estados`
@@ -4128,6 +4135,13 @@ ALTER TABLE `asignacion_contenido`
 ALTER TABLE `asignacion_pago`
   ADD CONSTRAINT `asignacion_pago_ibfk_1` FOREIGN KEY (`fk_reserva`) REFERENCES `asignacion_reserva` (`id_reserva`),
   ADD CONSTRAINT `asignacion_pago_ibfk_2` FOREIGN KEY (`fk_usuario`) REFERENCES `cat_usuario` (`id_usuario`);
+
+--
+-- Filtros para la tabla `asignacion_reservacion`
+--
+ALTER TABLE `asignacion_reservacion`
+  ADD CONSTRAINT `asignacion_reservacion_ibfk_1` FOREIGN KEY (`fk_usuario`) REFERENCES `cat_usuario` (`id_usuario`),
+  ADD CONSTRAINT `asignacion_reservacion_ibfk_2` FOREIGN KEY (`fk_espacio`) REFERENCES `cat_espacios` (`id_espacio`);
 
 --
 -- Filtros para la tabla `cat_espacios`

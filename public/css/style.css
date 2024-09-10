@@ -592,70 +592,132 @@ nav.scrolled {
 }
 
 /* carrusel */
+.image-content {
+    position: relative;
+}
 
-.swiper-hero {
+.overlay {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    max-width: 1600px;
-}
-
-.swiper-hero .swiper-slide {
-    width: 250px;
-}
-
-.swiper-hero img {
-    height: 255px;
-    width: 100%;
-    object-fit: cover;
-}
-
-@media (min-width: 1024px) {
-    .swiper-hero img {
-        height: 344px;
-    }
-}
-
-.swiper-hero .swiper-button-prev,
-.swiper-hero .swiper-button-next {
-    --swiper-navigation-size: 20px;
-    background-color: white;
-    height: 70px;
-    width: 50px;
-    margin-top: -35px;
-
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
 }
 
-.swiper-hero .swiper-button-prev {
-    border-radius: 0 65px 65px 0;
-    left: -10px;
+.overlay .name,
+.overlay .description {
+    color: var(--bg-white);
+    margin: 0;
+    padding: 10px;
 }
 
-.swiper-hero .swiper-button-next {
-    border-radius: 65px 0 0 65px;
-    right: -10px;
-}
-
-.swiper-hero:hover .swiper-button-prev,
-.swiper-hero:hover .swiper-button-next {
+.image-content:hover .overlay {
     opacity: 1;
 }
 
-.swiper-hero .swiper-pagination {
-    --swiper-pagination-color: white;
-    --swiper-pagination-bullet-size: 6px;
-    --swiper-pagination-bullet-inactive-color: #000;
-    --swiper-pagination-bullet-inactive-opacity: 0.25;
-    --swiper-pagination-bullet-opacity: 1;
-    --swiper-pagination-bullet-horizontal-gap: 2px;
+.card-content {
+    position: relative;
+    z-index: 1;
 }
 
-.swiper-hero .swiper-pagination-bullet {
-    box-shadow: inset 0 0 0 1px #fff;
+.button {
+    border: none;
+    font-size: 16px;
+    color: #FFF;
+    padding: 8px 16px;
+    background-color: var(--bg-green-cyan);
+    border-radius: 6px;
+    margin: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.swiper-hero .swiper-pagination-bullet-active {
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+.button:hover {
+    background: var(--bg-green-cyan);
+}
+
+.swiper-navBtn {
+    color: #6E93f7;
+    transition: color 0.3s ease;
+}
+
+.swiper-navBtn:hover {
+    color: var(--bg-green-cyan);
+}
+
+.swiper-navBtn::before,
+.swiper-navBtn::after {
+    font-size: 35px;
+}
+
+.swiper-button-next {
+    right: 0;
+}
+
+.swiper-button-prev {
+    left: 0;
+}
+
+.swiper-pagination-bullet {
+    background-color: #006817;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #006817;
+}
+
+.modal-content {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+.modal-dialog {
+    margin: auto;
+}
+
+.modal-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0;
+}
+
+
+@media screen and (max-width: 768px) {
+    .slide-content {
+        margin: 0 10px;
+    }
+
+    .swiper-navBtn {
+        display: none;
+    }
+}
+
+#espacio swiper-container {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+#espacio swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: auto;
+}
+
+#espacio swiper-slide img {
+    display: block;
 }
 
 /* poster */
@@ -709,4 +771,74 @@ nav.scrolled {
     -webkit-backdrop-filter: blur(4px);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* estilo de salones */
+
+#inicio-salon {
+    position: relative;
+    background-image: url(../img/Fondo.salones.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#inicio-salon::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.079);
+    z-index: 1;
+}
+
+#inicio-salon>* {
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 900px) {
+    #inicio-salon{
+        position: relative;
+        background-image: url(../img/Fondo.salones.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 0%;
+    }
+}
+
+#inicio-oficinas {
+    position: relative;
+    background-image: url(../img/Fondo.oficinas.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#inicio-oficinas::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.079);
+    z-index: 1;
+}
+
+#inicio-oficinas>* {
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 900px) {
+    #inicio-oficinas{
+        position: relative;
+        background-image: url(../img/Fondo.oficinas.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 0%;
+    }
 }

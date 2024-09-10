@@ -162,16 +162,18 @@ class AdminModel extends ModelBase
             $con = new Database;
             $con->pdo->beginTransaction();
             $query = $con->pdo->prepare("INSERT INTO cat_espacios
-                (nombre, tipo_espacio, fk_pais, fk_estado, cordenadas, precio_hora, estatus)
+                (nombre, tipo_espacio, fk_pais, fk_estado, cordenadas, precio_hora, token, ubicacion, estatus)
                     VALUES
-                (:nombre, :tipoEspacio, :fkPais, :fkEstado, :cordenadas, :PrecioHora, 1)");
+                (:nombre, :tipoEspacio, :fkPais, :fkEstado, :cordenadas, :PrecioHora, :token, :ubicacion, 1)");
             $query->execute([
                 ':nombre' => $datos['nombre'],
                 ':tipoEspacio' => $datos['tipo_espacio'],
                 ':fkPais' => $datos['id_pais'],
                 ':fkEstado' => $datos['id_estado'],
                 ':cordenadas' => $datos['cordenadas'],
-                ':PrecioHora' => $datos['precio']
+                ':PrecioHora' => $datos['precio'],
+                ':token' => $datos['token'],
+                ':ubicacion' => $datos['ubicacion']
             ]);
             $con->pdo->commit();
             return true;
@@ -191,7 +193,9 @@ class AdminModel extends ModelBase
                 tipo_espacio = :tipoEspacio,
                 fk_pais = :idPais,
                 fk_estado = :idEstado,
-                cordenadas = :cordenadas
+                cordenadas = :cordenadas,
+                token = :token,
+                ubicacion = :ubicacion
                     WHERE 
                 id_espacio = :idEspacio;");
             $query->execute([
@@ -200,7 +204,9 @@ class AdminModel extends ModelBase
                 ':tipoEspacio' => $datos['tipo_espacio'],
                 ':idPais' => $datos['id_pais'],
                 ':idEstado' => $datos['id_estado'],
-                ':cordenadas' => $datos['cordenadas']
+                ':cordenadas' => $datos['cordenadas'],
+                ':token' => $datos['token'],
+                ':ubicacion' => $datos['ubicacion']
             ]);
             $con->pdo->commit();
             return true;

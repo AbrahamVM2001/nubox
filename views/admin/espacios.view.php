@@ -73,6 +73,13 @@
                                 Ingrese un precio valido, por favor.
                             </div>
                         </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <label for="portada" style="color: #000;">Portada <span>*</span></label>
+                            <input type="file" class="form-control" name="ubicacion" id="ubicacion">
+                            <div class="invalid-feedback">
+                                Ingresa la portada, por favor.
+                            </div>
+                        </div>
                     </div>
                 </form>
             </div>
