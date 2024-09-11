@@ -8,16 +8,17 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 
-class usuario extends ControllerBase
+class Cliente extends ControllerBase
 {
     function __construct()
     {
         parent::__construct();
     }
+    /* inicio */
     function render()
     {
-        if ($this->verificarUser()) {
-            $this->view->render("usuario/index");
+        if ($this->verificarCliente()) {
+            $this->view->render("cliente/index");
         } else {
             $this->recargar();
         }

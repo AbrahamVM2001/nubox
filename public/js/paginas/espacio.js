@@ -1,7 +1,7 @@
 $(function () {
     // funcion de contraseña
     function validatePassword() {
-        let password = $('#pass').val();
+        let password = $('#passRegistro').val();
         let confirmPassword = $('#pass_confir').val();
         let hasUppercase = /[A-Z]/.test(password);
         let hasLowercase = /[a-z]/.test(password);
@@ -26,14 +26,22 @@ $(function () {
             : '<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 512 512"><path fill="#e11d48" d="m427.314 107.313l-22.628-22.626L256 233.373L107.314 84.687l-22.628 22.626L233.373 256L84.686 404.687l22.628 22.626L256 278.627l148.686 148.686l22.628-22.626L278.627 256z"/></svg>';
         icon.html(svg);
     }
-    $('#pass').on('input', validatePassword);
+    $('#passRegistro').on('input', validatePassword);
     $('#pass_confir').on('input', validatePassword);
+    // funciones de filtrado
+    $('body').on('click', '.btn-formLogear', function () {
+        $('#form-new-logear').show();
+        $('#form-new-reservacion').hide();
+    });
+    $('body').on('click', '.btn-formregistro', function () {
+        $('#form-new-reservacion').show();
+        $('#form-new-logear').hide();
+    });
     // mostrar espacio
     async function cardsEspacio(id_espacio) {
         try {
             let peticion = await fetch(servidor + `login/espacio/${id_espacio}`);
             let response = await peticion.json();
-            console.log(response);
             if (response.length === 0) {
                 jQuery(`<h3 class="mt-4 text-center text-uppercase">Error 404 Espacio no disponible</h3>`).appendTo("#container-espacio").addClass('text-danger');
                 return false;
@@ -85,4 +93,82 @@ $(function () {
         }
     }
     cardsEspacio(id_espacio);
+    // logeo
+    $(".btn-logear").click(function () {
+        let form = $("#form-new-logear");
+        if (form[0].checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: servidor + 'login/acceso',
+                dataType: 'json',
+                data: form.serialize(),
+                beforeSend: function () {
+                    $("#loading").addClass('loading');
+                },
+                success: function (data) {
+                    Swal.fire({
+                        icon: data.estatus,
+                        title: data.titulo,
+                        text: data.respuesta,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                    if (data.estatus === 'success') {
+                        setTimeout(() => {
+                            location.href=servidor+"login"+"/"+"pago"+"/"+id_espacio
+                        }, 2000);
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+                complete: function () {
+                    $("#loading").removeClass('loading');
+                }
+            });
+        }
+        form.addClass('was-validated');
+    });
+    // registro
+    $(".btn-reservacion").click(function () {
+        let form = $("#form-new-reservacion");
+        if (form[0].checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: servidor + 'login/registro',
+                dataType: 'json',
+                data: form.serialize(),
+                beforeSend: function () {
+                    $("#loading").addClass('loading');
+                },
+                success: function (data) {
+                    Swal.fire({
+                        icon: data.estatus,
+                        title: data.titulo,
+                        text: data.respuesta,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                    if (data.estatus === 'success') {
+                        setTimeout(() => {
+                            location.href=servidor+"login"+"/"+"pago"+"/"+id_espacio
+                        }, 2000);
+                    }
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+                complete: function () {
+                    $("#loading").removeClass('loading');
+                }
+            });
+        }
+        form.addClass('was-validated');
+    });
 });

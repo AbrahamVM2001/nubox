@@ -1,8 +1,8 @@
 <?php
 define("HOST", "localhost");//Servidor donde se aloja la base de datos
-define("DB", "u547745900_nubox");//Nombre de la base de datos
-define("USER", "u547745900_nubox");//Usuario de la base de datos
-define("PASSWORD", "9XJQd5Ep#H;h");//Contraseña de usuario de la base de datos
+define("DB", "nubox");//Nombre de la base de datos
+define("USER", "root");//Usuario de la base de datos
+define("PASSWORD", "");//Contraseña de usuario de la base de datos
 define("CHARSET", "utf8");//Codificación de caracteres.
 
     $db = new Database();

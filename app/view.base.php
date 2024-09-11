@@ -15,6 +15,7 @@ class ViewBase
   public $tipo;
   public $salon;
   public $oficina;
+  public $pagoEspacio;
   function __construct()
   {
     // echo "<p>Vista base</p>";

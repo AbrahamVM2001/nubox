@@ -23,6 +23,31 @@ class LoginModel extends ModelBase
             return;
         }
     }
+    public static function registro($datos)
+    {
+        try {
+            $con = new Database;
+            $con->pdo->beginTransaction();
+            $query = $con->pdo->prepare("INSERT INTO cat_usuario
+                (nombre, apellido_paterno, apellido_materno, tipo_usuario, correo, contrasena, estatus)
+                    VALUES
+                (:name, :paterno, :materno, 4, :email, :pass, 1)");
+            $query->execute([
+                ':name' => $datos['name'],
+                ':paterno' => $datos['apellidoP'],
+                ':materno' => $datos['apellidoM'],
+                ':email' => $datos['emailRegistro'],
+                ':pass' => $datos['passRegistro']
+            ]);
+            $idUsuario = $con->pdo->lastInsertId();
+            return ['estatus' => 'success', 'mensaje' => 'Usuario insertado correctamente', 'id_usuario' => $idUsuario ];
+            return true;
+        } catch (PDOException $e) {
+            $con->pdo->rollBack();
+            echo "Error recopilado model guardarUsuario: " . $e->getMessage();
+            return false;
+        }
+    }
     // funciones de carruseles
     public static function viewSalon(){
         try {
@@ -94,6 +119,45 @@ class LoginModel extends ModelBase
         } catch (PDOException $e) {
             echo "Error model oficinas: " .$e->getMessage();
             return;
+        }
+    }
+    // registro de pago
+    public static function registroReserva($datos)
+    {
+        try {
+            $con = new Database;
+            $con->pdo->beginTransaction();
+            $query = $con->pdo->prepare("INSERT INTO asignacion_reserva
+                (fk_usuario, fk_espacio, fecha_inicio, fecha_finalizacion)
+                    VALUES
+                (:usuario, :espacio, :fechaI, :fechaF)");
+            $query->execute([
+                ':usuario' => $_SESSION['id_usuario-' . constant('Sistema')],
+                ':espacio' => $datos['id_espacio'],
+                ':fechaI' => $datos['fecha_ingreso'],
+                ':fechaF' => $datos['fecha_finalizacion']
+            ]);
+            $id_asignacion_reservacion = $con->pdo->lastInsertId();
+            return ['estatus' => 'success', 'mensaje' => 'Usuario insertado correctamente', 'id_asignacion_reservacion' => $id_asignacion_reservacion ];
+            return true;
+        } catch (PDOException $e) {
+            $con->pdo->rollBack();
+            echo "Error recopilado model registroReservacion: " . $e->getMessage();
+            return false;
+        }
+    }
+    public static function registroPago($datos){
+        try {
+            $con = new Database;
+            $con->pdo->beginTransaction();
+            $query = $con->pdo->prepare("");
+            $query->execute([]);
+            $con->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            $con->pdo->rollBack();
+            echo "Error recopilado model registroPago: " . $e->getMessage();
+            return false;
         }
     }
 }

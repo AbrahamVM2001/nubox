@@ -33,6 +33,13 @@ class App extends ControllerBase
                 return false;
             }
             $this->general($this->url);
+        } else if (isset($_SESSION['id_usuario-' . constant('Sistema')]) && !empty($_SESSION['id_usuario-' . constant('Sistema')])  && $this->verificarCliente()) {
+            $archivoController = "controllers/cliente.controller.php";
+                require_once $archivoController;
+                $controller = new Cliente();
+                $controller->loadModel("cliente");
+                $controller->render();
+                return false;
         } else {
             // echo "No esta logueado, redireccionar a Login";
             if (empty($this->url[0])) {

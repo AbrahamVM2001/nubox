@@ -51,6 +51,14 @@ class ControllerBase{
       return false;
     }
   }
+  function verificarCliente()
+  {
+    if (isset($_SESSION['tipo_usuario-' . constant('Sistema')]) && $_SESSION['tipo_usuario-' . constant('Sistema')] == 4) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   function verificarGeneral() {
     if (isset($_SESSION['tipo_usuario-' . constant('Sistema')])) {
         return true;

@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Matemasie&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>
+    <title>Pago |
         <?= constant('SOCIEDAD') ?>
     </title>
     <!--     Fonts and icons     -->
@@ -104,160 +104,65 @@
         </div>
     </nav>
     <!-- home -->
-    <div class="container" style="padding-top: 100px;" id="espacio">
-        <div class="row" id="container-espacio">
-        </div>
+    <div class="container d-flex justify-content-center align-items-center text-center" style="height: 100vh;">
         <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                <swiper-container class="mySwiper" id="carruselContenido" pagination="true" effect="coverflow" grab-cursor="true" centered-slides="true"
-                    slides-per-view="auto" coverflow-effect-rotate="50" coverflow-effect-stretch="0" coverflow-effect-depth="100"
-                    coverflow-effect-modifier="1" coverflow-effect-slide-shadows="true">
-                </swiper-container>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-6" id="container">
-                <h5>Descripcion</h5>
-                <p id="desc"></p>
-                <h5>Tipo de espacio</h5>
-                <p id="tipo"></p>
-                <h5 id="">Fechas ocupadas</h5>
-                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="height: 550px;">
-                    <div id="calendar"></div>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <div id="map" style="height: 500px; width: 100%;"></div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-6" id="container-reservacion">
-                <div class="card">
-                    <div class="card-title text-center">
-                        <h3>$<span id="precio"></span> <span style="font-size: 10px;">por hora</span></h3>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-12 col-lg-6">
-                                <button class="btn btn-success btn-formregistro">Registrarme</button>
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" style="width: 400px;">
+                <form id="form-new-reservacion" action="javascript:;" class="needs-validation" novalidate method="post">
+                    <input type="hidden" name="id_espacio" id="id_espacio" value="<?= $this->pagoEspacio; ?>">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <label for="fecha_ingreso">Fecha de Inicio <span>*</span></label>
+                            <input type="date" class="form-control" name="fecha_ingreso" id="fecha_ingreso" required>
+                            <div class="invalid-feedback">
+                                Ingresa la fecha de ingreso, por favor.
                             </div>
-                            <div class="col-sm-12 col-md-12 col-lg-6">
-                                <button class="btn btn-success btn-formLogear">Iniciar Sesión</button>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="fecha_finalizacion">Fecha de finalizacion <span>*</span></label>
+                            <input type="date" class="form-control" name="fecha_finalizacion" id="fecha_finalizacion" required>
+                            <div class="invalid-feedback">
+                                Ingresa la fecha de finalizacion, por favor.
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <form id="form-new-reservacion" action="javascript:;" class="needs-validation" novalidate method="post">
-                            <input type="hidden" name="id_espacio" id="espacio" value="<?= $this->salon; ?>">
-                            <div class="row">
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
-                                    <label for="nombre">Ingresa tu nombre <span>*</span></label>
-                                    <input type="text" class="form-control" name="name" id="name" required>
-                                    <div class="invalid-feedback">
-                                        Ingresa tu nombre, por favor.
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
-                                    <label for="apellidos">Ingresa tus apellido paterno <span>*</span></label>
-                                    <input type="text" class="form-control" name="apellidoP" id="apellidoP" required>
-                                    <div class="invalid-feedback">
-                                        Ingresa tus Apellidos, por favor.
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
-                                    <label for="apellidos">Ingresa tus apellidos materno</label>
-                                    <input type="text" class="form-control" name="apellidoM" id="apellidoM" required>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
-                                    <label for="correo">Ingresa tu correo <span>*</span></label>
-                                    <input type="email" name="emailRegistro" id="emailRegistro" class="form-control" required>
-                                    <div class="invalid-feedback">
-                                        Ingresa tu correo electronico, por favor.
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                    <label for="Caracteristicas" style="color: #000;">Ingresa una contraseña mayor a 8 pero menos a 32 con letras, caracteres y números.</label><br>
-                                    <label for="Contraseña" style="color: #000;">Contraseña <span>*</span></label>
-                                    <input style="color: #000;" type="password" name="passRegistro" id="passRegistro" class="form-control" placeholder="Contraseña..." required>
-                                    <p style="font-size: 10px; color: #000;"><span class="verificar-mayusculas"></span> Mayúsculas <span>ABCDFG</span></p>
-                                    <p style="font-size: 10px; color: #000;"><span class="verificar-minusculas"></span> Minúscula <span>abcdfg</span></p>
-                                    <p style="font-size: 10px; color: #000;"><span class="verificar-numeros"></span> Números <span>12345</span></p>
-                                    <p style="font-size: 10px; color: #000;"><span class="verificar-caracteres"></span> Caracteres <span>@?¡!&%</span></p>
-                                    <p style="font-size: 10px; color: #000;"><span class="verificar-meno"></span> Es mayor a 8 caracteres</p>
-                                    <p style="font-size: 10px; color: #000;"><span class="verificar-mayor"></span> Es menos a 32 caracteres</p>
-                                    <div class="invalid-feedback">
-                                        Ingresa una contraseña válida, por favor.
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                                    <label for="Confirmacion" style="color: #000;">Confirmación Contraseña</label>
-                                    <input style="color: #000;" type="password" class="form-control" name="pass_confir" id="pass_confir" placeholder="Contraseña..." required>
-                                    <p style="font-size: 10px; color: #000;"><span class="verificar-similar"></span> Similar</p>
-                                    <div class="invalid-feedback">
-                                        Ingresa una contraseña válida, por favor.
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12 mt-2">
-                                    <a href="#" style="color: #000; text-decoration: none;">Termino y condicionales</a>
-                                </div>
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2 d-flex align-items-center justify-content-center text-center">
-                                    <button data-formulario="form-new-reservacion" type="button" class="btn btn-primary btn-reservacion">Reservar</button>
-                                </div>
-                            </div>
-                        </form>
-                        <form id="form-new-logear" action="javascript:;" class="needs-validation" navalidate method="post" style="display: none;">
-                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
-                                <label for="correo">Correo Electronico <span>*</span></label>
-                                <input type="text" class="form-control" name="correo" id="email" placeholder="example@mail.com" required>
-                                <div class="invalid-feedback">
-                                    Ingresa tu correo electronico, por favor.
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
-                                <label for="password">Contraseña <span>*</span></label>
-                                <input type="text" class="form-control" name="pass" id="passwordLogeo" required>
-                                <div class="invalid-feedback">
-                                    Ingresa tu contraseña, por favor.
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2 text-center">
-                                <button data-formulario="form-new-logear" type="button" class="btn btn-primary btn-logear">Ingresar</button>
-                            </div>
-                        </form>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
+                        <input type="text" readonly="readonly" name="pago_dia" id="pago_dia" class="form-control">
+                        <p>Total: $<input type="text" readonly="readonly" name="total" id="total" style="background-color: #fff; border: 0; width: 70px; font-weight: 900;">mxn</p>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" id="preguntas">
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                Requisitos para rentar espacio
-                            </button>
-                        </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                                <p>Para proceder con la renta de un espacio, es necesario cumplir con los siguientes requisitos:</p>
-                                <ul>
-                                    <li>Tarjeta de Crédito o Débito: Debes contar con una tarjeta de crédito o débito válida para realizar el pago.</li>
-                                    <li>Edad Mínima: Debes ser mayor de 18 años para poder alquilar el espacio.</li>
-                                    <li>Depósito Inicial: Se requiere un depósito correspondiente al período de renta deseado.</li>
-                                    <li>Una vez que inicies el proceso de pago, y tras validar la transacción, recibirás un correo electrónico con la información detallada de tu compra. Este correo incluirá:</li>
-                                </ul>
-                                <p>Confirmación de la Renta: El tiempo total por el cual has reservado el espacio.
-                                    Documentación: Los archivos PDF del contrato de alquiler, que deberás firmar y devolver. También se incluirá el reglamento interno del lugar.
-                                    Este procedimiento asegura que todos los aspectos del alquiler se gestionen de manera formal y transparente, proporcionando toda la documentación necesaria para tu comodidad y seguridad.
-                                </p>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
+                        <label for="numero_tarjeta">Número de tarjeta <span>*</span></label>
+                        <input type="tel" class="form-control" name="numero_tarjeta" id="numero_tarjeta" placeholder="4242 4242 4242 4242" required>
+                        <div class="invalid-feedback">
+                            Ingresa el número de tarjeta, por favor.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 mt-2">
+                            <label for="año_expiracion">Año de expiracion</label>
+                            <input type="date" name="year-exp" id="year-exp" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Ingresa el año de expiración, por favor.
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mt-2">
+                            <label for="cvc">CVC</label>
+                            <input type="number" class="form-control" name="cvc" id="cvc" min="000" max="999" placeholder="987" required>
+                            <div class="invalid-feedback">
+                                Ingresa el cvc, por favor
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                Politica de cancelación
-                            </button>
-                        </h2>
-                        <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                                <p>Para cancelar la renta del espacio, una vez que hayas sido registrado en nuestro sistema, podrás acceder y verificar los reportes y pagos generados. Esto te permitirá revisar toda la información relevante antes de proceder con la cancelación.</p>
-                            </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
+                        <label for="Nombre">Nombre del titular <span>*</span></label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Juan Garcia Martinez" required>
+                        <div class="invalid-feedback">
+                            Ingresa el nombre del titular, por favor.
                         </div>
                     </div>
-                </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <button data-formulario="form-new-reservacion" type="button" class="btn btn-primary btn-reservar mt-3">Reservación</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -335,7 +240,7 @@
     <!-- scripts -->
     <script>
         let servidor = '<?= constant('URL') ?>';
-        let id_espacio = '<?= $this->salon ?>';
+        let id_espacio = '<?= $this->pagoEspacio ?>';
     </script>
     <script src="<?= constant("URL") ?>public/js/plugins/jquery/jquery.min.js"></script>
     <script src="<?= constant('URL') ?>public/js/core/popper.min.js"></script>
@@ -388,8 +293,34 @@
 
         document.addEventListener('DOMContentLoaded', actualizarFecha);
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-    <script src="<?= constant('URL') ?>public/js/paginas/espacio.js"></script>
+    <script>
+        document.getElementById('fecha_ingreso').addEventListener('change', calcularTotal);
+document.getElementById('fecha_finalizacion').addEventListener('change', calcularTotal);
+
+function calcularTotal() {
+    const fechaIngreso = new Date(document.getElementById('fecha_ingreso').value);
+    const fechaFinalizacion = new Date(document.getElementById('fecha_finalizacion').value);
+    const pagoDia = parseFloat(document.getElementById('pago_dia').value);
+    const totalField = document.getElementById('total');
+
+    if (fechaIngreso && fechaFinalizacion && !isNaN(pagoDia)) {
+        // Calcula la diferencia en días (milisegundos a días)
+        const diferenciaTiempo = fechaFinalizacion - fechaIngreso;
+        const diferenciaDias = diferenciaTiempo / (1000 * 60 * 60 * 24) + 1;
+
+        if (diferenciaDias > 0) {
+            // Calcula el total
+            const total = diferenciaDias * pagoDia;
+            totalField.value = total.toFixed(2);
+        } else {
+            totalField.value = '0.00';
+        }
+    } else {
+        totalField.value = '0.00';
+    }
+}
+    </script>
+    <script src="<?= constant('URL') ?>public/js/paginas/pago.js"></script>
 </body>
 
 </html>

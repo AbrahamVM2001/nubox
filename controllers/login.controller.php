@@ -9,10 +9,12 @@ use PHPMailer\PHPMailer\Exception;
 class Login extends ControllerBase
 {
 
-    function __construct(){
+    function __construct()
+    {
         parent::__construct();
     }
-    function render(){
+    function render()
+    {
         $this->view->render('login/index');
     }
     function acceso()
@@ -61,8 +63,66 @@ class Login extends ControllerBase
         }
         echo json_encode($data);
     }
+    function registro()
+    {
+        try {
+            $password = $_POST['passRegistro'];
+            $errors = [];
+            if (!preg_match('/[A-Z]/', $password)) {
+                $errors[] = 'Debe contener al menos una mayúscula.';
+            }
+            if (!preg_match('/[a-z]/', $password)) {
+                $errors[] = 'Debe contener al menos una minúscula.';
+            }
+            if (!preg_match('/[0-9]/', $password)) {
+                $errors[] = 'Debe contener al menos un número.';
+            }
+            if (!preg_match('/[!@#$%^&*(),.?":{}|<>]/', $password)) {
+                $errors[] = 'Debe contener al menos un carácter especial.';
+            }
+            if (strlen($password) < 8 || strlen($password) > 32) {
+                $errors[] = 'La contraseña debe tener entre 8 y 32 caracteres.';
+            }
+            if (!empty($errors)) {
+                $data = [
+                    'estatus' => 'warning',
+                    'titulo' => 'Error de validación',
+                    'respuesta' => implode(' ', $errors)
+                ];
+                echo json_encode($data);
+                return;
+            }
+            $_POST['passRegistro'] = encrypt_decrypt('encrypt', $password);
+            $resp = LoginModel::registro($_POST);
+            if ($resp !== false) {
+                $_SESSION['id_usuario-' . constant('Sistema')] = $resp['id_usuario'];
+                        $_SESSION['nombre_usuario-' . constant('Sistema')] = $_POST['nombre'];
+                        $_SESSION['usuario-' . constant('Sistema')] = $_POST['apellido_paterno'];
+                        $_SESSION['tipo_usuario-' . constant('Sistema')] = $_POST['tipo_usuario'];
+                $data = [
+                    'estatus' => 'success',
+                    'titulo' => 'Registro exitoso' . '' . $_POST['name'],
+                    'respuesta' => ''
+                ];
+            } else {
+                $data = [
+                    'estatus' => 'error',
+                    'titulo' => 'Error al registro',
+                    'respuesta' => 'UPS!, vuelve a intentarlo'
+                ];
+            }
+        } catch (\Throwable $th) {
+            $data = [
+                'estatus' => 'error',
+                'titulo' => 'Error del servidor',
+                'respuesta' => 'Contacte al área de sistemas. Error: ' . $th->getMessage()
+            ];
+        }
+        echo json_encode($data);
+    }
     // carruseles
-    function viewSalon(){
+    function viewSalon()
+    {
         try {
             $salon = LoginModel::viewSalon();
             echo json_encode($salon);
@@ -71,7 +131,8 @@ class Login extends ControllerBase
             return;
         }
     }
-    function viewOficina(){
+    function viewOficina()
+    {
         try {
             $oficina = LoginModel::viewOficina();
             echo json_encode($oficina);
@@ -81,11 +142,13 @@ class Login extends ControllerBase
         }
     }
     // mostrar el salon
-    function salon($param){
+    function salon($param)
+    {
         $this->view->salon = $param[0];
         $this->view->render('login/salon');
     }
-    function espacio($param){
+    function espacio($param)
+    {
         try {
             $contenido = LoginModel::espacio($param[0]);
             echo json_encode($contenido);
@@ -94,7 +157,8 @@ class Login extends ControllerBase
             return;
         }
     }
-    function salir(){
+    function salir()
+    {
         unset($_SESSION['id_usuario-' . constant('Sistema')]);
         unset($_SESSION['nombre_usuario-' . constant('Sistema')]);
         unset($_SESSION['usuario-' . constant('Sistema')]);
@@ -103,10 +167,12 @@ class Login extends ControllerBase
         header("location:" . constant('URL'));
     }
     // pantalla para mostrar todos los salones
-    function salones(){
+    function salones()
+    {
         $this->view->render('login/salones');
     }
-    function mostrarSalones(){
+    function mostrarSalones()
+    {
         try {
             $salones = LoginModel::mostrarSalones();
             echo json_encode($salones);
@@ -116,10 +182,12 @@ class Login extends ControllerBase
         }
     }
     // pantalla para mostrar todos las oficinas
-    function oficinas(){
+    function oficinas()
+    {
         $this->view->render('login/oficinas');
     }
-    function mostrarOficinas(){
+    function mostrarOficinas()
+    {
         try {
             $oficinas = LoginModel::mostrarOficinas();
             echo json_encode($oficinas);
@@ -128,5 +196,36 @@ class Login extends ControllerBase
             return;
         }
     }
+    // pago
+    function pago($param = null){
+        $this->view->pagoEspacio = $param[0];
+        $this->view->render("login/pago");
+    }
+    function registroPago(){
+        try {
+            $pago = $this->registroReserva();
+            if ($pago != false) {
+                $resp = $this->registroPago($_POST);
+                
+            } else {
+                # code...
+            }
+            
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+    function registroReserva(){
+        try {
+            $resp = LoginModel::registroReserva($_POST);
+            if ($resp != false) {
+                return;
+            } else {
+                return false;
+            }
+        } catch (\Throwable $th) {
+            echo "Error en el controllador registro Reserva: " . $th->getMessage();
+            return;
+        }
+    }
 }
-?>
