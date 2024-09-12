@@ -65,18 +65,6 @@ $(function () {
             $('#precio').text(response[0].precio_hora);
             $('#desc').text(response[0].descripcion);
             $('#tipo').text(response[0].tipo_espacio == 1 ? 'Salón' : response[0].tipo_espacio == 2 ? 'Oficina' : 'Otro');
-            let events = response.map(item => ({
-                title: "ocupado",
-                start: item.fecha_inicio,
-                end: item.fecha_finalizacion,
-                color: 'red'
-            }));
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                events: events
-            });
-            calendar.render();
             var map = L.map('map').setView([response[0].latitud, response[0].longitud], 13);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -93,6 +81,36 @@ $(function () {
         }
     }
     cardsEspacio(id_espacio);
+    // mostrar asignaciones
+    async function cardsAsignacion(id_espacio) {
+        try {
+            let peticion = await fetch(servidor + `login/asignacion/${id_espacio}`);
+            let response = await peticion.json();
+            if (response.length === 0) {
+                jQuery(`<h3 class="mt-4 text-center text-uppercase">Error 404 Espacio no disponible</h3>`).appendTo("#container-espacio").addClass('text-danger');
+                return false;
+            }
+            $("#container-espacio").empty();
+            let events = response.map(item => ({
+                title: "ocupado",
+                start: item.fecha_inicio,
+                end: item.fecha_finalizacion,
+                color: 'red'
+            }));
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: events
+            });
+            calendar.render();
+        } catch (error) {
+            if (error.name == 'AbortError') {
+            } else {
+                console.error('Error al cargar los datos:', error);
+            }
+        }
+    }
+    cardsAsignacion(id_espacio);
     // logeo
     $(".btn-logear").click(function () {
         let form = $("#form-new-logear");

@@ -96,9 +96,9 @@ class Login extends ControllerBase
             $resp = LoginModel::registro($_POST);
             if ($resp !== false) {
                 $_SESSION['id_usuario-' . constant('Sistema')] = $resp['id_usuario'];
-                        $_SESSION['nombre_usuario-' . constant('Sistema')] = $_POST['nombre'];
-                        $_SESSION['usuario-' . constant('Sistema')] = $_POST['apellido_paterno'];
-                        $_SESSION['tipo_usuario-' . constant('Sistema')] = $_POST['tipo_usuario'];
+                $_SESSION['nombre_usuario-' . constant('Sistema')] = $_POST['nombre'];
+                $_SESSION['usuario-' . constant('Sistema')] = $_POST['apellido_paterno'];
+                $_SESSION['tipo_usuario-' . constant('Sistema')] = $_POST['tipo_usuario'];
                 $data = [
                     'estatus' => 'success',
                     'titulo' => 'Registro exitoso' . '' . $_POST['name'],
@@ -157,6 +157,16 @@ class Login extends ControllerBase
             return;
         }
     }
+    function asignacion($param)
+    {
+        try {
+            $asignacion = LoginModel::asignacion($param[0]);
+            echo json_encode($asignacion);
+        } catch (\Throwable $th) {
+            echo "Error en el espacio controllador: " . $th->getMessage();
+            return;
+        }
+    }
     function salir()
     {
         unset($_SESSION['id_usuario-' . constant('Sistema')]);
@@ -197,71 +207,63 @@ class Login extends ControllerBase
         }
     }
     // pago
-    function pago($param = null){
+    function pago($param = null)
+    {
         $this->view->pagoEspacio = $param[0];
         $this->view->render("login/pago");
     }
-    public function procesarPago() {
+    function procesamientoPago()
+    {
         try {
-            $stripeSecretKey = "tu_clave_secreta_de_stripe";
-            \Stripe\Stripe::setApiKey($stripeSecretKey);
-
-            // Primero registrar la reservación
-            $reserva = $this->registroReserva();
-            
-            if ($reserva['estatus'] == 'success') {
-                // Realizar el pago con Stripe
-                $token = $_POST['stripeToken'];
-                $total = $_POST['total'] * 100; // Convertir a centavos
-
-                $charge = \Stripe\Charge::create([
-                    'amount' => $total,
-                    'currency' => 'mxn',
-                    'description' => 'Pago de reservación',
-                    'source' => $token,
-                    'metadata' => ['reserva_id' => $reserva['id_asignacion_reservacion']]
-                ]);
-
-                if ($charge['status'] == 'succeeded') {
-                    // Si el pago es exitoso, registrar el pago en la base de datos
-                    $_POST['id_asignacion_reservacion'] = $reserva['id_asignacion_reservacion'];
-                    $_POST['metodo_pago'] = 'stripe';
-                    $_POST['estado'] = 'completado';
-
-                    $pago = LoginModel::registroPago($_POST);
-                    if ($pago) {
+            require_once('public/vendor/autoload.php');
+            \Stripe\Stripe::setApiKey('sk_test_51PxwgDK9TllkJ0UIX9fsNhAhfO5rsuMqYjr31DsSEffdEEvsaMti5bJpmMbQbsZTIT2no8nsxqRjEbLp5rZ1a5v000V5sKouBc');
+            $token = $_POST['stripeToken'];
+            $amount = $_POST['total'] * 100;
+            $charge = \Stripe\Charge::create([
+                'amount' => $amount,
+                'currency' => 'mxn',
+                'description' => 'Pago por reserva',
+                'source' => $token,
+            ]);
+            $idReserva = LoginModel::registroReserva($_POST);
+            if ($idReserva !== false) {
+                $_POST['id_asignacion_reservacion'] = $idReserva;
+                $resp = LoginModel::registroPago($_POST);
+                if ($resp !== false) {
+                    $numeroTarjeta = $_POST['numero_tarjeta'];
+                    $_POST['numero_tarjeta'] = substr($numeroTarjeta, -4);
+                    $tarjeta = LoginModel::registroTarjeta($_POST);
+                    if ($tarjeta !== false) {
                         $data = [
                             'estatus' => 'success',
-                            'titulo' => 'Registro pago',
-                            'respuesta' => 'Hemos recibido tu pago, gracias por la reservación'
+                            'titulo' => 'Pago correcto',
+                            'respuesta' => 'El pago se completó correctamente'
                         ];
                     } else {
-                        throw new Exception("Error al registrar el pago en la base de datos.");
+                        $data = [
+                            'estatus' => 'error',
+                            'titulo' => 'Error pago',
+                            'respuesta' => 'No se pudo procesar el pago.'
+                        ];
                     }
                 } else {
-                    throw new Exception("El pago con Stripe falló.");
+                    $data = [
+                        'estatus' => 'error',
+                        'titulo' => 'Error pago',
+                        'respuesta' => 'Pago incorrecto, contacte servicio Atención al cliente'
+                    ];
                 }
             } else {
-                throw new Exception("Error al registrar la reservación.");
+                $data = [
+                    'estatus' => 'error',
+                    'titulo' => 'Error registro reserva',
+                    'respuesta' => 'Error en el registro de la reserva'
+                ];
             }
         } catch (\Throwable $th) {
-            $data = [
-                'estatus' => 'error',
-                'titulo' => 'Error en el proceso',
-                'respuesta' => $th->getMessage()
-            ];
+            echo "Error en el controlador: " . $th->getMessage();
+            return;
         }
-
         echo json_encode($data);
-    }
-
-    public function registroReserva() {
-        try {
-            $resp = LoginModel::registroReserva($_POST);
-            return $resp;
-        } catch (\Throwable $th) {
-            echo "Error en el controlador registro Reserva: " . $th->getMessage();
-            return false;
-        }
     }
 }

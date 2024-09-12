@@ -119,7 +119,7 @@
                         </div>
                         <div class="col-sm-12 col-md-6">
                             <label for="fecha_finalizacion">Fecha de finalizacion <span>*</span></label>
-                            <input type="date" class="form-control" name="fecha_finalizacion" id="fecha_finalizacion" required>
+                            <input type="date" class="form-control" name="fecha_finalizacion" id="fecha_finalizacion">
                             <div class="invalid-feedback">
                                 Ingresa la fecha de finalizacion, por favor.
                             </div>
@@ -130,40 +130,17 @@
                         <p>Total: $<input type="text" readonly="readonly" name="total" id="total" style="background-color: #fff; border: 0; width: 70px; font-weight: 900;">mxn</p>
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
-                        <label for="numero_tarjeta">Número de tarjeta <span>*</span></label>
-                        <input type="tel" class="form-control" name="numero_tarjeta" id="numero_tarjeta" placeholder="4242 4242 4242 4242" required>
-                        <div class="invalid-feedback">
-                            Ingresa el número de tarjeta, por favor.
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                        <input type="hidden" name="metodo_pago" id="metodo_pago" required>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 col-md-6 mt-2">
-                            <label for="año_expiracion">Año de expiracion</label>
-                            <input type="month" name="year-exp" id="year-exp" class="form-control" required>
-                            <div class="invalid-feedback">
-                                Ingresa el año de expiración, por favor.
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-6 mt-2">
-                            <label for="cvc">CVC</label>
-                            <input type="number" class="form-control" name="cvc" id="cvc" min="000" max="999" placeholder="987" required>
-                            <div class="invalid-feedback">
-                                Ingresa el cvc, por favor
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
                         <label for="Nombre">Nombre del titular <span>*</span></label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Juan Garcia Martinez" required>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Juan Garcia Martinez">
                         <div class="invalid-feedback">
                             Ingresa el nombre del titular, por favor.
                         </div>
                     </div>
-                    <div id="card-element"></div>
-                    <div id="card-errors" role="alert"></div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-4">
+                        <div id="card-element"></div>
+                        <div id="card-errors" role="alert"></div>
+                    </div>
+                    <input type="hidden" name="stripeToken" id="stripeToken">
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <button data-formulario="form-new-reservacion" type="button" class="btn btn-primary btn-reservar mt-3">Reservación</button>
                     </div>
@@ -327,7 +304,7 @@
         }
     </script>
     <!-- identificar tarjeta -->
-    <script>
+    <!-- <script>
         document.getElementById('numero_tarjeta').addEventListener('input', function() {
             const numeroTarjeta = this.value.replace(/\s+/g, '');
             const metodoPagoField = document.getElementById('metodo_pago');
@@ -343,7 +320,7 @@
                 metodoPagoField.value = '';
             }
         });
-    </script>
+    </script> -->
     <script src="<?= constant('URL') ?>public/js/paginas/pago.js"></script>
 </body>
 

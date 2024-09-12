@@ -209,7 +209,7 @@
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
                                 <label for="password">Contraseña <span>*</span></label>
-                                <input type="text" class="form-control" name="pass" id="passwordLogeo" required>
+                                <input type="password" class="form-control" name="pass" id="passwordLogeo" required>
                                 <div class="invalid-feedback">
                                     Ingresa tu contraseña, por favor.
                                 </div>

@@ -13,39 +13,68 @@ $(function () {
     }
     cardsEspacio(id_espacio);
     // funcion del pago
-    document.querySelector('.btn-reservar').addEventListener('click', function (e) {
-        e.preventDefault();
-    
-        let form = document.getElementById('form-new-reservacion');
-        if (form.checkValidity() === false) {
-            form.classList.add('was-validated');
-            return;
-        }
-    
-        let stripe = Stripe('pk_test_51PxwgDK9TllkJ0UIEN1qLYcxJApO6vqMxXM8EiouAWJxEV3Xw61olZOsqQMb9mRPljxMErEzjQiCRc54k1qTVAfX00nickPbYO');
-        let elements = stripe.elements();
-    
-        stripe.createToken(elements).then(function (result) {
-            if (result.error) {
-                console.log(result.error.message);
+    // Inicializar Stripe
+    const stripe = Stripe('pk_test_51PxwgDK9TllkJ0UIEN1qLYcxJApO6vqMxXM8EiouAWJxEV3Xw61olZOsqQMb9mRPljxMErEzjQiCRc54k1qTVAfX00nickPbYO'); // Reemplaza con tu clave pública
+    const elements = stripe.elements();
+    const card = elements.create('card');
+    card.mount('#card-element');
+
+    // Escuchar el botón de reservación
+    $(".btn-reservar").click(async function (event) {
+        event.preventDefault();
+
+        let form = $("#form-new-reservacion");
+
+        // Validación del formulario
+        if (form[0].checkValidity() === false) {
+            event.stopPropagation();
+        } else {
+            // Crear el token de la tarjeta con Stripe
+            const { token, error } = await stripe.createToken(card);
+
+            if (error) {
+                // Mostrar el error en la interfaz
+                document.getElementById('card-errors').textContent = error.message;
             } else {
-                let formData = new FormData(form);
-                formData.append('stripeToken', result.token.id);
-    
-                fetch('https://nubox.devabraham.com/', {
-                    method: 'POST',
-                    body: formData,
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.estatus === 'success') {
-                        alert(data.respuesta);
-                    } else {
-                        alert(data.respuesta);
+                // Si se genera el token correctamente, lo añadimos al formulario
+                $("#stripeToken").val(token.id);
+                console.log(token.id);
+                
+
+                // Enviar los datos con AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: servidor + 'login/procesamientoPago/',
+                    dataType: 'json',
+                    data: form.serialize(), // Aquí se incluye el token de Stripe
+                    beforeSend: function () {
+                        $("#loading").addClass('loading');
+                    },
+                    success: function (data) {
+                        Swal.fire({
+                            icon: data.estatus,
+                            title: data.titulo,
+                            text: data.respuesta,
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                        if (data.estatus === 'success') {
+                            setTimeout(() => {
+                                location.href = servidor + "login" + "/" + "salir";
+                            }, 2000);
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data);
+                    },
+                    complete: function () {
+                        $("#loading").removeClass('loading');
                     }
-                })
-                .catch(error => console.log('Error:', error));
+                });
             }
-        });
+        }
+
+        form.addClass('was-validated');
     });
+
 });

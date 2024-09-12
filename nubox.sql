@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-09-2024 a las 01:47:19
+-- Tiempo de generación: 13-09-2024 a las 01:47:14
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -141,13 +141,22 @@ INSERT INTO `asignacion_contenido` (`id_asignacion_contenido`, `fk_usuario`, `fk
 
 CREATE TABLE `asignacion_pago` (
   `id_pago` int(11) NOT NULL,
-  `fk_reserva` int(11) DEFAULT NULL,
+  `fk_reservacion` int(11) DEFAULT NULL,
   `fk_usuario` int(11) DEFAULT NULL,
   `monto` float DEFAULT NULL,
-  `fecha_pago` datetime DEFAULT NULL,
-  `metodo_pago` varchar(550) DEFAULT NULL,
-  `estado` int(11) DEFAULT NULL
+  `fecha_pago` date DEFAULT NULL,
+  `metodo_pago` varchar(500) DEFAULT NULL,
+  `estado` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `asignacion_pago`
+--
+
+INSERT INTO `asignacion_pago` (`id_pago`, `fk_reservacion`, `fk_usuario`, `monto`, `fecha_pago`, `metodo_pago`, `estado`) VALUES
+(10, 19, 1, 9600, '2024-09-12', NULL, 'comprobacion'),
+(11, 20, 1, 9600, '2024-09-12', NULL, 'comprobacion'),
+(12, 21, 1, 9600, '2024-09-12', NULL, 'comprobacion');
 
 -- --------------------------------------------------------
 
@@ -162,6 +171,15 @@ CREATE TABLE `asignacion_reservacion` (
   `fecha_incio` datetime DEFAULT NULL,
   `fecha_finalizacion` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `asignacion_reservacion`
+--
+
+INSERT INTO `asignacion_reservacion` (`id_asignacion_reservacion`, `fk_usuario`, `fk_espacio`, `fecha_incio`, `fecha_finalizacion`) VALUES
+(19, 1, 1, '2024-09-13 00:00:00', '2024-09-20 00:00:00'),
+(20, 1, 1, '2024-09-13 00:00:00', '2024-09-20 00:00:00'),
+(21, 1, 1, '2024-09-13 00:00:00', '2024-09-20 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -3694,7 +3712,8 @@ INSERT INTO `cat_menu` (`id_menu`, `nombre_menu`, `descripcion_menu`, `referenci
 (1, 'Inicio', 'Página de inicio', NULL, 1, '<i class=\"fa-solid fa-house\"></i>', 3, 1),
 (2, 'Salir', 'Salir del sistema', 'login/salir', 100, '<i class=\"fa-solid fa-right-from-bracket\"></i>', 3, 1),
 (3, 'Usuario', 'Alta, modificacion, activado y desactivado de usuario.', 'admin/usuario', 2, '<i class=\"fa-regular fa-user\"></i>', 1, 1),
-(4, 'Espacios', 'Alta, baja, activar o desactivar espacios', 'admin/espacios', 4, '<i class=\"fa-solid fa-champagne-glasses\"></i>', 1, 1);
+(4, 'Espacios', 'Alta, baja, activar o desactivar espacios', 'admin/espacios', 4, '<i class=\"fa-solid fa-champagne-glasses\"></i>', 1, 1),
+(5, 'exampleCliente', 'exampleCliente', 'cliente/pago', 1, NULL, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -3927,6 +3946,30 @@ CREATE TABLE `cat_submenu` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `cat_tarjeta`
+--
+
+CREATE TABLE `cat_tarjeta` (
+  `id_tarjeta` int(11) NOT NULL,
+  `fk_usuario` int(11) DEFAULT NULL,
+  `numero_tarjeta` int(11) DEFAULT NULL,
+  `fecha_vencimiento` varchar(10) DEFAULT NULL,
+  `cvc` int(4) DEFAULT NULL,
+  `nombre_titular` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cat_tarjeta`
+--
+
+INSERT INTO `cat_tarjeta` (`id_tarjeta`, `fk_usuario`, `numero_tarjeta`, `fecha_vencimiento`, `cvc`, `nombre_titular`) VALUES
+(6, 1, NULL, NULL, NULL, 'Abraham Vera Martinez'),
+(7, 1, NULL, NULL, NULL, 'Abraham Vera Martinez'),
+(8, 1, NULL, NULL, NULL, 'Abraham Vera Martinez');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `cat_usuario`
 --
 
@@ -3946,10 +3989,7 @@ CREATE TABLE `cat_usuario` (
 --
 
 INSERT INTO `cat_usuario` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `tipo_usuario`, `correo`, `contrasena`, `estatus`) VALUES
-(1, 'Abraham', 'Vera', 'Martinez', 1, 'abrahamveram2001@devabraham.com', 'TE0xL3B4Ymh5RkhTRFd3UVBjVEpqdz09', 1),
-(2, 'Juan', 'Garcia', 'Torres', 2, 'juandios@devabraham.com', 'TE0xL3B4Ymh5RkhTRFd3UVBjVEpqdz09', 1),
-(3, 'Aquetzalli', 'Garcia', 'Urbina', 2, 'aquetzalli@devabraham.com', 'cUNPNGdpUUcxSk5uNzJla0VlQlpxUT09', 0),
-(4, 'Enrique', 'Valencia', '', 2, 'enrique@devabraham.com', 'cCswaHpROXRjcE9rTFY2cWZ6S0YvQT09', 1);
+(1, 'Abraham', 'Vera', 'Martinez', 1, 'admin@devabraham.com', 'TE0xL3B4Ymh5RkhTRFd3UVBjVEpqdz09', 1);
 
 -- --------------------------------------------------------
 
@@ -3997,7 +4037,7 @@ ALTER TABLE `asignacion_contenido`
 --
 ALTER TABLE `asignacion_pago`
   ADD PRIMARY KEY (`id_pago`),
-  ADD KEY `fk_reserva` (`fk_reserva`),
+  ADD KEY `fk_reservacion` (`fk_reservacion`),
   ADD KEY `fk_usuario` (`fk_usuario`);
 
 --
@@ -4043,6 +4083,13 @@ ALTER TABLE `cat_submenu`
   ADD KEY `fk_id_menu` (`fk_id_menu`);
 
 --
+-- Indices de la tabla `cat_tarjeta`
+--
+ALTER TABLE `cat_tarjeta`
+  ADD PRIMARY KEY (`id_tarjeta`),
+  ADD KEY `fk_usuario` (`fk_usuario`);
+
+--
 -- Indices de la tabla `cat_usuario`
 --
 ALTER TABLE `cat_usuario`
@@ -4068,13 +4115,13 @@ ALTER TABLE `asignacion_contenido`
 -- AUTO_INCREMENT de la tabla `asignacion_pago`
 --
 ALTER TABLE `asignacion_pago`
-  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `asignacion_reservacion`
 --
 ALTER TABLE `asignacion_reservacion`
-  MODIFY `id_asignacion_reservacion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_asignacion_reservacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `cat_espacios`
@@ -4092,7 +4139,7 @@ ALTER TABLE `cat_estados`
 -- AUTO_INCREMENT de la tabla `cat_menu`
 --
 ALTER TABLE `cat_menu`
-  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_menu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `cat_paises`
@@ -4107,10 +4154,16 @@ ALTER TABLE `cat_submenu`
   MODIFY `id_submenu` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `cat_tarjeta`
+--
+ALTER TABLE `cat_tarjeta`
+  MODIFY `id_tarjeta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de la tabla `cat_usuario`
 --
 ALTER TABLE `cat_usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracion`
@@ -4133,7 +4186,7 @@ ALTER TABLE `asignacion_contenido`
 -- Filtros para la tabla `asignacion_pago`
 --
 ALTER TABLE `asignacion_pago`
-  ADD CONSTRAINT `asignacion_pago_ibfk_1` FOREIGN KEY (`fk_reserva`) REFERENCES `asignacion_reserva` (`id_reserva`),
+  ADD CONSTRAINT `asignacion_pago_ibfk_1` FOREIGN KEY (`fk_reservacion`) REFERENCES `asignacion_reservacion` (`id_asignacion_reservacion`),
   ADD CONSTRAINT `asignacion_pago_ibfk_2` FOREIGN KEY (`fk_usuario`) REFERENCES `cat_usuario` (`id_usuario`);
 
 --
@@ -4161,6 +4214,12 @@ ALTER TABLE `cat_estados`
 --
 ALTER TABLE `cat_submenu`
   ADD CONSTRAINT `cat_submenu_ibfk_1` FOREIGN KEY (`fk_id_menu`) REFERENCES `cat_menu` (`id_menu`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `cat_tarjeta`
+--
+ALTER TABLE `cat_tarjeta`
+  ADD CONSTRAINT `cat_tarjeta_ibfk_1` FOREIGN KEY (`fk_usuario`) REFERENCES `cat_usuario` (`id_usuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

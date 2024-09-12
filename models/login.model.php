@@ -40,7 +40,7 @@ class LoginModel extends ModelBase
                 ':pass' => $datos['passRegistro']
             ]);
             $idUsuario = $con->pdo->lastInsertId();
-            return ['estatus' => 'success', 'mensaje' => 'Usuario insertado correctamente', 'id_usuario' => $idUsuario ];
+            return ['estatus' => 'success', 'mensaje' => 'Usuario insertado correctamente', 'id_usuario' => $idUsuario];
             return true;
         } catch (PDOException $e) {
             $con->pdo->rollBack();
@@ -49,7 +49,8 @@ class LoginModel extends ModelBase
         }
     }
     // funciones de carruseles
-    public static function viewSalon(){
+    public static function viewSalon()
+    {
         try {
             $con = new Database;
             $query = $con->pdo->prepare("SELECT * FROM cat_espacios WHERE tipo_espacio = 1 AND estatus = 1;");
@@ -60,7 +61,8 @@ class LoginModel extends ModelBase
             return;
         }
     }
-    public static function viewOficina(){
+    public static function viewOficina()
+    {
         try {
             $con = new Database;
             $query = $con->pdo->prepare("SELECT * FROM cat_espacios WHERE tipo_espacio = 2 AND estatus = 1");
@@ -72,18 +74,16 @@ class LoginModel extends ModelBase
         }
     }
     // mostrar el espacio seleccionado
-    public static function espacio($id_espacio){
+    public static function espacio($id_espacio)
+    {
         try {
             $con = new Database;
             $query = $con->pdo->prepare("
             SELECT
                 ac.*,
-                ar.*,
                 ce.*
             FROM
                 asignacion_contenido ac
-            LEFT JOIN
-                asignacion_reservacion ar ON ac.fk_espacio = ar.fk_espacio
             LEFT JOIN
                 cat_espacios ce ON ac.fk_espacio = ce.id_espacio
             WHERE
@@ -98,26 +98,51 @@ class LoginModel extends ModelBase
             return;
         }
     }
+    public static function asignacion($id_espacio)
+    {
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("
+            SELECT
+                ar.*
+            FROM
+                asignacion_reservacion ar
+            JOIN
+                cat_espacios ce ON ar.fk_espacio = ce.id_espacio
+            WHERE
+                ar.fk_espacio = :idEspacio;
+            ");
+            $query->execute([
+                ':idEspacio' => base64_decode(base64_decode($id_espacio))
+            ]);
+            return $query->fetchAll();
+        } catch (PDOException $e) {
+            echo "Error model espacio: " . $e->getMessage();
+            return;
+        }
+    }
     // pantalla para mostrar todos los salones
-    public static function mostrarSalones(){
+    public static function mostrarSalones()
+    {
         try {
             $con = new Database;
             $query = $con->pdo->prepare("SELECT * FROM cat_espacios WHERE tipo_espacio = '1';");
             $query->execute();
             return $query->fetchAll();
         } catch (PDOException $e) {
-            echo "Error model salones: " .$e->getMessage();
+            echo "Error model salones: " . $e->getMessage();
             return;
         }
     }
-    public static function mostrarOficinas(){
+    public static function mostrarOficinas()
+    {
         try {
             $con = new Database;
             $query = $con->pdo->prepare("SELECT * FROM cat_espacios WHERE tipo_espacio = '2';");
             $query->execute();
             return $query->fetchAll();
         } catch (PDOException $e) {
-            echo "Error model oficinas: " .$e->getMessage();
+            echo "Error model oficinas: " . $e->getMessage();
             return;
         }
     }
@@ -127,32 +152,33 @@ class LoginModel extends ModelBase
         try {
             $con = new Database;
             $con->pdo->beginTransaction();
-            $query = $con->pdo->prepare("INSERT INTO asignacion_reserva
-                (fk_usuario, fk_espacio, fecha_inicio, fecha_finalizacion)
-                    VALUES
-                (:usuario, :espacio, :fechaI, :fechaF)");
+            $query = $con->pdo->prepare("INSERT INTO asignacion_reservacion
+            (fk_usuario, fk_espacio, fecha_incio, fecha_finalizacion)
+                VALUES
+            (:usuario, :espacio, :fechaI, :fechaF)");
             $query->execute([
                 ':usuario' => $_SESSION['id_usuario-' . constant('Sistema')],
-                ':espacio' => $datos['id_espacio'],
+                ':espacio' => base64_decode(base64_decode($datos['id_espacio'])),
                 ':fechaI' => $datos['fecha_ingreso'],
                 ':fechaF' => $datos['fecha_finalizacion']
             ]);
-            $id_asignacion_reservacion = $con->pdo->lastInsertId();
-            return ['estatus' => 'success', 'mensaje' => 'Usuario insertado correctamente', 'id_asignacion_reservacion' => $id_asignacion_reservacion ];
-            return true;
+            $idReserva = $con->pdo->lastInsertId();
+            $con->pdo->commit();
+            return $idReserva;
         } catch (PDOException $e) {
             $con->pdo->rollBack();
-            echo "Error recopilado model registroReservacion: " . $e->getMessage();
+            echo "Error recopilado model registroReserva: " . $e->getMessage();
             return false;
         }
     }
-    public static function registroPago($datos){
+    public static function registroPago($datos)
+    {
         try {
             $con = new Database;
             $fecha = date('Y-m-d h:m:s');
             $con->pdo->beginTransaction();
             $query = $con->pdo->prepare("INSERT INTO asignacion_pago 
-            (fk_reserva, fk_usuario, monto, fecha_pago, metodo_pago, estado)
+            (fk_reservacion, fk_usuario, monto, fecha_pago, metodo_pago, estado)
             VALUES
             (:reserva, :usuario, :monto, :fecha_pago, :pago, :estado)");
             $query->execute([
@@ -161,7 +187,31 @@ class LoginModel extends ModelBase
                 ':monto' => $datos['total'],
                 ':fecha_pago' => $fecha,
                 ':pago' => $datos['metodo_pago'],
-                ':estado' => $datos['estado']
+                ':estado' => 'comprobacion'
+            ]);
+            $con->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            $con->pdo->rollBack();
+            echo "Error recopilado model registroPago: " . $e->getMessage();
+            return false;
+        }
+    }
+    public static function registroTarjeta($datos)
+    {
+        try {
+            $con = new Database;
+            $con->pdo->beginTransaction();
+            $query = $con->pdo->prepare("INSERT INTO cat_tarjeta
+            (fk_usuario, numero_tarjeta, fecha_vencimiento, cvc, nombre_titular)
+            VALUES
+            (:usuario, :numero, :fecha, :cvc, :nombre)");
+            $query->execute([
+                ':usuario' => $_SESSION['id_usuario-' . constant('Sistema')],
+                ':numero' => $datos['cardnumber'],
+                ':fecha' => $datos['exp-date'],
+                ':cvc' => $datos['cardCvc'],
+                ':nombre' => $datos['name']
             ]);
             $con->pdo->commit();
             return true;
