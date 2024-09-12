@@ -13,42 +13,39 @@ $(function () {
     }
     cardsEspacio(id_espacio);
     // funcion del pago
-    $(".btn-reservacion").click(function () {
-        let form = $("#form-new-reservacion");
-        if (form[0].checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        } else {
-            $.ajax({
-                type: 'POST',
-                url: servidor + 'login/pago',
-                dataType: 'json',
-                data: form.serialize(),
-                beforeSend: function () {
-                    $("#loading").addClass('loading');
-                },
-                success: function (data) {
-                    Swal.fire({
-                        icon: data.estatus,
-                        title: data.titulo,
-                        text: data.respuesta,
-                        showConfirmButton: false,
-                        timer: 2000
-                    });
-                    if (data.estatus === 'success') {
-                        setTimeout(() => {
-                            location.href=servidor+"login"+"/"+"pago"+"/"+id_espacio
-                        }, 2000);
-                    }
-                },
-                error: function (data) {
-                    console.log(data);
-                },
-                complete: function () {
-                    $("#loading").removeClass('loading');
-                }
-            });
+    document.querySelector('.btn-reservar').addEventListener('click', function (e) {
+        e.preventDefault();
+    
+        let form = document.getElementById('form-new-reservacion');
+        if (form.checkValidity() === false) {
+            form.classList.add('was-validated');
+            return;
         }
-        form.addClass('was-validated');
+    
+        let stripe = Stripe('pk_test_51PxwgDK9TllkJ0UIEN1qLYcxJApO6vqMxXM8EiouAWJxEV3Xw61olZOsqQMb9mRPljxMErEzjQiCRc54k1qTVAfX00nickPbYO');
+        let elements = stripe.elements();
+    
+        stripe.createToken(elements).then(function (result) {
+            if (result.error) {
+                console.log(result.error.message);
+            } else {
+                let formData = new FormData(form);
+                formData.append('stripeToken', result.token.id);
+    
+                fetch('https://nubox.devabraham.com/', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.estatus === 'success') {
+                        alert(data.respuesta);
+                    } else {
+                        alert(data.respuesta);
+                    }
+                })
+                .catch(error => console.log('Error:', error));
+            }
+        });
     });
 });

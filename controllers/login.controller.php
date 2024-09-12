@@ -201,31 +201,67 @@ class Login extends ControllerBase
         $this->view->pagoEspacio = $param[0];
         $this->view->render("login/pago");
     }
-    function registroPago(){
+    public function procesarPago() {
         try {
-            $pago = $this->registroReserva();
-            if ($pago != false) {
-                $resp = $this->registroPago($_POST);
-                
-            } else {
-                # code...
-            }
+            $stripeSecretKey = "tu_clave_secreta_de_stripe";
+            \Stripe\Stripe::setApiKey($stripeSecretKey);
+
+            // Primero registrar la reservación
+            $reserva = $this->registroReserva();
             
+            if ($reserva['estatus'] == 'success') {
+                // Realizar el pago con Stripe
+                $token = $_POST['stripeToken'];
+                $total = $_POST['total'] * 100; // Convertir a centavos
+
+                $charge = \Stripe\Charge::create([
+                    'amount' => $total,
+                    'currency' => 'mxn',
+                    'description' => 'Pago de reservación',
+                    'source' => $token,
+                    'metadata' => ['reserva_id' => $reserva['id_asignacion_reservacion']]
+                ]);
+
+                if ($charge['status'] == 'succeeded') {
+                    // Si el pago es exitoso, registrar el pago en la base de datos
+                    $_POST['id_asignacion_reservacion'] = $reserva['id_asignacion_reservacion'];
+                    $_POST['metodo_pago'] = 'stripe';
+                    $_POST['estado'] = 'completado';
+
+                    $pago = LoginModel::registroPago($_POST);
+                    if ($pago) {
+                        $data = [
+                            'estatus' => 'success',
+                            'titulo' => 'Registro pago',
+                            'respuesta' => 'Hemos recibido tu pago, gracias por la reservación'
+                        ];
+                    } else {
+                        throw new Exception("Error al registrar el pago en la base de datos.");
+                    }
+                } else {
+                    throw new Exception("El pago con Stripe falló.");
+                }
+            } else {
+                throw new Exception("Error al registrar la reservación.");
+            }
         } catch (\Throwable $th) {
-            //throw $th;
+            $data = [
+                'estatus' => 'error',
+                'titulo' => 'Error en el proceso',
+                'respuesta' => $th->getMessage()
+            ];
         }
+
+        echo json_encode($data);
     }
-    function registroReserva(){
+
+    public function registroReserva() {
         try {
             $resp = LoginModel::registroReserva($_POST);
-            if ($resp != false) {
-                return;
-            } else {
-                return false;
-            }
+            return $resp;
         } catch (\Throwable $th) {
-            echo "Error en el controllador registro Reserva: " . $th->getMessage();
-            return;
+            echo "Error en el controlador registro Reserva: " . $th->getMessage();
+            return false;
         }
     }
 }

@@ -136,10 +136,13 @@
                             Ingresa el número de tarjeta, por favor.
                         </div>
                     </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <input type="hidden" name="metodo_pago" id="metodo_pago" required>
+                    </div>
                     <div class="row">
                         <div class="col-sm-12 col-md-6 mt-2">
                             <label for="año_expiracion">Año de expiracion</label>
-                            <input type="date" name="year-exp" id="year-exp" class="form-control" required>
+                            <input type="month" name="year-exp" id="year-exp" class="form-control" required>
                             <div class="invalid-feedback">
                                 Ingresa el año de expiración, por favor.
                             </div>
@@ -159,6 +162,8 @@
                             Ingresa el nombre del titular, por favor.
                         </div>
                     </div>
+                    <div id="card-element"></div>
+                    <div id="card-errors" role="alert"></div>
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                         <button data-formulario="form-new-reservacion" type="button" class="btn btn-primary btn-reservar mt-3">Reservación</button>
                     </div>
@@ -261,6 +266,7 @@
     <!-- mapa -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <!-- pasarela de pago -->
+    <script src="https://js.stripe.com/v3/"></script>
     <!-- <script src="https://sdk.mercadopago.com/js/v2"></script> -->
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
@@ -295,30 +301,48 @@
     </script>
     <script>
         document.getElementById('fecha_ingreso').addEventListener('change', calcularTotal);
-document.getElementById('fecha_finalizacion').addEventListener('change', calcularTotal);
+        document.getElementById('fecha_finalizacion').addEventListener('change', calcularTotal);
 
-function calcularTotal() {
-    const fechaIngreso = new Date(document.getElementById('fecha_ingreso').value);
-    const fechaFinalizacion = new Date(document.getElementById('fecha_finalizacion').value);
-    const pagoDia = parseFloat(document.getElementById('pago_dia').value);
-    const totalField = document.getElementById('total');
+        function calcularTotal() {
+            const fechaIngreso = new Date(document.getElementById('fecha_ingreso').value);
+            const fechaFinalizacion = new Date(document.getElementById('fecha_finalizacion').value);
+            const pagoDia = parseFloat(document.getElementById('pago_dia').value);
+            const totalField = document.getElementById('total');
 
-    if (fechaIngreso && fechaFinalizacion && !isNaN(pagoDia)) {
-        // Calcula la diferencia en días (milisegundos a días)
-        const diferenciaTiempo = fechaFinalizacion - fechaIngreso;
-        const diferenciaDias = diferenciaTiempo / (1000 * 60 * 60 * 24) + 1;
+            if (fechaIngreso && fechaFinalizacion && !isNaN(pagoDia)) {
+                // Calcula la diferencia en días (milisegundos a días)
+                const diferenciaTiempo = fechaFinalizacion - fechaIngreso;
+                const diferenciaDias = diferenciaTiempo / (1000 * 60 * 60 * 24) + 1;
 
-        if (diferenciaDias > 0) {
-            // Calcula el total
-            const total = diferenciaDias * pagoDia;
-            totalField.value = total.toFixed(2);
-        } else {
-            totalField.value = '0.00';
+                if (diferenciaDias > 0) {
+                    // Calcula el total
+                    const total = diferenciaDias * pagoDia;
+                    totalField.value = total.toFixed(2);
+                } else {
+                    totalField.value = '0.00';
+                }
+            } else {
+                totalField.value = '0.00';
+            }
         }
-    } else {
-        totalField.value = '0.00';
-    }
-}
+    </script>
+    <!-- identificar tarjeta -->
+    <script>
+        document.getElementById('numero_tarjeta').addEventListener('input', function() {
+            const numeroTarjeta = this.value.replace(/\s+/g, '');
+            const metodoPagoField = document.getElementById('metodo_pago');
+            if (/^4[0-9]{12}(?:[0-9]{3})?$/.test(numeroTarjeta)) {
+                metodoPagoField.value = 'Visa';
+            } else if (/^5[1-5][0-9]{14}$/.test(numeroTarjeta)) {
+                metodoPagoField.value = 'MasterCard';
+            } else if (/^3[47][0-9]{13}$/.test(numeroTarjeta)) {
+                metodoPagoField.value = 'American Express';
+            } else if (/^6(?:011|5[0-9]{2})[0-9]{12}$/.test(numeroTarjeta)) {
+                metodoPagoField.value = 'Discover';
+            } else {
+                metodoPagoField.value = '';
+            }
+        });
     </script>
     <script src="<?= constant('URL') ?>public/js/paginas/pago.js"></script>
 </body>

@@ -149,9 +149,20 @@ class LoginModel extends ModelBase
     public static function registroPago($datos){
         try {
             $con = new Database;
+            $fecha = date('Y-m-d h:m:s');
             $con->pdo->beginTransaction();
-            $query = $con->pdo->prepare("");
-            $query->execute([]);
+            $query = $con->pdo->prepare("INSERT INTO asignacion_pago 
+            (fk_reserva, fk_usuario, monto, fecha_pago, metodo_pago, estado)
+            VALUES
+            (:reserva, :usuario, :monto, :fecha_pago, :pago, :estado)");
+            $query->execute([
+                ':reserva' => $datos['id_asignacion_reservacion'],
+                ':usuario' => $_SESSION['id_usuario-' . constant('Sistema')],
+                ':monto' => $datos['total'],
+                ':fecha_pago' => $fecha,
+                ':pago' => $datos['metodo_pago'],
+                ':estado' => $datos['estado']
+            ]);
             $con->pdo->commit();
             return true;
         } catch (PDOException $e) {
