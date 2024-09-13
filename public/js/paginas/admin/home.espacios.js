@@ -241,9 +241,4 @@ $(function () {
             complete: () => $("#loading").removeClass("loading"),
         });
     }
-    let pasaje = 12 * ((24.50 + 24.50)+24);
-    let mama = 1100;
-    let dentista = 400;
-    let total = pasaje + mama + dentista;
-    console.log(total);
 });
