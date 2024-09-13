@@ -178,15 +178,14 @@ class LoginModel extends ModelBase
             $fecha = date('Y-m-d h:m:s');
             $con->pdo->beginTransaction();
             $query = $con->pdo->prepare("INSERT INTO asignacion_pago 
-            (fk_reservacion, fk_usuario, monto, fecha_pago, metodo_pago, estado)
+            (fk_reservacion, fk_usuario, fecha_pago, monto, estado)
             VALUES
-            (:reserva, :usuario, :monto, :fecha_pago, :pago, :estado)");
+            (:reserva, :usuario, :fecha_pago, :monto, :estado)");
             $query->execute([
                 ':reserva' => $datos['id_asignacion_reservacion'],
                 ':usuario' => $_SESSION['id_usuario-' . constant('Sistema')],
                 ':monto' => $datos['total'],
                 ':fecha_pago' => $fecha,
-                ':pago' => $datos['metodo_pago'],
                 ':estado' => 'comprobacion'
             ]);
             $con->pdo->commit();
@@ -203,14 +202,13 @@ class LoginModel extends ModelBase
             $con = new Database;
             $con->pdo->beginTransaction();
             $query = $con->pdo->prepare("INSERT INTO cat_tarjeta
-            (fk_usuario, numero_tarjeta, fecha_vencimiento, cvc, nombre_titular)
-            VALUES
-            (:usuario, :numero, :fecha, :cvc, :nombre)");
+        (fk_usuario, numero_tarjeta, fecha_vencimiento, nombre_titular)
+        VALUES
+        (:usuario, :numero, :fecha, :nombre)");
             $query->execute([
                 ':usuario' => $_SESSION['id_usuario-' . constant('Sistema')],
                 ':numero' => $datos['cardnumber'],
                 ':fecha' => $datos['exp-date'],
-                ':cvc' => $datos['cardCvc'],
                 ':nombre' => $datos['name']
             ]);
             $con->pdo->commit();

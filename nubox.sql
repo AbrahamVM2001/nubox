@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-09-2024 a las 01:47:14
+-- Tiempo de generación: 14-09-2024 a las 00:03:08
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -37,102 +37,6 @@ CREATE TABLE `asignacion_contenido` (
   `estatus` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `asignacion_contenido`
---
-
-INSERT INTO `asignacion_contenido` (`id_asignacion_contenido`, `fk_usuario`, `fk_espacio`, `fecha`, `token`, `ubicacion`, `estatus`) VALUES
-(1, 1, 5, '2024-09-02 05:09:48', 'FVYSLPZNNX8A7XAE48', 'public/contenido/salones/FVYSLPZNNX8A7XAE48.png', 1),
-(2, 1, 5, '2024-09-02 05:09:58', 'HDPYE8NP1BY4AC6MOW', 'public/contenido/salones/HDPYE8NP1BY4AC6MOW.png', 1),
-(3, 1, 5, '2024-09-02 05:09:06', 'AASXMM1VKXN15IIV2D', 'public/contenido/salones/AASXMM1VKXN15IIV2D.png', 1),
-(4, 1, 5, '2024-09-02 05:09:14', 'HWXL7SCDMUYQXP5JZ6', 'public/contenido/salones/HWXL7SCDMUYQXP5JZ6.png', 1),
-(5, 1, 5, '2024-09-02 05:09:24', 'QW9RZVG6F7HYVSD4VG', 'public/contenido/salones/QW9RZVG6F7HYVSD4VG.png', 1),
-(6, 1, 10, '2024-09-02 05:09:39', '6K2YUTXSHHK77MAKGC', 'public/contenido/salones/6K2YUTXSHHK77MAKGC.png', 1),
-(7, 1, 10, '2024-09-02 05:09:46', 'VML2IC1ZY9UOCUH4ZG', 'public/contenido/salones/VML2IC1ZY9UOCUH4ZG.png', 1),
-(8, 1, 10, '2024-09-02 05:09:56', 'WRIFQTQ818RPVVHMX2', 'public/contenido/salones/WRIFQTQ818RPVVHMX2.png', 1),
-(9, 1, 10, '2024-09-02 05:09:05', 'ER4MVAOJF1ZE5PRM62', 'public/contenido/salones/ER4MVAOJF1ZE5PRM62.png', 1),
-(10, 1, 10, '2024-09-02 05:09:14', 'GWL7K6P29UD28AK8HC', 'public/contenido/salones/GWL7K6P29UD28AK8HC.png', 1),
-(11, 1, 9, '2024-09-02 05:09:25', 'BND975TUUWFPW9OT59', 'public/contenido/salones/BND975TUUWFPW9OT59.png', 1),
-(12, 1, 9, '2024-09-02 05:09:32', 'KKMAADK6ARW2G86Y3O', 'public/contenido/salones/KKMAADK6ARW2G86Y3O.png', 1),
-(13, 1, 9, '2024-09-02 05:09:40', 'RYFYVA5BOK2R1VLNEJ', 'public/contenido/salones/RYFYVA5BOK2R1VLNEJ.png', 1),
-(14, 1, 9, '2024-09-02 05:09:47', 'TPISLTK4SOE61W7OG2', 'public/contenido/salones/TPISLTK4SOE61W7OG2.png', 1),
-(15, 1, 9, '2024-09-02 05:09:54', 'FVN7WGHOANT7FIF1TB', 'public/contenido/salones/FVN7WGHOANT7FIF1TB.png', 1),
-(16, 1, 4, '2024-09-02 05:09:10', 'PF399PEZMUJMS2DKJB', 'public/contenido/salones/PF399PEZMUJMS2DKJB.png', 1),
-(17, 1, 4, '2024-09-02 05:09:17', 'NDQORTS1QEKTQV798X', 'public/contenido/salones/NDQORTS1QEKTQV798X.png', 1),
-(18, 1, 4, '2024-09-02 05:09:24', 'UFR1LSSR1ZJ6TAYX1K', 'public/contenido/salones/UFR1LSSR1ZJ6TAYX1K.png', 1),
-(19, 1, 4, '2024-09-02 05:09:31', 'UJ26SKTJ2PUPQTKDPD', 'public/contenido/salones/UJ26SKTJ2PUPQTKDPD.png', 1),
-(20, 1, 4, '2024-09-02 05:09:39', 'RNLV9C3G3FBCLRUNJ5', 'public/contenido/salones/RNLV9C3G3FBCLRUNJ5.png', 1),
-(21, 1, 2, '2024-09-02 05:09:50', 'D4121DHPVNANPV3UY5', 'public/contenido/salones/D4121DHPVNANPV3UY5.png', 1),
-(22, 1, 2, '2024-09-02 05:09:58', 'ARJJ3BJHICAAS33P2L', 'public/contenido/salones/ARJJ3BJHICAAS33P2L.png', 1),
-(23, 1, 2, '2024-09-02 05:09:12', 'EDRGR5V69N4YQPHSP8', 'public/contenido/salones/EDRGR5V69N4YQPHSP8.png', 1),
-(24, 1, 2, '2024-09-02 05:09:19', '38OI66D528TQA6J1MR', 'public/contenido/salones/38OI66D528TQA6J1MR.png', 1),
-(25, 1, 2, '2024-09-02 05:09:26', 'CVYVJOFR8MIGB9Y2NX', 'public/contenido/salones/CVYVJOFR8MIGB9Y2NX.png', 1),
-(26, 1, 1, '2024-09-02 05:09:41', 'PHPWHXKUBGA82D4GWE', 'public/contenido/salones/FVYSLPZNNX8A7XAE48.png', 1),
-(27, 1, 1, '2024-09-02 05:09:49', 'TSSH434WILW98W67X7', 'public/contenido/salones/FVYSLPZNNX8A7XAE48.png', 1),
-(28, 1, 1, '2024-09-02 05:09:22', 'POOMH4DZV6QR2UOK36', 'public/contenido/salones/FVYSLPZNNX8A7XAE48.png', 1),
-(29, 1, 1, '2024-09-02 05:09:29', 'M5YC7SIT313NU3TPM6', 'public/contenido/salones/FVYSLPZNNX8A7XAE48.png', 1),
-(30, 1, 1, '2024-09-02 05:09:37', 'NS2IKUNTJZQ695KK6T', 'public/contenido/salones/FVYSLPZNNX8A7XAE48.png', 1),
-(31, 1, 6, '2024-09-02 05:09:03', 'JYYZ9N7DKTMJPSKXFW', 'public/contenido/salones/JYYZ9N7DKTMJPSKXFW.png', 1),
-(32, 1, 6, '2024-09-02 05:09:10', '8ERXRW4LVEGSLQA1EE', 'public/contenido/salones/8ERXRW4LVEGSLQA1EE.png', 1),
-(33, 1, 6, '2024-09-02 05:09:16', '11V4L5ON1TU9WZTAUF', 'public/contenido/salones/11V4L5ON1TU9WZTAUF.png', 1),
-(34, 1, 6, '2024-09-02 05:09:23', 'E6LFVH8D9OF31S8I7X', 'public/contenido/salones/E6LFVH8D9OF31S8I7X.png', 1),
-(35, 1, 6, '2024-09-02 05:09:32', 'HHULGA72PGPKQQY8AA', 'public/contenido/salones/HHULGA72PGPKQQY8AA.png', 1),
-(36, 1, 8, '2024-09-02 05:09:43', 'P1ALZJB5DVIHKGYHMS', 'public/contenido/salones/P1ALZJB5DVIHKGYHMS.png', 1),
-(37, 1, 8, '2024-09-02 05:09:51', 'R7WHMDB9OA99C6WQ7K', 'public/contenido/salones/R7WHMDB9OA99C6WQ7K.png', 1),
-(38, 1, 8, '2024-09-02 05:09:58', '1EYLCAP6BFV3XFNF89', 'public/contenido/salones/1EYLCAP6BFV3XFNF89.png', 1),
-(39, 1, 8, '2024-09-02 05:09:06', 'RC7BWABS66E9ONMA24', 'public/contenido/salones/RC7BWABS66E9ONMA24.png', 1),
-(40, 1, 8, '2024-09-02 05:09:13', '1TCVBO5EUKGT6KXSWR', 'public/contenido/salones/1TCVBO5EUKGT6KXSWR.png', 1),
-(41, 1, 3, '2024-09-02 05:09:27', 'L97V8JCP1ENWQ8AX5S', 'public/contenido/salones/L97V8JCP1ENWQ8AX5S.png', 1),
-(42, 1, 3, '2024-09-02 05:09:34', 'LRLWZMQM41XWOW5NBT', 'public/contenido/salones/LRLWZMQM41XWOW5NBT.png', 1),
-(43, 1, 3, '2024-09-02 05:09:41', '75ZBTMZKMNA88P6LWM', 'public/contenido/salones/75ZBTMZKMNA88P6LWM.png', 1),
-(44, 1, 3, '2024-09-02 05:09:53', 'ZGIFTWY3514DCJIANE', 'public/contenido/salones/ZGIFTWY3514DCJIANE.png', 1),
-(45, 1, 3, '2024-09-02 05:09:00', '45XL6G1N9KMYRJ82U8', 'public/contenido/salones/45XL6G1N9KMYRJ82U8.png', 1),
-(46, 1, 7, '2024-09-02 05:09:15', 'YQBEKCXPI7BQJOGAF2', 'public/contenido/salones/YQBEKCXPI7BQJOGAF2.png', 1),
-(47, 1, 7, '2024-09-02 05:09:22', 'NPR713CI1NSU9W5CN8', 'public/contenido/salones/NPR713CI1NSU9W5CN8.png', 1),
-(48, 1, 7, '2024-09-02 05:09:31', 'HX9OB5AX4XTMGIA56O', 'public/contenido/salones/HX9OB5AX4XTMGIA56O.png', 1),
-(49, 1, 7, '2024-09-02 05:09:40', '26WLJ422WZLJQ3WKC8', 'public/contenido/salones/26WLJ422WZLJQ3WKC8.png', 1),
-(50, 1, 7, '2024-09-02 05:09:48', '4WYKSAOIRRNTV7P779', 'public/contenido/salones/4WYKSAOIRRNTV7P779.png', 1),
-(51, 1, 12, '2024-09-02 05:09:22', 'JL8HIY1LGMRIJVXF4A', 'public/contenido/oficinas/JL8HIY1LGMRIJVXF4A.png', 1),
-(52, 1, 12, '2024-09-02 05:09:28', '7O2ZDPXYWZQZ6SMQQ1', 'public/contenido/oficinas/7O2ZDPXYWZQZ6SMQQ1.png', 1),
-(53, 1, 12, '2024-09-02 05:09:35', 'J9BGE4YODNWJ7CRKYD', 'public/contenido/oficinas/J9BGE4YODNWJ7CRKYD.png', 1),
-(54, 1, 12, '2024-09-02 05:09:27', 'EIHA6HV5F7PKN2CQVG', 'public/contenido/oficinas/EIHA6HV5F7PKN2CQVG.png', 1),
-(55, 1, 12, '2024-09-02 05:09:37', '4Y6IKC9I9FHON2YT2S', 'public/contenido/oficinas/4Y6IKC9I9FHON2YT2S.png', 1),
-(56, 1, 14, '2024-09-02 05:09:55', 'JWKMGEPO7X2Q5S13GJ', 'public/contenido/oficinas/JWKMGEPO7X2Q5S13GJ.png', 1),
-(57, 1, 14, '2024-09-02 05:09:02', '4SX66GGR39IFU58IW4', 'public/contenido/oficinas/4SX66GGR39IFU58IW4.png', 1),
-(58, 1, 14, '2024-09-02 05:09:08', '6BKNF222K7RJ4QBUVQ', 'public/contenido/oficinas/6BKNF222K7RJ4QBUVQ.png', 1),
-(59, 1, 14, '2024-09-02 05:09:16', 'PPEDJ34HYI4AJ865XS', 'public/contenido/oficinas/PPEDJ34HYI4AJ865XS.png', 1),
-(60, 1, 14, '2024-09-02 05:09:23', 'PWX1D55H8VQW9O4Q9R', 'public/contenido/oficinas/PWX1D55H8VQW9O4Q9R.png', 1),
-(61, 1, 15, '2024-09-02 05:09:39', 'GJTWZ8YJ3ZLYUT27OT', 'public/contenido/oficinas/GJTWZ8YJ3ZLYUT27OT.png', 1),
-(62, 1, 15, '2024-09-02 05:09:46', 'OC1D6PAX15J5XLHLQ1', 'public/contenido/oficinas/OC1D6PAX15J5XLHLQ1.png', 1),
-(63, 1, 15, '2024-09-02 05:09:53', 'JGAN5RRT9LGBDA2OI7', 'public/contenido/oficinas/JGAN5RRT9LGBDA2OI7.png', 1),
-(64, 1, 15, '2024-09-02 05:09:02', 'WS57JKUI8BBF7WT2KI', 'public/contenido/oficinas/WS57JKUI8BBF7WT2KI.png', 1),
-(65, 1, 15, '2024-09-02 05:09:16', 'G88CEG4F3KX5RWCO8S', 'public/contenido/oficinas/G88CEG4F3KX5RWCO8S.png', 1),
-(66, 1, 16, '2024-09-02 05:09:31', 'LZ69LOEZ2CEPPX43HL', 'public/contenido/oficinas/LZ69LOEZ2CEPPX43HL.png', 1),
-(67, 1, 16, '2024-09-02 05:09:38', '8IA9DVRF5U28UKZMFI', 'public/contenido/oficinas/8IA9DVRF5U28UKZMFI.png', 1),
-(68, 1, 16, '2024-09-02 05:09:46', '5LC4JEEYA8NKG8YJ83', 'public/contenido/oficinas/5LC4JEEYA8NKG8YJ83.png', 1),
-(69, 1, 16, '2024-09-02 05:09:53', 'I2DOI64UX6HTB5C1LU', 'public/contenido/oficinas/I2DOI64UX6HTB5C1LU.png', 1),
-(70, 1, 16, '2024-09-02 05:09:01', 'I3QK7OZI3HRIS2QDVL', 'public/contenido/oficinas/I3QK7OZI3HRIS2QDVL.png', 1),
-(71, 1, 19, '2024-09-02 05:09:21', 'Q4LJGRKIYKVSVJIEQC', 'public/contenido/oficinas/Q4LJGRKIYKVSVJIEQC.png', 1),
-(72, 1, 19, '2024-09-02 05:09:27', 'ZL7LG4WZR13BN8VK8X', 'public/contenido/oficinas/ZL7LG4WZR13BN8VK8X.png', 1),
-(73, 1, 19, '2024-09-02 05:09:34', 'TGKTHVK8C8JHBNNB3U', 'public/contenido/oficinas/TGKTHVK8C8JHBNNB3U.png', 1),
-(74, 1, 19, '2024-09-02 05:09:42', 'SIYXAQMQ4Y5CLC1F5H', 'public/contenido/oficinas/SIYXAQMQ4Y5CLC1F5H.png', 1),
-(75, 1, 19, '2024-09-02 05:09:50', 'O4MRU3VQXUCVD5AMLE', 'public/contenido/oficinas/O4MRU3VQXUCVD5AMLE.png', 1),
-(76, 1, 13, '2024-09-02 05:09:01', 'B1L6Z3D49OIDO6RHVU', 'public/contenido/oficinas/B1L6Z3D49OIDO6RHVU.png', 1),
-(77, 1, 13, '2024-09-02 05:09:07', 'V21Q2VJD9K1KR5ATHY', 'public/contenido/oficinas/V21Q2VJD9K1KR5ATHY.png', 1),
-(78, 1, 13, '2024-09-02 05:09:14', 'EAWQW3O8QT1TSVJ1Y1', 'public/contenido/oficinas/EAWQW3O8QT1TSVJ1Y1.png', 1),
-(79, 1, 13, '2024-09-02 05:09:21', 'GXJJUYNKVSK7WPUP5C', 'public/contenido/oficinas/GXJJUYNKVSK7WPUP5C.png', 1),
-(80, 1, 13, '2024-09-02 05:09:28', 'N2QEAMTZ4XXVPQQJJ9', 'public/contenido/oficinas/N2QEAMTZ4XXVPQQJJ9.png', 1),
-(81, 1, 17, '2024-09-02 05:09:41', '5RLQN9HDIOVAWPU7BG', 'public/contenido/oficinas/5RLQN9HDIOVAWPU7BG.png', 1),
-(82, 1, 17, '2024-09-02 05:09:48', '18NVF2JEA2OW6ZN1RR', 'public/contenido/oficinas/18NVF2JEA2OW6ZN1RR.png', 1),
-(83, 1, 17, '2024-09-02 05:09:55', 'CEWDQBK1CVUF5NL7DN', 'public/contenido/oficinas/CEWDQBK1CVUF5NL7DN.png', 1),
-(84, 1, 17, '2024-09-02 05:09:03', 'X5ECYXAU5NXREXFCCL', 'public/contenido/oficinas/X5ECYXAU5NXREXFCCL.png', 1),
-(85, 1, 17, '2024-09-02 05:09:11', '16CFLAKSNEHS1EPM7B', 'public/contenido/oficinas/16CFLAKSNEHS1EPM7B.png', 1),
-(86, 1, 18, '2024-09-02 05:09:23', 'EVS7KGYM4VQEETEG78', 'public/contenido/oficinas/EVS7KGYM4VQEETEG78.png', 1),
-(87, 1, 18, '2024-09-02 05:09:30', 'SY1LTYAMUX9PM6B836', 'public/contenido/oficinas/SY1LTYAMUX9PM6B836.png', 1),
-(88, 1, 18, '2024-09-02 05:09:36', 'BR6GH7XLI4TRGVJZEQ', 'public/contenido/oficinas/BR6GH7XLI4TRGVJZEQ.png', 1),
-(89, 1, 18, '2024-09-02 05:09:44', 'VDDEHP9SXIJXS1KCPY', 'public/contenido/oficinas/VDDEHP9SXIJXS1KCPY.png', 1),
-(90, 1, 18, '2024-09-02 05:09:51', '8GWPJTN79Y5SE3EWGT', 'public/contenido/oficinas/8GWPJTN79Y5SE3EWGT.png', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -145,18 +49,8 @@ CREATE TABLE `asignacion_pago` (
   `fk_usuario` int(11) DEFAULT NULL,
   `monto` float DEFAULT NULL,
   `fecha_pago` date DEFAULT NULL,
-  `metodo_pago` varchar(500) DEFAULT NULL,
   `estado` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `asignacion_pago`
---
-
-INSERT INTO `asignacion_pago` (`id_pago`, `fk_reservacion`, `fk_usuario`, `monto`, `fecha_pago`, `metodo_pago`, `estado`) VALUES
-(10, 19, 1, 9600, '2024-09-12', NULL, 'comprobacion'),
-(11, 20, 1, 9600, '2024-09-12', NULL, 'comprobacion'),
-(12, 21, 1, 9600, '2024-09-12', NULL, 'comprobacion');
 
 -- --------------------------------------------------------
 
@@ -171,15 +65,6 @@ CREATE TABLE `asignacion_reservacion` (
   `fecha_incio` datetime DEFAULT NULL,
   `fecha_finalizacion` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `asignacion_reservacion`
---
-
-INSERT INTO `asignacion_reservacion` (`id_asignacion_reservacion`, `fk_usuario`, `fk_espacio`, `fecha_incio`, `fecha_finalizacion`) VALUES
-(19, 1, 1, '2024-09-13 00:00:00', '2024-09-20 00:00:00'),
-(20, 1, 1, '2024-09-13 00:00:00', '2024-09-20 00:00:00'),
-(21, 1, 1, '2024-09-13 00:00:00', '2024-09-20 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -202,32 +87,6 @@ CREATE TABLE `cat_espacios` (
   `descripcion` varchar(500) DEFAULT NULL,
   `estatus` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `cat_espacios`
---
-
-INSERT INTO `cat_espacios` (`id_espacio`, `nombre`, `tipo_espacio`, `fk_pais`, `fk_estado`, `longitud`, `latitud`, `direccion`, `precio_hora`, `token`, `ubicacion`, `descripcion`, `estatus`) VALUES
-(1, 'Salón Majestuoso del Centro', 1, 119, 2055, '19.445155', '-99.157716', '19.445155, -99.157716', 1200, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(2, 'Salón Encanto Mexicano', 1, 119, 2055, '19.438396', '-99.167887', '19.438396, -99.167887', 10950, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(3, 'Salón Santa Marta Maria Tellez', 1, 119, 2055, '19.448473', '-99.147245', '19.448473, -99.147245', 50234, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(4, 'Salón Cultural', 1, 119, 2055, '19.451670', '-99.147931', '19.451670, -99.147931', 2131, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(5, 'Salón Azteca', 1, 119, 2055, '19.433054', '-99.140550', '19.433054, -99.140550', 34567, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(6, 'Salón Pabellón', 1, 119, 2055, '19.436697', '-99.152438', '19.436697, -99.152438', 10987, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(7, 'Salón Source', 1, 119, 2055, '19.432297', '-99.197530', '19.432297, -99.197530', 7569, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(8, 'Salón Perez Ortiz', 1, 119, 2055, '19.428817', '-99.204332', '19.428817, -99.204332', 8765, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(9, 'Salón Chinga tu madre', 1, 119, 2055, '19.432601', '-99.199804', '19.432601, -99.199804', 321312, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(10, 'Salón Calli', 1, 119, 2055, '19.432965', '-99.190920', '19.432965, -99.190920', 12000, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(11, 'Oficina Emperial', 2, 119, 2055, '19.390403', '-99.126635', '19.390403, -99.126635', 25000, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/Q3KQRGUHIEFBFDW12F.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(12, 'Oficina Washitom', 2, 119, 2055, '19.392943', '-99.133459', '19.392943, -99.133459', 32456, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(13, 'Oficina Hercules', 2, 119, 2055, '19.392943', '-99.133459', '19.389916, -99.135949', 12345, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(14, 'Oficina Sex', 2, 119, 2055, '19.440177', '-99.208141', '19.440177, -99.208141', 45000, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(15, 'Oficina Kolin', 2, 119, 2055, '19.451838', '-99.153486', '19.451838, -99.153486', 24670, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(16, 'Oficina Julie', 2, 119, 2055, '19.447649', '-99.150214', '19.447649, -99.150214', 12980, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(17, 'Oficina Emperial', 2, 119, 2055, '19.454913', '-99.158990', '19.454913, -99.158990', 32150, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(18, 'Oficina Clover', 2, 119, 2055, '19.448600', '-99.161329', '19.448600, -99.161329', 23456, 'DNQJNQS2YFUQD48DVC', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(19, 'Oficina Jouler', 2, 119, 2055, '19.430912', '-99.201623', '19.430912, -99.201623', 45670, 'Q3KQRGUHIEFBFDW12F', 'public/contenido/oficinas/DNQJNQS2YFUQD48DVC.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1),
-(20, 'example', 1, 1, 14, '50.4949629', '10.5469211,17', '50.4949629,10.5469211,17', 12560, 'P7JQLIY3VV1HNS9V83', 'public/contenido/salones/P7JQLIY3VV1HNS9V83.jpeg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at elit rhoncus, dignissim erat eget, laoreet erat. Mauris aliquam quis est in egestas. In eget suscipit eros, in luctus nunc. Cras diam lorem, lobortis vel ultricies in, faucibus et urna. Nam quis diam id sem faucibus molestie. Quisque fringilla ligula eu magna blandit, sed cursus sem lacinia. Pellentesque a erat massa.', 1);
 
 -- --------------------------------------------------------
 
@@ -3954,18 +3813,8 @@ CREATE TABLE `cat_tarjeta` (
   `fk_usuario` int(11) DEFAULT NULL,
   `numero_tarjeta` int(11) DEFAULT NULL,
   `fecha_vencimiento` varchar(10) DEFAULT NULL,
-  `cvc` int(4) DEFAULT NULL,
   `nombre_titular` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `cat_tarjeta`
---
-
-INSERT INTO `cat_tarjeta` (`id_tarjeta`, `fk_usuario`, `numero_tarjeta`, `fecha_vencimiento`, `cvc`, `nombre_titular`) VALUES
-(6, 1, NULL, NULL, NULL, 'Abraham Vera Martinez'),
-(7, 1, NULL, NULL, NULL, 'Abraham Vera Martinez'),
-(8, 1, NULL, NULL, NULL, 'Abraham Vera Martinez');
 
 -- --------------------------------------------------------
 
@@ -4109,25 +3958,25 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `asignacion_contenido`
 --
 ALTER TABLE `asignacion_contenido`
-  MODIFY `id_asignacion_contenido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id_asignacion_contenido` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `asignacion_pago`
 --
 ALTER TABLE `asignacion_pago`
-  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `asignacion_reservacion`
 --
 ALTER TABLE `asignacion_reservacion`
-  MODIFY `id_asignacion_reservacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_asignacion_reservacion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `cat_espacios`
 --
 ALTER TABLE `cat_espacios`
-  MODIFY `id_espacio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_espacio` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `cat_estados`
@@ -4157,7 +4006,7 @@ ALTER TABLE `cat_submenu`
 -- AUTO_INCREMENT de la tabla `cat_tarjeta`
 --
 ALTER TABLE `cat_tarjeta`
-  MODIFY `id_tarjeta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_tarjeta` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `cat_usuario`

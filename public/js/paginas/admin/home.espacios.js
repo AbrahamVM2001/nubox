@@ -60,7 +60,6 @@ $(function () {
         try {
             let peticion = await fetch(servidor + `admin/viewEspacios`);
             let response = await peticion.json();
-            console.log(response);
             if (response.length == 0) {
                 jQuery(`<h3 class="mt-4 text-center text-uppercase">Sin salones registrados</h3>`).appendTo("#container-salon").addClass('text-danger');
                 return false;
@@ -242,4 +241,9 @@ $(function () {
             complete: () => $("#loading").removeClass("loading"),
         });
     }
+    let pasaje = 12 * ((24.50 + 24.50)+24);
+    let mama = 1100;
+    let dentista = 400;
+    let total = pasaje + mama + dentista;
+    console.log(total);
 });

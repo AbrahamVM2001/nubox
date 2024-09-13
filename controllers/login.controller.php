@@ -219,19 +219,32 @@ class Login extends ControllerBase
             \Stripe\Stripe::setApiKey('sk_test_51PxwgDK9TllkJ0UIX9fsNhAhfO5rsuMqYjr31DsSEffdEEvsaMti5bJpmMbQbsZTIT2no8nsxqRjEbLp5rZ1a5v000V5sKouBc');
             $token = $_POST['stripeToken'];
             $amount = $_POST['total'] * 100;
+
+            // Crear el cargo en Stripe
             $charge = \Stripe\Charge::create([
                 'amount' => $amount,
                 'currency' => 'mxn',
                 'description' => 'Pago por reserva',
                 'source' => $token,
             ]);
+
+            // Obtener los últimos 4 dígitos de la tarjeta desde el objeto de cargo
+            $cardLast4 = $charge->source->last4;
+            $cardExpMonth = $charge->source->exp_month;
+            $cardExpYear = $charge->source->exp_year;
+
+            // Guardar el registro de la reserva
             $idReserva = LoginModel::registroReserva($_POST);
+
             if ($idReserva !== false) {
                 $_POST['id_asignacion_reservacion'] = $idReserva;
                 $resp = LoginModel::registroPago($_POST);
                 if ($resp !== false) {
-                    $numeroTarjeta = $_POST['numero_tarjeta'];
-                    $_POST['numero_tarjeta'] = substr($numeroTarjeta, -4);
+                    // Guardar la tarjeta (solo los datos permitidos)
+                    $_POST['cardnumber'] = $cardLast4;
+                    $_POST['exp-date'] = "$cardExpMonth/$cardExpYear";
+                    $_POST['cardCvc'] = '***'; // Nunca almacenes el CVC
+
                     $tarjeta = LoginModel::registroTarjeta($_POST);
                     if ($tarjeta !== false) {
                         $data = [
