@@ -12,6 +12,79 @@ class AdminModel extends ModelBase
     {
         parent::__construct();
     }
+    // mostrar graficas para analisis
+    public static function containerVentasTotales(){
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("SELECT SUM(monto) AS total_monto FROM asignacion_pago;");
+            $query->execute();
+            return $query->fetch();
+        } catch (PDOException $e) {
+            echo "Error model containerVentasTotales: " . $e->getMessage();
+            return;
+        }
+    }
+    public static function containerClientes(){
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("SELECT COUNT(tipo_usuario) AS numero_total FROM cat_usuario WHERE tipo_usuario = 3;");
+            $query->execute();
+            return $query->fetch();
+        } catch (PDOException $e) {
+            echo "Error model containerClientes: " . $e->getMessage();
+            return;
+        }
+    }
+    public static function containerEspacios(){
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("
+            SELECT 
+                e.id_espacio, 
+                e.nombre, 
+                COUNT(r.id_asignacion_reservacion) AS total_reservaciones
+            FROM 
+                asignacion_reservacion r
+            INNER JOIN 
+                cat_espacios e ON r.fk_espacio = e.id_espacio
+            GROUP BY 
+                e.id_espacio, e.nombre;
+            ");
+            $query->execute();
+            return $query->fetchAll();
+        } catch (PDOException $e) {
+            echo "Error model containerEspacios: " . $e->getMessage();
+            return;
+        }
+    }
+    public static function containerClientesSinAsignar(){
+        try {
+            $con = new Database;
+            $query = $con->pdo->prepare("
+            SELECT 
+                e.id_espacio,
+                e.nombre AS nombre_espacio,
+                u.id_usuario,
+                u.nombre AS nombre_usuario,
+                u.apellido_paterno,
+                u.apellido_materno
+            FROM 
+                cat_espacios e
+            LEFT JOIN 
+                cat_usuario u ON u.tipo_usuario = 2 
+            LEFT JOIN 
+                asignacion_usuario_reservacion aur ON u.id_usuario = aur.fk_usuario
+            WHERE 
+                aur.fk_usuario IS NULL 
+                AND e.estatus = 1; -- Ajusta este filtro de acuerdo a la lógica de tu aplicación para espacios activos.
+            ");
+            $query->execute();
+            return $query->fetchAll();
+        } catch (PDOException $e) {
+            echo "Error model containerClientesSinAsignar: " . $e->getMessage();
+            return;
+        }
+    }
     // usuario
     public static function usuario()
     {
@@ -162,15 +235,18 @@ class AdminModel extends ModelBase
             $con = new Database;
             $con->pdo->beginTransaction();
             $query = $con->pdo->prepare("INSERT INTO cat_espacios
-                (nombre, tipo_espacio, fk_pais, fk_estado, cordenadas, precio_hora, token, ubicacion, estatus)
+                (nombre, tipo_espacio, descripcion, fk_pais, fk_estado, longitud, latitud, direccion, precio_hora, token, ubicacion, estatus)
                     VALUES
-                (:nombre, :tipoEspacio, :fkPais, :fkEstado, :cordenadas, :PrecioHora, :token, :ubicacion, 1)");
+                (:nombre, :tipoEspacio, :descripcion, :fkPais, :fkEstado, :longitud, :latitud, :direccion, :PrecioHora, :token, :ubicacion, 1)");
             $query->execute([
                 ':nombre' => $datos['nombre'],
                 ':tipoEspacio' => $datos['tipo_espacio'],
+                ':descripcion' => $datos['desc'],
                 ':fkPais' => $datos['id_pais'],
                 ':fkEstado' => $datos['id_estado'],
-                ':cordenadas' => $datos['cordenadas'],
+                ':direccion' => $datos['direccion'],
+                ':longitud' => $datos['longitud'],
+                ':latitud' => $datos['latitud'],
                 ':PrecioHora' => $datos['precio'],
                 ':token' => $datos['token'],
                 ':ubicacion' => $datos['ubicacion']
@@ -191,9 +267,12 @@ class AdminModel extends ModelBase
             $query = $con->pdo->prepare("UPDATE cat_espacios SET
                 nombre = :nombre,
                 tipo_espacio = :tipoEspacio,
+                descripcion = :descripcion,
                 fk_pais = :idPais,
                 fk_estado = :idEstado,
-                cordenadas = :cordenadas,
+                direccion = :direccion,
+                longitud = :longitud,
+                latitud = :latitud,
                 token = :token,
                 ubicacion = :ubicacion
                     WHERE 
@@ -202,9 +281,12 @@ class AdminModel extends ModelBase
                 ':idEspacio' => $datos['id_espacio'],
                 ':nombre' => $datos['nombre'],
                 ':tipoEspacio' => $datos['tipo_espacio'],
+                ':descripcion' => $datos['desc'],
                 ':idPais' => $datos['id_pais'],
                 ':idEstado' => $datos['id_estado'],
-                ':cordenadas' => $datos['cordenadas'],
+                ':direccion' => $datos['direccion'],
+                ':longitud' => $datos['longitud'],
+                ':latitud' => $datos['latitud'],
                 ':token' => $datos['token'],
                 ':ubicacion' => $datos['ubicacion']
             ]);

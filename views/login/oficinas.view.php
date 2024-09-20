@@ -216,7 +216,7 @@
                                     <label for="contraseña">Contraseña</label>
                                     <input type="password" name="pass" id="pass" class="form-control mt-2" placeholder="Contraseña..." required>
                                     <button class="btn btn-light btn-ver-password mt-3">Ver contraseña</button><br>
-                                    <button class="btn btn-light btn-recuperar mt-2">Olvide mi contraseña</button>
+                                    <a class="btn btn-light btn-recuperar mt-2" href="<?= constant('URL') ?>login/password">Olvide mi contraseña</a>
                                     <div class="invalid-feedback">
                                         Ingresa una contraseña valida, por favor.
                                     </div>
@@ -283,6 +283,24 @@
         setInterval(actualizarFecha, 1000);
 
         document.addEventListener('DOMContentLoaded', actualizarFecha);
+    </script>
+    <!-- password -->
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Selecciona el botón y el campo de entrada
+            const togglePasswordButton = document.querySelector('.btn-ver-password');
+            const passwordField = document.querySelector('#pass');
+
+            // Agrega un manejador de eventos al botón
+            togglePasswordButton.addEventListener('click', () => {
+                // Alterna el tipo de input entre 'password' y 'text'
+                const type = passwordField.type === 'password' ? 'text' : 'password';
+                passwordField.type = type;
+
+                // Cambia el texto del botón según el estado
+                togglePasswordButton.textContent = type === 'password' ? 'Ver contraseña' : 'Ocultar contraseña';
+            });
+        });
     </script>
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-09-2024 a las 00:03:08
+-- Tiempo de generación: 21-09-2024 a las 01:27:10
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -40,6 +40,20 @@ CREATE TABLE `asignacion_contenido` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `asignacion_numero_verificacion`
+--
+
+CREATE TABLE `asignacion_numero_verificacion` (
+  `id_asignacion_numero_verificacion` int(11) NOT NULL,
+  `fk_usuario` int(11) DEFAULT NULL,
+  `numero` int(5) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `confirmacion` int(2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `asignacion_pago`
 --
 
@@ -69,6 +83,21 @@ CREATE TABLE `asignacion_reservacion` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `asignacion_usuario_reservacion`
+--
+
+CREATE TABLE `asignacion_usuario_reservacion` (
+  `id_asignacion_usuario_reservacion` int(11) NOT NULL,
+  `fk_usuario` int(11) DEFAULT NULL,
+  `fk_asignacion_reserva` int(11) DEFAULT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `fecha_finalizacion` date DEFAULT NULL,
+  `estatus` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `cat_espacios`
 --
 
@@ -84,7 +113,7 @@ CREATE TABLE `cat_espacios` (
   `precio_hora` float DEFAULT NULL,
   `token` varchar(33) DEFAULT NULL,
   `ubicacion` varchar(500) DEFAULT NULL,
-  `descripcion` varchar(500) DEFAULT NULL,
+  `descripcion` varchar(260) DEFAULT NULL,
   `estatus` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -3838,7 +3867,8 @@ CREATE TABLE `cat_usuario` (
 --
 
 INSERT INTO `cat_usuario` (`id_usuario`, `nombre`, `apellido_paterno`, `apellido_materno`, `tipo_usuario`, `correo`, `contrasena`, `estatus`) VALUES
-(1, 'Abraham', 'Vera', 'Martinez', 1, 'admin@devabraham.com', 'TE0xL3B4Ymh5RkhTRFd3UVBjVEpqdz09', 1);
+(1, 'Abraham', 'Vera', 'Martinez', 1, 'abrahamveram2001@gmail.com', 'TE0xL3B4Ymh5RkhTRFd3UVBjVEpqdz09', 1),
+(2, 'Abraham', 'Vera', 'Martinez', 2, 'abrahamveram2001@devabraham.com', 'SUcweXlxWldUQ1pvSllFQlgzZzRmQT09', 1);
 
 -- --------------------------------------------------------
 
@@ -3867,7 +3897,7 @@ CREATE TABLE `configuracion` (
 --
 
 INSERT INTO `configuracion` (`id_sociedad`, `nombre_sociedad`, `nombre_sistema`, `descripcion_sistema`, `servidor_correo`, `puerto_servidor_correo`, `correo_soporte`, `password_correo`, `correo_institucional`, `ruta_logotipo`, `ruta_icono`, `dominio_sociedad`, `estatus_sociedad`) VALUES
-(1, 'Nubox', 'nubox', 'Renta de salones y oficinas', '@devabraham.com', '465', 'abraham@devabraham.com', 'Abraham##15', 'abrahamveram2001@devabraham.com', 'public/img/logo.png', 'public/img/logo.png', 'http://localhost/nubox/', 1);
+(1, 'Nubox', 'nubox', 'Renta de salones y oficinas', '@devabraham.com', '465', 'abraham@devabraham.com', 'Abraham##15', 'abrahamveram2001@devabraham.com', 'public/img/logo.png', 'public/img/logo.png', 'https://nubox.devabraham.com/', 1);
 
 --
 -- Índices para tablas volcadas
@@ -3880,6 +3910,13 @@ ALTER TABLE `asignacion_contenido`
   ADD PRIMARY KEY (`id_asignacion_contenido`),
   ADD KEY `fk_usuario` (`fk_usuario`),
   ADD KEY `fk_espacio` (`fk_espacio`);
+
+--
+-- Indices de la tabla `asignacion_numero_verificacion`
+--
+ALTER TABLE `asignacion_numero_verificacion`
+  ADD PRIMARY KEY (`id_asignacion_numero_verificacion`),
+  ADD KEY `fk_usuario` (`fk_usuario`);
 
 --
 -- Indices de la tabla `asignacion_pago`
@@ -3896,6 +3933,14 @@ ALTER TABLE `asignacion_reservacion`
   ADD PRIMARY KEY (`id_asignacion_reservacion`),
   ADD KEY `fk_usuario` (`fk_usuario`),
   ADD KEY `fk_espacio` (`fk_espacio`);
+
+--
+-- Indices de la tabla `asignacion_usuario_reservacion`
+--
+ALTER TABLE `asignacion_usuario_reservacion`
+  ADD PRIMARY KEY (`id_asignacion_usuario_reservacion`),
+  ADD KEY `fk_usuario` (`fk_usuario`),
+  ADD KEY `fk_asignacion_pago` (`fk_asignacion_reserva`);
 
 --
 -- Indices de la tabla `cat_espacios`
@@ -3961,6 +4006,12 @@ ALTER TABLE `asignacion_contenido`
   MODIFY `id_asignacion_contenido` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `asignacion_numero_verificacion`
+--
+ALTER TABLE `asignacion_numero_verificacion`
+  MODIFY `id_asignacion_numero_verificacion` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `asignacion_pago`
 --
 ALTER TABLE `asignacion_pago`
@@ -3971,6 +4022,12 @@ ALTER TABLE `asignacion_pago`
 --
 ALTER TABLE `asignacion_reservacion`
   MODIFY `id_asignacion_reservacion` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `asignacion_usuario_reservacion`
+--
+ALTER TABLE `asignacion_usuario_reservacion`
+  MODIFY `id_asignacion_usuario_reservacion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `cat_espacios`
@@ -4012,7 +4069,7 @@ ALTER TABLE `cat_tarjeta`
 -- AUTO_INCREMENT de la tabla `cat_usuario`
 --
 ALTER TABLE `cat_usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracion`
@@ -4032,6 +4089,12 @@ ALTER TABLE `asignacion_contenido`
   ADD CONSTRAINT `asignacion_contenido_ibfk_2` FOREIGN KEY (`fk_espacio`) REFERENCES `cat_espacios` (`id_espacio`);
 
 --
+-- Filtros para la tabla `asignacion_numero_verificacion`
+--
+ALTER TABLE `asignacion_numero_verificacion`
+  ADD CONSTRAINT `asignacion_numero_verificacion_ibfk_1` FOREIGN KEY (`fk_usuario`) REFERENCES `cat_usuario` (`id_usuario`);
+
+--
 -- Filtros para la tabla `asignacion_pago`
 --
 ALTER TABLE `asignacion_pago`
@@ -4044,6 +4107,13 @@ ALTER TABLE `asignacion_pago`
 ALTER TABLE `asignacion_reservacion`
   ADD CONSTRAINT `asignacion_reservacion_ibfk_1` FOREIGN KEY (`fk_usuario`) REFERENCES `cat_usuario` (`id_usuario`),
   ADD CONSTRAINT `asignacion_reservacion_ibfk_2` FOREIGN KEY (`fk_espacio`) REFERENCES `cat_espacios` (`id_espacio`);
+
+--
+-- Filtros para la tabla `asignacion_usuario_reservacion`
+--
+ALTER TABLE `asignacion_usuario_reservacion`
+  ADD CONSTRAINT `asignacion_usuario_reservacion_ibfk_1` FOREIGN KEY (`fk_usuario`) REFERENCES `cat_usuario` (`id_usuario`),
+  ADD CONSTRAINT `asignacion_usuario_reservacion_ibfk_2` FOREIGN KEY (`fk_asignacion_reserva`) REFERENCES `asignacion_reservacion` (`id_asignacion_reservacion`);
 
 --
 -- Filtros para la tabla `cat_espacios`

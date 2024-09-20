@@ -37076,3 +37076,74 @@ table.dataTable.no-footer {
 #info-table-result_filter{
   color: #fff;
 }
+
+/* procesar informacion */
+
+#precesar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10000;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  background-color: #fff;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+#precesar .procesando {
+  width: 100px;
+  height: 100px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border-top: 5px solid #e74c3c;
+  position: relative;
+  animation: load 2s linear infinite;
+}
+
+#precesar .procesando::before,
+#precesar .procesando::after {
+  content: '';
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+
+#precesar .procesando::before {
+  border-top: 5px solid #e67e22;
+  transform: rotate(120deg);
+}
+
+#precesar .procesando::after {
+  border-top: 5px solid #3498db;
+  transform: rotate(240deg);
+}
+
+#precesar .procesando span {
+  position: absolute;
+  font-size: small;
+  width: 100px;
+  height: 100px;
+  color: #000;
+  text-align: center;
+  line-height: 100px;
+  animation: a2 2s linear infinite;
+}
+
+@keyframes load {
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes a2 {
+  to {
+      transform: rotate(-360deg);
+  }
+}

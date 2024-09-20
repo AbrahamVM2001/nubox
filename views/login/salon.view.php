@@ -388,6 +388,24 @@
 
         document.addEventListener('DOMContentLoaded', actualizarFecha);
     </script>
+    <!-- password -->
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Selecciona el botón y el campo de entrada
+            const togglePasswordButton = document.querySelector('.btn-ver-password');
+            const passwordField = document.querySelector('#pass');
+
+            // Agrega un manejador de eventos al botón
+            togglePasswordButton.addEventListener('click', () => {
+                // Alterna el tipo de input entre 'password' y 'text'
+                const type = passwordField.type === 'password' ? 'text' : 'password';
+                passwordField.type = type;
+
+                // Cambia el texto del botón según el estado
+                togglePasswordButton.textContent = type === 'password' ? 'Ver contraseña' : 'Ocultar contraseña';
+            });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
     <script src="<?= constant('URL') ?>public/js/paginas/espacio.js"></script>
 </body>

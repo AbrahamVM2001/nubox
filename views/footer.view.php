@@ -2,7 +2,7 @@
 </main>
 <!--   Core JS Files   -->
 <script>
-    let servidor = '<?= constant("URL"); ?>';
+  let servidor = '<?= constant("URL"); ?>';
 </script>
 <script src="<?= constant("URL") ?>public/js/plugins/jquery/jquery.min.js"></script>
 <script src="<?= constant('URL') ?>public/js/core/popper.min.js"></script>
@@ -16,7 +16,7 @@
 
 <script src="<?= constant('URL') ?>public/js/plugins/choices.min.js"></script>
 <!-- Select2 -->
-<script src="<?php echo constant("URL");?>public/plugins/select2/js/select2.full.min.js"></script>
+<script src="<?php echo constant("URL"); ?>public/plugins/select2/js/select2.full.min.js"></script>
 <!-- Github buttons -->
 <script async defer src="<?= constant('URL') ?>public/js/github.buttons.js"></script>
 <script src="<?= constant('URL') ?>public/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
@@ -27,11 +27,14 @@
 
 <!-- DataTables Exports -->
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-  <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+
+<!-- chartjs -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- Filtros individuales Datatables -->
 <script src="https://cdn.datatables.net/fixedheader/3.2.3/js/dataTables.fixedHeader.min.js"></script>
@@ -79,10 +82,10 @@
   }
 </script>
 <script>
-  $(function () {
+  $(function() {
     $('[data-bs-toggle="tooltip"]').tooltip()
     $("body").addClass('g-sidenav-show bg-gray-100 g-sidenav-hidden');
-    $("#hamburguesa").click(function () {
+    $("#hamburguesa").click(function() {
       if ($(this).hasClass('mostrar')) {
         console.log("Tiene la clase mostrar");
         $(this).addClass('ocultar')
@@ -98,17 +101,19 @@
         $("body").removeClass('g-sidenav-show bg-gray-100  g-sidenav-pinned')
       }
     });
+
     function mayusculas(e) {
       e.value = e.value.toUpperCase();
     }
+
     function minusculas(e) {
       e.value = e.value.toLowerCase();
     }
-    $(".mayusculas").on('keyup', function () {
+    $(".mayusculas").on('keyup', function() {
       /* console.log("mayus"); */
       mayusculas(this);
     });
-    $(".minusculas").on('keyup', function () {
+    $(".minusculas").on('keyup', function() {
       minusculas(this);
     });
     $('[data-toggle="tooltip"]').tooltip()

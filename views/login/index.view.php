@@ -369,7 +369,7 @@
                                     <label for="contraseña">Contraseña</label>
                                     <input type="password" name="pass" id="pass" class="form-control mt-2" placeholder="Contraseña..." required>
                                     <button class="btn btn-light btn-ver-password mt-3">Ver contraseña</button><br>
-                                    <button class="btn btn-light btn-recuperar mt-2">Olvide mi contraseña</button>
+                                    <a class="btn btn-light btn-recuperar mt-2" href="<?= constant('URL') ?>login/password">Olvide mi contraseña</a>
                                     <div class="invalid-feedback">
                                         Ingresa una contraseña valida, por favor.
                                     </div>
@@ -488,7 +488,8 @@
     <script src="<?= constant('URL') ?>public/js/soft-ui-dashboard.min.js?v=1.0.5"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script>
-        var swiper = new Swiper(".slide-content", {
+        // Carrusel de salones
+        var swiperSalones = new Swiper("#carrusel-salones .slide-content", {
             slidesPerView: 3,
             spaceBetween: 25,
             loop: true,
@@ -496,13 +497,43 @@
             fade: 'true',
             grabCursor: 'true',
             pagination: {
-                el: ".swiper-pagination",
+                el: "#carrusel-salones .swiper-pagination",
                 clickable: true,
                 dynamicBullets: true,
             },
             navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+                nextEl: "#carrusel-salones .swiper-button-next",
+                prevEl: "#carrusel-salones .swiper-button-prev",
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                },
+                520: {
+                    slidesPerView: 2,
+                },
+                950: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+
+        // Carrusel de oficinas
+        var swiperOficinas = new Swiper("#carrusel-oficinas .slide-content", {
+            slidesPerView: 3,
+            spaceBetween: 25,
+            loop: true,
+            centerSlide: 'true',
+            fade: 'true',
+            grabCursor: 'true',
+            pagination: {
+                el: "#carrusel-oficinas .swiper-pagination",
+                clickable: true,
+                dynamicBullets: true,
+            },
+            navigation: {
+                nextEl: "#carrusel-oficinas .swiper-button-next",
+                prevEl: "#carrusel-oficinas .swiper-button-prev",
             },
             breakpoints: {
                 0: {

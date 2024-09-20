@@ -50,6 +50,12 @@
             </div>
         </section>
     </div>
+    <!-- pantalla de carga para procesar -->
+    <div id="precesar">
+        <div class="procesando">
+            <span>Procesando...</span>
+        </div>
+    </div>
     <!-- menu -->
     <nav>
         <div class="wrapper">
@@ -303,24 +309,24 @@
             }
         }
     </script>
-    <!-- identificar tarjeta -->
-    <!-- <script>
-        document.getElementById('numero_tarjeta').addEventListener('input', function() {
-            const numeroTarjeta = this.value.replace(/\s+/g, '');
-            const metodoPagoField = document.getElementById('metodo_pago');
-            if (/^4[0-9]{12}(?:[0-9]{3})?$/.test(numeroTarjeta)) {
-                metodoPagoField.value = 'Visa';
-            } else if (/^5[1-5][0-9]{14}$/.test(numeroTarjeta)) {
-                metodoPagoField.value = 'MasterCard';
-            } else if (/^3[47][0-9]{13}$/.test(numeroTarjeta)) {
-                metodoPagoField.value = 'American Express';
-            } else if (/^6(?:011|5[0-9]{2})[0-9]{12}$/.test(numeroTarjeta)) {
-                metodoPagoField.value = 'Discover';
-            } else {
-                metodoPagoField.value = '';
-            }
+    <!-- password -->
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Selecciona el botón y el campo de entrada
+            const togglePasswordButton = document.querySelector('.btn-ver-password');
+            const passwordField = document.querySelector('#pass');
+
+            // Agrega un manejador de eventos al botón
+            togglePasswordButton.addEventListener('click', () => {
+                // Alterna el tipo de input entre 'password' y 'text'
+                const type = passwordField.type === 'password' ? 'text' : 'password';
+                passwordField.type = type;
+
+                // Cambia el texto del botón según el estado
+                togglePasswordButton.textContent = type === 'password' ? 'Ver contraseña' : 'Ocultar contraseña';
+            });
         });
-    </script> -->
+    </script>
     <script src="<?= constant('URL') ?>public/js/paginas/pago.js"></script>
 </body>
 

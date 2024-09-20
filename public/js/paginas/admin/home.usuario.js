@@ -4,7 +4,6 @@ $(function () {
         try {
             let peticion = await fetch(servidor + `admin/viewUsuario`);
             let response = await peticion.json();
-            console.log(response);
             if (response.length == 0) {
                 jQuery(`<h3 class="mt-4 text-center text-uppercase">Sin usuarioss registrados</h3>`).appendTo("#container-usuario").addClass('text-danger');
                 return false;

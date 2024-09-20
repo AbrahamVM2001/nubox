@@ -146,7 +146,7 @@ $(function () {
             event.preventDefault();
             event.stopPropagation();
         } else {
-            if ($('#nombre').val().length == 0 || $('#tipo_espacio').val().length == 0 || $('#id_pais').val().length == 0 || $('#id_estado').val().length == 0 || $('#cordenadas').val().length == 0 || $('#precio').val().length == 0) {
+            if ($('#nombre').val().length == 0 || $('#tipo_espacio').val().length == 0 || $('#id_pais').val().length == 0 || $('#id_estado').val().length == 0 || $('#direccion').val().length == 0 || $('#latitud').val().length == 0 || $('#longitud').val().length == 0 || $('#precio').val().length == 0) {
                 Swal.fire("Por favor llenar todos los campos por favor!");
                 return false;
             } else {
@@ -204,8 +204,11 @@ $(function () {
             $('#tipo').val('')
             $('#nombre').val(response['nombre']);
             $('#tipo_espacio').val(response['tipo_espacio']);
+            $('#desc').val(response['descripcion']);
             $('#id_pais').val(response['fk_pais']);
-            $('#cordenadas').val(response['cordenadas']);
+            $('#direccion').val(response['direccion']);
+            $('#latitud').val(response['latitud']);
+            $('#longitud').val(response['longitud']);
             $('#precio').val(response['precio_hora']);
             await estado('#id_estado', response['fk_pais'], response['fk_estado']);
         } catch (error) {

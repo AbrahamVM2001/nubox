@@ -1,4 +1,7 @@
 $(function () {
+    // carga de pago
+    
+    // mostrar espacios
     async function cardsEspacio(id_espacio) {
         try {
             let peticion = await fetch(servidor + `login/espacio/${id_espacio}`);
@@ -22,33 +25,26 @@ $(function () {
     // Escuchar el botón de reservación
     $(".btn-reservar").click(async function (event) {
         event.preventDefault();
-
         let form = $("#form-new-reservacion");
-
-        // Validación del formulario
+        
         if (form[0].checkValidity() === false) {
             event.stopPropagation();
         } else {
-            // Crear el token de la tarjeta con Stripe
             const { token, error } = await stripe.createToken(card);
-
+            
             if (error) {
-                // Mostrar el error en la interfaz
                 document.getElementById('card-errors').textContent = error.message;
             } else {
-                // Si se genera el token correctamente, lo añadimos al formulario
                 $("#stripeToken").val(token.id);
                 console.log(token.id);
                 
-
-                // Enviar los datos con AJAX
                 $.ajax({
                     type: 'POST',
                     url: servidor + 'login/procesamientoPago/',
                     dataType: 'json',
-                    data: form.serialize(), // Aquí se incluye el token de Stripe
+                    data: form.serialize(),
                     beforeSend: function () {
-                        $("#loading").addClass('loading');
+                        $("#precesar").show();
                     },
                     success: function (data) {
                         Swal.fire({
@@ -58,6 +54,7 @@ $(function () {
                             showConfirmButton: false,
                             timer: 2000
                         });
+                        
                         if (data.estatus === 'success') {
                             setTimeout(() => {
                                 location.href = servidor + "login" + "/" + "salir";
@@ -68,13 +65,11 @@ $(function () {
                         console.log(data);
                     },
                     complete: function () {
-                        $("#loading").removeClass('loading');
+                        $("#precesar").hide(); 
                     }
                 });
             }
         }
-
         form.addClass('was-validated');
     });
-
 });

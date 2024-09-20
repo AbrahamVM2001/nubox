@@ -38,21 +38,14 @@ $(function () {
         $('#form-new-logear').hide();
     });
     // mostrar espacio
-    async function cardsEspacio(id_espacio) {
+    async function cardsImagen(id_espacio) {
         try {
-            let peticion = await fetch(servidor + `login/espacio/${id_espacio}`);
+            let peticion = await fetch(servidor + `login/imagen/${id_espacio}`);
             let response = await peticion.json();
             if (response.length === 0) {
-                jQuery(`<h3 class="mt-4 text-center text-uppercase">Error 404 Espacio no disponible</h3>`).appendTo("#container-espacio").addClass('text-danger');
+                jQuery(`<h3 class="mt-4 text-center text-uppercase">Error 404 Sin imagenes del espacio</h3>`).appendTo("#container-espacio").addClass('text-danger');
                 return false;
             }
-            $("#container-espacio").empty();
-            let cardHtml = `
-                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                    <h1>${response[0].nombre}</h1>
-                </div>
-            `;
-            $("#container-espacio").append(cardHtml);
             $("#carruselContenido").empty();
             response.forEach(item => {
                 let cardSwiper = `
@@ -62,6 +55,29 @@ $(function () {
                 `;
                 $("#carruselContenido").append(cardSwiper);
             });
+        } catch (error) {
+            if (error.name == 'AbortError') {
+            } else {
+                console.error('Error al cargar los datos:', error);
+            }
+        }
+    }
+    cardsImagen(id_espacio);
+    async function cardsEspacio(id_espacio) {
+        try {
+            let peticion = await fetch(servidor + `login/espacio/${id_espacio}`);
+            let response = await peticion.json();
+            if (response.length === 0) {
+                jQuery(`<h3 class="mt-4 text-center text-uppercase">Error 404 Sin imagenes del espacio</h3>`).appendTo("#container-espacio").addClass('text-danger');
+                return false;
+            }
+            $("#container-espacio").empty();
+            let cardHtml = `
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <h1>${response[0].nombre}</h1>
+                </div>
+            `;
+            $("#container-espacio").append(cardHtml);
             $('#precio').text(response[0].precio_hora);
             $('#desc').text(response[0].descripcion);
             $('#tipo').text(response[0].tipo_espacio == 1 ? 'Salón' : response[0].tipo_espacio == 2 ? 'Oficina' : 'Otro');
@@ -87,10 +103,10 @@ $(function () {
             let peticion = await fetch(servidor + `login/asignacion/${id_espacio}`);
             let response = await peticion.json();
             if (response.length === 0) {
-                jQuery(`<h3 class="mt-4 text-center text-uppercase">Error 404 Espacio no disponible</h3>`).appendTo("#container-espacio").addClass('text-danger');
+                jQuery(`<h3 class="mt-4 text-center text-uppercase">Sin reservaciones</h3>`).appendTo("#calendar").addClass('text-danger');
                 return false;
             }
-            $("#container-espacio").empty();
+            $("#calendar").empty();
             let events = response.map(item => ({
                 title: "ocupado",
                 start: item.fecha_inicio,

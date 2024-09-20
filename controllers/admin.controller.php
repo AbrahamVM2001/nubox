@@ -23,6 +23,43 @@ class Admin extends ControllerBase
             $this->recargar();
         }
     }
+    // mostrar graficas para analisis
+    function containerVentasTotales(){
+        try {
+            $containerVentasTotales = AdminModel::containerVentasTotales();
+            echo json_encode($containerVentasTotales);
+        } catch (\Throwable $th) {
+            echo "Error recopilado controlador containerVentasTotales: " . $th->getMessage();
+            return;
+        }
+    }
+    function containerClientes(){
+        try {
+            $containerClientes = AdminModel::containerClientes();
+            echo json_encode($containerClientes);
+        } catch (\Throwable $th) {
+            echo "Error recopilado controlador containerClientes: " . $th->getMessage();
+            return;
+        }
+    }
+    function containerEspacios(){
+        try {
+            $containerEspacios = AdminModel::containerEspacios();
+            echo json_encode($containerEspacios);
+        } catch (\Throwable $th) {
+            echo "Error recopilado controlador containerEspacios: " . $th->getMessage();
+            return;
+        }
+    }
+    function containerClientesSinAsignar(){
+        try {
+            $containerClientesSinAsignar = AdminModel::containerClientesSinAsignar();
+            echo json_encode($containerClientesSinAsignar);
+        } catch (\Throwable $th) {
+            echo "Error recopilado controlador containerClientesSinAsignar: " . $th->getMessage();
+            return;
+        }
+    }
     // usuario
     function usuario()
     {

@@ -42,6 +42,13 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <label for="descripcion" style="color: #000;">Descripción <span>*</span></label>
+                            <textarea style="color: #000;" name="desc" id="desc" class="form-control" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor felis nunc, in euismod ligula sodales ut." required></textarea>
+                            <div class="invalid-feedback">
+                                Ingresa una descripción valida, por favor.
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                             <label for="pais" style="color: #000;">País <span>*</span></label>
                             <select name="id_pais" id="id_pais" class="form-control" required style="color: #000;">
                                 <option></option>
@@ -60,15 +67,29 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <label for="cordenadas" style="color: #000;">Cordenadas <span>*</span></label>
-                            <input style="color: #000;" type="text" name="cordenadas" id="cordenadas" class="form-control" required>
+                            <label for="cordenadas" style="color: #000;">Dirección <span>*</span></label>
+                            <input style="color: #000;" type="text" name="direccion" id="direccion" class="form-control" required placeholder="Calle Ficticia 123, Colonia Imaginaria, Ciudad Virtual, CP 12345, México.">
                             <div class="invalid-feedback">
-                                Ingrese las cordenadas valido, por favor.
+                                Ingrese las Dirección valido, por favor.
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="latitud" style="color: #000;">Latitud <span>*</span></label>
+                            <input style="color: #000;" type="number" step="any" name="latitud" id="latitud" class="form-control" required placeholder="45.123456">
+                            <div class="invalid-feedback">
+                                Ingrese la latitud valida, por favor.
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <label for="longitud" style="color: #000;">Longitud <span>*</span></label>
+                            <input style="color: #000;" type="number" step="any" name="longitud" id="longitud" class="form-control" required placeholder="-93.654321">
+                            <div class="invalid-feedback">
+                                Ingrese una longitud valida, por favor.
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                             <label for="precio" style="color: #000;">Precio por hora <span>*</span></label>
-                            <input style="color: #000;" type="number" name="precio" id="precio" class="form-control" placeholder="1000.00" required>
+                            <input style="color: #000;" type="number" step="any" name="precio" id="precio" class="form-control" placeholder="1000.00" required>
                             <div class="invalid-feedback">
                                 Ingrese un precio valido, por favor.
                             </div>
