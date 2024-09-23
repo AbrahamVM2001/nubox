@@ -63,7 +63,7 @@ $(function () {
                     });
                     if (data.estatus === 'success') {
                         setTimeout(() => {
-                            location.href=servidor
+                            location.href=servidor + 'login/' + 'cambiarContrasena/' + btoa(btoa(data.envio));
                         }, 2000);
                     }
                 },

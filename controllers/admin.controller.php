@@ -224,14 +224,14 @@ class Admin extends ControllerBase
             if ($resp !== false) {
                 $data = [
                     'estatus' => 'success',
-                    'titulo' => ($_POST['tipo'] == 'nuevo') ? 'Salon registrado' : 'Salon actualizado',
-                    'respuesta' => ($_POST['tipo'] == 'nuevo') ? 'Salon creado correctamente' : 'Se actualizó correctamente el salon'
+                    'titulo' => ($_POST['tipo'] == 'nuevo') ? 'Espacio registrado' : 'Espacio actualizado',
+                    'respuesta' => ($_POST['tipo'] == 'nuevo') ? 'Espacio creado correctamente' : 'Se actualizó correctamente el espacio'
                 ];
             } else {
                 $data = [
                     'estatus' => 'warning',
-                    'titulo' => ($_POST['tipo'] == 'nuevo') ? 'Error en el registro' : 'Salon no actualizado',
-                    'respuesta' => ($_POST['tipo'] == 'nuevo') ? 'No se pudo crear el salon' : 'No se pudo actualizar correctamente el salon'
+                    'titulo' => ($_POST['tipo'] == 'nuevo') ? 'Error en el registro' : 'Espacio no actualizado',
+                    'respuesta' => ($_POST['tipo'] == 'nuevo') ? 'No se pudo crear el espacio' : 'No se pudo actualizar correctamente el espacio'
                 ];
             }
         } catch (\Throwable $th) {
@@ -388,14 +388,14 @@ class Admin extends ControllerBase
             if ($resp !== false) {
                 $data = [
                     'estatus' => 'success',
-                    'titulo' => ($_POST['tipo'] == 'nuevo') ? 'Salon registrado' : 'Salon actualizado',
-                    'respuesta' => ($_POST['tipo'] == 'nuevo') ? 'Salon creado correctamente' : 'Se actualizó correctamente el salon'
+                    'titulo' => ($_POST['tipo'] == 'nuevo') ? 'Espacio registrado' : 'Espacio actualizado',
+                    'respuesta' => ($_POST['tipo'] == 'nuevo') ? 'Espacio creado correctamente' : 'Se actualizó correctamente el espacio'
                 ];
             } else {
                 $data = [
                     'estatus' => 'warning',
-                    'titulo' => ($_POST['tipo'] == 'nuevo') ? 'Error en el registro' : 'Salon no actualizado',
-                    'respuesta' => ($_POST['tipo'] == 'nuevo') ? 'No se pudo crear el salon' : 'No se pudo actualizar correctamente el salon'
+                    'titulo' => ($_POST['tipo'] == 'nuevo') ? 'Error en el registro' : 'Espacio no actualizado',
+                    'respuesta' => ($_POST['tipo'] == 'nuevo') ? 'No se pudo crear el espacio' : 'No se pudo actualizar correctamente el espacio'
                 ];
             }
         } catch (\Throwable $th) {
